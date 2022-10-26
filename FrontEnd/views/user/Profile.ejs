@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>EShop - Home Page</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="/css/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/css/userIndex.css" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- Topbar Start -->
+<div class="container-fluid">
+    <div class="row bg-secondary py-2 px-xl-5">
+        <div class="col-lg-6 d-none d-lg-block">
+            <div class="d-inline-flex align-items-center">
+                <a class="text-dark" href="">FAQs</a>
+                <span class="text-muted px-2">|</span>
+                <a class="text-dark" href="">Help</a>
+                <span class="text-muted px-2">|</span>
+                <a class="text-dark" href="">Support</a>
+            </div>
+        </div>
+        
+        <div class="col-lg-6 text-center text-lg-right">
+            <div class="d-inline-flex align-items-center">
+                <a class="text-dark px-2" href="">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a class="text-dark px-2" href="">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a class="text-dark px-2" href="">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a class="text-dark px-2" href="">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a class="text-dark pl-2" href="">
+                    <i class="fab fa-youtube"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="row align-items-center py-3 px-xl-5">
+        <div class="col-lg-3 d-none d-lg-block">
+            <a href="" class="text-decoration-none">
+                <h1 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">E</span>Shop</h1>
+            </a>
+        </div>
+        <div class="col-lg-6 col-6 text-left">
+            
+        </div>
+       
+    </div>
+</div>
+<!-- Topbar End -->
+
+
+<%- include('../partials/flash') %> 
+
+<div class="container ">
+    <div class="row ">
+        <a href="/" class="nav-item nav-link active ps-5">Home</a>
+        <div class="col-md-12 d-flex align-items-center justify-content-center">
+            <div class="col-md-6 bg-secondary rounded  w-75">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-4 pt-4  float-left">
+                            <h6>User Name</h6>
+                        </div>
+                        <div class="col-md-8 pt-4  float-left">
+                            <h6><%= user.name %> </h6>
+                        </div>
+                        <div class="col-md-4 pt-4  float-left">
+                            <h6>Email</h6>
+                        </div>
+                        <div class="col-md-8 pt-4  float-left">
+                            <h6><%= user.email %> </h6>
+                        </div>
+                        <div class="col-md-4 pt-4  float-left">
+                            <h6>Mobile</h6>
+                        </div>
+                        <div class="col-md-8 pt-4  float-left">
+                            <h6><%= user.mobile %> </h6>
+                        </div>
+                        <div class="col-md-4 pt-4  float-left">
+                            <h6>Email Verification</h6>
+                        </div>
+                        <div class="col-md-8 pt-4  float-left">
+                            <% if(user.verified == true) { %> 
+                            <h6>Completed</h6>
+                            <% } else { %> 
+                             <h6>Not Completed</h6>
+                             <% } %>    
+                        </div>
+                        <div class="col-md-4 pt-4  float-left">
+                            <h6>Block Status</h6>
+                        </div>
+                        <div class="col-md-8 pt-4  float-left">
+                            <% if(user.blockStatus == false) { %> 
+                            <h6>Unblocked</h6>
+                            <% } else { %> 
+                             <h6>Blocked</h6>
+                            <% } %>    
+                        </div>
+                        <div class="col-md-12 pt-4 float-left text-center">
+                            <h5>Address</h5>
+                        </div>
+                        <% for(let addr of address) { %> 
+                        <% if(addr) { %>
+                            
+                            <div class="col-md-4 pt-4 float-left ">
+                                <h6>House No</h6>
+                            </div>
+                            <div class="col-md-8 pt-4  float-left">
+                                <h6><%= addr.houseNo %> </h6>
+                            </div>
+                            <div class="col-md-4 pt-4 float-left text-left">
+                                <h6>Street</h6>
+                            </div>
+                            <div class="col-md-8 pt-4   float-left">
+                                <h6><%= addr.street %> </h6>
+                            </div>
+                            <div class="col-md-4 pt-4 float-left">
+                                <h6>District</h6>
+                            </div>
+                            <div class="col-md-8 pt-4  float-left">
+                                <h6><%= addr.district %> </h6>
+                            </div>
+                            <div class="col-md-4 pt-4 float-left">
+                                <h6>State</h6>
+                            </div>
+                            <div class="col-md-8 pt-4  float-left">
+                                <h6><%= addr.state %> </h6>
+                            </div>
+                            <div class="col-md-4 pt-4 float-left">
+                                <h6>Pincode</h6>
+                            </div>
+                            <div class="col-md-8 pt-4  float-left">
+                                <h6><%= addr.pincode %> </h6>
+                            </div><br>
+                            
+                            
+                        
+                        <!-- <div class="col-md-12 float-left"> -->
+                            <a href="/deleteAddress/<%= addr._id %>" class="btn btn-danger rounded">delete</a><br>
+                        <!-- </div> -->
+                       
+                    <% } %> 
+
+                    <% } %>
+                    <div class="col-md-6 mt-4">
+                        <a href="/addAddress " class="btn btn-success rounded">Add Another Address</a>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<%- include('../partials/userFooter')  %> 

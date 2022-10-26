@@ -1,0 +1,172 @@
+<!-- include header -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Products</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="css/addProduct.css">
+    <style>
+        #category{
+            width: 100px;
+        }
+    </style>
+</head>
+<body>
+    <header id="header">
+        <nav>
+            <div class="container">
+                <div class="text-center">
+                    <a href="" class="nav-brand text-dark"> Product Management</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+<!-- include header -->
+
+<!-- main site -->
+
+<main id="site-main">
+    <div class="container">
+        <div class="box-nav d-flex justify-between">
+           <div class="filter">
+            <a href="/adminProducts"><i class="fas fa-angle-angle-left"></i> All Products</a>
+           </div>
+        </div>  
+        <%- include('../partials/flash') %> 
+        <div class="form-title text-center">
+            <h2 class="text-dark">New Product</h2>
+            <span class="text-light">Use below form to add a new product</span> 
+        </div>
+
+        <!-- form handling -->
+        <form action="/addProduct/add" method="POST" id="add_user" enctype="multipart/form-data">
+            <div class="new_user">
+                <div class="form-group">
+                    <label for="name"class="text-light">Product Name</label>
+                    <input type="hidden"name="id"value="">
+                    <input type="text" name="name" value=""placeholder="Product name" required>
+                </div>
+                <div class="form-group">
+                    <label for="name"class="text-light">Price</label>
+                    
+                    <input type="text" name="price" value=""placeholder="Price"required>
+                </div>
+
+                <div class="form-group">
+                    <label for="name"class="text-light">Discount</label>
+                    
+                    <input type="text" name="discount" value=""placeholder="Discount Percentage"required>
+                </div>
+
+                <div class="form-group">
+                    <label for="name"class="text-light">Original Price</label>
+                    
+                    <input type="text" name="originalPrice" value=""placeholder="Original Price"required>
+                </div>
+
+                <div class="form-group">
+                    <label for="name"class="text-light">Category</label>
+                    
+                    <select  name="category" id="category_id">
+                        <option selected>Choose Category</option>
+                        <% for (let category of categories) { %>
+                            <option value="<%= category.name %>"><%= category.name %> </option>
+                            <% } %> 
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="name"class="text-light">Brand</label>
+                    
+                    <select  name="brand" id="subCategory">
+                        <option selected>Choose Brand</option>
+                        <% for(let subCategory of brands) { %>
+                            <option value="<%= subCategory.name %> "><%= subCategory.name %> </option> 
+                            <% } %> 
+                    </select>
+                </div>
+
+                
+
+                <div class="form-group">
+                    <label for="name"class="text-light">Image</label>
+                    
+                    <input type="file" name="image" value=""placeholder="Attatch image"required >
+                </div>
+                
+                <div class="form-group">
+                    <label for="name"class="text-light">Highlights</label>
+                    
+                    <textarea name="highlights" cols="80" rows="10" required> </textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="name"class="text-light">Description</label>
+                    
+                    <textarea name="description" cols="80" rows="10" required> </textarea>
+                </div>
+                
+
+                <div class="form-group">
+                    <label for="name"class="text-light">Stock</label>
+                    
+                    <input type="text" name="stock" placeholder="stocks"required>
+                </div>
+
+                              
+                 
+                <div class="form-group">
+                    <button type="submit" class="btn text-dark update">Save</button>
+                
+                </div>
+            </div>
+           
+        </form>
+    </div>
+</main>
+
+<!-- main site -->
+
+<!-- include footer -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<!-- <script src="js/addProduct.js"></script> -->
+<!-- <script>
+    const category = document.getElementById("category_id");
+
+category.addEventListener("change", function () {
+    let categoryId = category.value;
+
+    const subCategoryField = document.getElementById('subcategory');
+    let option = '';
+    fetch('/products/fetch', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ categoryId })
+    }).then(res => res.json()).then(data => {
+        let subCategory = data.subcategory;
+        if (subCategory.length > 0) {
+            option += `<select id="subCategoryId" name="subcategory" class="form-control">`;
+            subCategory.forEach((eachSubCategory) => {
+                option += `<option value="${eachSubCategory._id}">${eachSubCategory.subcategory}</option>`;
+            });
+            option += `</select>`;
+            subCategoryField.innerHTML = option;
+        } else {
+            subCategoryField.innerHTML = `<select id="subCategoryId" name="subcategory" class="form-control"><option value=" g">Choose..</option></select>`;
+        }
+
+    })
+});
+</script> -->
+</body>
+</html>
+
+<!-- include footer -->

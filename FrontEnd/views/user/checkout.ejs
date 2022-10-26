@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>EShop - Checkout</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/css/style.css" rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.js"
+        integrity="sha512-CX7sDOp7UTAq+i1FYIlf9Uo27x4os+kGeoT7rgwvY+4dmjqV0IuE/Bl5hVsjnQPQiTOhAX1O2r2j5bjsFBvv/A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+
+
+
+</head>
+
+<body>
+    <!-- Topbar Start -->
+    <div class="container-fluid">
+        <div class="row bg-secondary py-2 px-xl-5">
+            <div class="col-lg-6 d-none d-lg-block">
+                <div class="d-inline-flex align-items-center">
+                    <a class="text-dark" href="">FAQs</a>
+                    <span class="text-muted px-2">|</span>
+                    <a class="text-dark" href="">Help</a>
+                    <span class="text-muted px-2">|</span>
+                    <a class="text-dark" href="">Support</a>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center text-lg-right">
+                <div class="d-inline-flex align-items-center">
+                    <a class="text-dark px-2" href="">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a class="text-dark px-2" href="">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a class="text-dark px-2" href="">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a class="text-dark px-2" href="">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a class="text-dark pl-2" href="">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row align-items-center py-3 px-xl-5">
+            <div class="col-lg-3 d-none d-lg-block">
+                <a href="" class="text-decoration-none">
+                    <h1 class="m-0 display-5 font-weight-semi-bold"><span
+                            class="text-primary font-weight-bold border px-3 mr-1">E</span>Shop</h1>
+                </a>
+            </div>
+
+
+        </div>
+    </div>
+    <!-- Topbar End -->
+
+
+
+    <div class="col-lg-9">
+        <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
+            <a href="" class="text-decoration-none d-block d-lg-none">
+                <h1 class="m-0 display-5 font-weight-semi-bold"><span
+                        class="text-primary font-weight-bold border px-3 mr-1">E</span>Shopper</h1>
+            </a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                <div class="navbar-nav mr-auto py-0">
+                    <a href="/" class="nav-item nav-link">Home</a>
+
+
+                </div>
+
+            </div>
+        </nav>
+    </div>
+    </div>
+    </div>
+    <!-- Navbar End -->
+
+
+    <!-- Page Header Start -->
+    <div class="container-fluid bg-secondary mb-5">
+        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
+            <h1 class="font-weight-semi-bold text-uppercase mb-3">Checkout</h1>
+            <div class="d-inline-flex">
+                <p class="m-0"><a href="/">Home</a></p>
+                <p class="m-0 px-2">-</p>
+                <p class="m-0">Checkout</p>
+            </div>
+        </div>
+    </div>
+    <!-- Page Header End -->
+
+
+    <!-- Checkout Start -->
+    <div class="container-fluid pt-5">
+        <div class="row px-xl-5">
+            <!-- <% cartList.forEach((p) => { %> 
+            
+                <% }) %>  -->
+            <form id="pay" method="post">
+                <div class="col-lg-8 float-left">
+                    <div class="mb-4">
+                        <% cartList.forEach((p)=> { %>
+                            <input type="hidden" value="<%= p._id %>" name="cartId">
+                            <% }) %>
+                                <h4 class="font-weight-semi-bold mb-4">Billing Address</h4>
+                                <div class="row">
+                                    <div class="col-md-6 form-group">
+                                        <label>Name</label>
+                                        <input class="form-control" name="name" type="text" placeholder="Your Name"
+                                            value="<%= user.name %> " required>
+                                    </div>
+                                    <!-- <div class="col-md-6 form-group">
+                            <label>Last Name</label>
+                            <input class="form-control" type="text" placeholder="Doe">
+                        </div> -->
+                                    <div class="col-md-6 form-group">
+                                        <label>E-mail</label>
+                                        <input class="form-control" name="email" type="text"
+                                            placeholder="example@email.com" value="<%= user.email %>" required>
+                                    </div>
+                                    <div class="col-md-6 form-group">
+                                        <label>Mobile No</label>
+                                        <input class="form-control" type="text" name="mobile" placeholder="Mobile no"
+                                            value="<%= user.mobile %>" required>
+                                    </div>
+                                    <% for(let i=0; i < address.length; i++) { %>
+                                        <div class="col-md-12 form-group d-flex ">
+                                            <div class="col-md-1">
+                                                <input class="w-75" type="radio" placeholder="House No"
+                                                    name="addressLine"
+                                                    value="<%= address[i].houseNo %>, <%= address[i].street %>, <%= address[i].district %>, <%= address[i].state %>, <%= address[i].pincode %>"
+                                                    required>
+                                            </div>
+                                            <label>
+                                                <%= address[i].houseNo %>, <%= address[i].street %>, <%=
+                                                            address[i].district %>, <%= address[i].state %>, <%=
+                                                                    address[i].pincode %>
+                                            </label>
+                                        </div>
+                                        <!-- <div class="col-md-6 form-group">
+                                <label>Street</label>
+                                <input class="form-control" type="text"name="street" placeholder="Street"value="<%= address[0].street %>" required>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Country</label>
+                                <input class="form-control" type="text" name="country" placeholder="Country" value="India" required> -->
+
+
+
+                                        <!-- <select class="custom-select">
+                                    <option selected>United States</option>
+                                    <option>Afghanistan</option>
+                                    <option>Albania</option>
+                                    <option>Algeria</option>
+                                </select> -->
+
+                                        <!-- </div>
+                            <div class="col-md-6 form-group">
+                                <label>District</label>
+                                <input class="form-control" type="text" name="district" placeholder="District"value="<%= address[0].district %>" required >
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>State</label>
+                                <input class="form-control" type="text" name="state" placeholder="State" value="<%= address[0].state %> " required >
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>ZIP Code</label>
+                                <input class="form-control" type="text" name="pincode" placeholder="Pincode" value="<%= address[0].pincode %>" required >
+                            </div> -->
+                                        <% } %>
+
+
+
+
+
+                                            <!-- <div class="col-md-12 form-group">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" name="checkBox" id="shipto">
+                                <label class="custom-control-label" for="shipto"  data-toggle="collapse" data-target="#shipping-address">Ship to different address</label>
+                            </div>
+                        </div> -->
+                                </div>
+                    </div>
+
+
+
+
+
+
+
+
+                    <!-- <div class="collapse mb-4" id="shipping-address">
+                    <h4 class="font-weight-semi-bold mb-4">Shipping Address</h4>
+                    <div class="row">
+                        
+                        <div class="col-md-6 form-group">
+                            <label>Name</label>
+                            <input class="form-control" type="text" name="name" placeholder="Your name" value="<%= user.name %>"  >
+                        </div>
+                         <div class="col-md-6 form-group">
+                            <label>Last Name</label>
+                            <input class="form-control" type="text" placeholder="Doe">
+                        </div> -->
+                    <!-- <div class="col-md-6 form-group">
+                            <label>E-mail</label>
+                            <input class="form-control" type="text" name="email" placeholder="example@email.com" value="<%= user.email %>" >
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Mobile No</label>
+                            <input class="form-control" type="text" name="mobile" value="<%= user.mobile %> " placeholder="Mobile No"  >
+                        </div>
+                        <% for(let i = 1; i < 2; i++) { %> 
+                        <div class="col-md-6 form-group">
+                            <label>House No</label>
+                            <input class="form-control" type="text" placeholder="House No"name="houseNo2" value="<%= address[1].houseNo %>"  >
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Street</label>
+                            <input class="form-control" type="text"name="street2" placeholder="Street" value="<%= address[1].street %>">
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Country</label>
+                            <input class="form-control" type="text" name="contry2" placeholder="Country"  value="India"> -->
+                    <!-- <select class="custom-select">
+                                <option selected>United States</option>
+                                <option>Afghanistan</option>
+                                <option>Albania</option>
+                                <option>Algeria</option>
+                            </select> -->
+                    <!-- </div>
+                        <div class="col-md-6 form-group">
+                            <label>District</label>
+                            <input class="form-control" type="text" name="district2" placeholder="District" value="<%= address[1].district %> ">
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>State</label>
+                            <input class="form-control" type="text" name="state2" placeholder="State" value="<%= address[1].state %> " >
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>ZIP Code</label>
+                            <input class="form-control" type="text" name="pincode2" placeholder="Pincode"  value="<%= address[1].pincode %> " >
+                        </div>
+                        <% } %> 
+                    </div>
+                </div> -->
+                </div>
+                <div class="col-lg-4 float-left">
+                    <div class="card border-secondary mb-5">
+                        <div class="card-header bg-secondary border-0">
+                            <h4 class="font-weight-semi-bold m-0">Order Total</h4>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="font-weight-medium mb-3">Products</h5>
+
+                            <% cartList.forEach((p)=> { %>
+                                <% p.product.forEach((p1)=> { %>
+                                    <div class="d-flex justify-content-between">
+                                        <p>
+                                            <%= p1.name %> - <%= p.itemQuantity %> Pcs
+                                        </p>
+                                        <% const total=parseInt(p1.price)*parseInt(p.itemQuantity) %>
+                                            <p class="text-success">Rs.<%= total %>
+                                            </p>
+                                    </div>
+                                    <% }) %>
+                                        <% }) %>
+                                            <hr class="mt-0">
+                                            <div class="d-flex justify-content-between mb-3 pt-1">
+                                                <h6 class="font-weight-medium">Subtotal</h6>
+                                                <h6 class="font-weight-medium">Rs.<%= subtotal %>
+                                                </h6>
+                                            </div>
+                                            <div class="d-flex justify-content-between">
+                                                <h6 class="font-weight-medium">Shipping</h6>
+                                                <h6 class="font-weight-medium">Rs.<%= shipping %>
+                                                </h6>
+                                            </div>
+                        </div>
+                        <div class="card-footer border-secondary bg-transparent">
+                            <div class="d-flex justify-content-between mt-2">
+                                <h5 class="font-weight-bold">Total</h5>
+                                <h5 class="font-weight-bold">Rs.<%= grandtotal %>
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card border-secondary mb-5">
+                        <div class="card-header bg-secondary border-0">
+                            <h4 class="font-weight-semi-bold m-0">Payment</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" name="payment" id="paypal"
+                                        value="cod" required>
+                                    <label class="custom-control-label" for="paypal">COD</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" name="payment" value="online"
+                                        id="directcheck" required>
+                                    <label class="custom-control-label" for="directcheck">Online Payment</label>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="card-footer border-secondary bg-transparent">
+                            <button class="btn btn-lg btn-block btn-primary font-weight-bold my-3 py-3"
+                                type="submit">Place Order</button>
+                        </div>
+                    </div>
+                </div>
+        </div>
+        </form>
+    </div>
+    <!-- Checkout End -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script>
+
+        // const form = document.querySelector('#pay')
+
+
+        //   form.addEventListener('submit',(e)=>{
+        //   e.preventDefault();
+        //   const paymethod = form.elements.payment.value;
+        //   fetch('/placeOrder',{
+        //     method: 'POST',
+        //     headers: { 'Content-Type': 'application/json' },
+        //     body: JSON.stringify({ payment })
+        //     }).then(res => res.json()).then(data => {
+        //       if(data.cod===true){
+        //         window.location.href='/orderSuccess'
+        //       }
+        //       console.log('data=',data)
+        //       const order = data.order
+        //       rzrpay(order);
+
+        //     }).catch(e=>{
+        //       console.log('erros=',e)
+        //     })
+        //     })
+
+        // function rzrpay(data){
+        //   console.log('amount=',data.bill)
+        //   var options = {
+        //     "key": "rzp_test_hMqwAizfgv8cdG", // Enter the Key ID generated from the Dashboard
+        //     "amount": data.bill, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+        //     "currency": "INR",
+        //     "name": "eShop",
+        //     "description": "Test Transaction",
+        //     "image": "https://img.icons8.com/ios-filled/344/amazon-alexa-logo.png",
+        //     "order_id": data.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+        //     "handler": function (response){
+        //         // alert(`${response}`)
+        //         // alert(response.razorpay_payment_id);
+        //         // alert(response.razorpay_order_id);
+        //         // alert(response.razorpay_signature)
+        //         verifypayment(response,data)
+        //     },
+        //     "theme": {
+        //         "color": "#444444"
+        //     }
+        //   };
+        //   const rzp1 = new Razorpay(options);
+        //   rzp1.open();
+
+        // }
+        // function verifypayment(payment,order){
+
+        //   fetch('/verifyPay',{
+        //     method:'POST',
+        //     headers: { 'Content-Type': 'application/json' },
+        //     body: JSON.stringify({ payment,order})
+        //   }).then(res=>res.json()).then(data=>{
+        //     console.log('data===',data.success);
+        //     if(data.success){
+        //       window.location.href='/orderSuccess'
+        //     }else{
+        //       window.location.reload();
+        //     }
+        //   })
+
+
+        // }
+
+
+        //     let form = document.querySelector('#pay')
+        //     form.addEventListener("submit", (e)=> {
+        //     e.preventDefault();
+        //   const payment =form.elements.payment.value;
+        //   const  name = form.elements.name.value;
+        //   const email = form.elements.email.value;
+        //   const mobile = form.elements.mobile.value;
+        //   const addressLine =  form.elements.addressLine.value;
+
+
+        //     fetch('/placeOrder', {
+        //         method: 'POST',
+        //         headers: { 'Content-Type': 'application/json' },
+        //         body: JSON.stringify({payment,name,email,mobile,addressLine})
+        //     }).then(res=> res.json()).then(data=>{
+        //         console.log(data.status)
+        //         if(data.status == true){
+        //             window.location.href='/orderSuccess'
+        //         }
+        //     })
+        // }).then(res => res.json()).then(data => {
+        //     let productDetails = data.product;
+
+
+        // });
+
+
+
+        $("#pay").submit((e) => {
+            e.preventDefault()
+            $.ajax({
+                url: '/placeOrder',
+                method: 'post',
+                data: $("#pay").serialize(),
+                success: (response) => {
+                    alert(response)
+
+                    if (response.codSuccess) {
+                        location.href = '/orderSuccess'
+                    } else {
+                        razorpayPayment(response)
+                    }
+                }
+            })
+        })
+
+        function razorpayPayment(order) {
+            var options = {
+                "key": "rzp_test_G1K3GI8FmZWVBI", // Enter the Key ID generated from the Dashboard
+                "amount": order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+                "currency": "INR",
+                "name": "eShop",
+                "description": "Test Transaction",
+                "image": "https://example.com/your_logo",
+                "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+                "handler": function (response) {
+                    alert(response.razorpay_payment_id);
+                    alert(response.razorpay_order_id);
+                    alert(response.razorpay_signature);
+
+                    verifyPayment(response,order)
+                },
+                "prefill": {
+                    "name": "Gaurav Kumar",
+                    "email": "gaurav.kumar@example.com",
+                    "contact": "9999999999"
+                },
+                "notes": {
+                    "address": "Razorpay Corporate Office"
+                },
+                "theme": {
+                    "color": "#3399cc"
+                }
+            };
+            var rzp1 = new Razorpay(options) 
+            rzp1.open();
+        }
+        function verifyPayment(payment,order) {
+            $.ajax({
+                url:'/verifyPay',
+                data:{
+                    payment,
+                    order
+                },
+                method: 'post'
+            })
+        }
+    </script>
+
+    <%- include('../partials/userFooter') %>

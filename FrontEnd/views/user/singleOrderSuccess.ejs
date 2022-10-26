@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Success</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="/css/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/css/userIndex.css" rel="stylesheet">
+    <!-- CSS only -->
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 pt-5 text-center"><i class="fa-solid fa-circle-check fa-5x" style="color: rgb(1, 63, 1) ;"></i></div>
+            <div class="col-md-12 text-center">
+                <h1 class="text-success ">Order Placed Successfully</h1>
+            </div>
+            <div class="col-md-12 p-3">
+                <h3>Details:</h3>
+            </div>
+            <div class="col-md-12 d-flex ">
+                <div class="col-md-3">
+                    <img class="w-50 " src="<%= product.image %> " alt="">
+                </div>
+                <div class="col-md-7">
+                    <h4><%= product.name %> </h4>
+                    <h6><%= product.highlights %> </h6>
+                </div>
+                <div class="col-md-2 ">
+                    <h3 class="text-success p-4">
+                        Rs.<%= product.price %> 
+                    </h3>
+                </div>
+            </div>
+            <hr>
+            <div class="col-md-12 d-flex pt-5">
+               <h5 class="float-right"> Shipping Charge: </h5> <h4 class="text-success float-right">Rs.<%= shipping %> </h4>
+            </div>
+            <div class="col-md-12 d-flex">
+                <h4>TOTAL:</h4> <h4 class="text-success">Rs.<%= orderData.bill %> </h4>
+            </div>
+        </div>
+        <div class="col-md-12 pt-5">
+            <h3 class="text-danger">Address:</h3>
+        </div>
+        <div class="col-md-12">
+            <h4>Name  : <%= orderData.address.name %> </h4>
+        </div>
+        <div class="col-md-12">
+            <h4>Email : <%= orderData.address.email %> </h4>
+        </div>
+        <div class="col-md-12">
+            <h4>Mobile : <%= orderData.address.mobile %> </h4>
+        </div>
+        <div class="col-md-12">
+            <h5>Address line : <%= orderData.address.addressLine %> </h5>
+        </div>
+
+    </div>
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<%- include('../partials/userFooter') %> 
