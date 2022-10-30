@@ -15,7 +15,7 @@ const adminProduct = async(req,res) => {
  
     try {
         const products = await productData.find({deleted:false})
-        console.log(products)
+        // console.log(products)
         res.render('admin/adminProducts',{products})
     } catch (err) {
         console.log(err)
@@ -42,12 +42,12 @@ const saveAddedProduct = async(req,res) => {
     try {
         if(!req.body){
             res.status(400).send({message:'content cannot be empty'})
-            console.log(req.body)
+            // console.log(req.body)
             return;
         }
         
 
-        const result = await cloudinary.uploader.upload(req.file.path)
+        // const result = await cloudinary.uploader.upload(req.file.path)
         const product = new productData ({
 
             name: req.body.name,
@@ -56,8 +56,7 @@ const saveAddedProduct = async(req,res) => {
             originalPrice: req.body.originalPrice,
             category: req.body.category,
             brand: req.body.brand,
-            image: result.secure_url,
-            cloudinary_id: result.public_id,
+           
             highlights: req.body.highlights,
             description: req.body.description,
             stock: req.body.stock,
@@ -66,16 +65,14 @@ const saveAddedProduct = async(req,res) => {
             
            
         })
-        await product
-            .save(product)
-            .then(data => {
+        product.images = req.files.map(f => ({url:f.path,filename:f.filename}))
+        await product.save()
+            
               //  res.send(data)
               req.flash('success','Product added successfully')
               res.redirect("/addProduct")
-            })
-            .catch(err => {
-                res.status(500).send({ message:err.message||'some error occurs while creating a create operation'})
-            })
+          
+            
     } catch(err) {
         console.log(err)
     }
@@ -103,13 +100,16 @@ const saveUpdatedProduct = async(req,res) => {
     
    try {
     const {id} = req.params
-    const result = await cloudinary.uploader.upload(req.file.path)
+    // const prod = await productData.findByIdAndUpdate(id)
+    // await cloudinary.uploader.destroy(prod.cloudinary_id)
+    // const result = await cloudinary.uploader.upload(req.file.path)
     const product = await productData.findByIdAndUpdate(id,{...req.body},{
-        image: result.secure_url,
-        cloudinary_id: result.public_id,
+       
         deleted: false
     })
-
+    const imgs = req.files.map(f => ({url:f.path,filename:f.filename}))
+    console.log(imgs)
+    product.images.unshift(...imgs)
     console.log(product)
     await product.save()
     req.flash('success','Product updated successfully.')

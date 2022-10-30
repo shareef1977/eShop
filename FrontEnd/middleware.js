@@ -19,6 +19,7 @@ const sessionCheckHomePage = (req,res,next) => {
             
     }else {
        res.redirect('/loginPage')
+    next()
     }
 }
 

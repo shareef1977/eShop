@@ -136,9 +136,9 @@ const productOrders = async(req,res) => {
         const orderData = await checkoutData.find({})
         // console.log(orderData)
 
-        console.log(orderData._id)
+        
         orderId = mongoose.Types.ObjectId(orderData._Id)
-        console.log(orderId)
+        // console.log(orderId)
         // const userDetail = await userData.findById({_id: userId})
         // console.log(userDetail)
         res.render('admin/orders',{orderData,orderId})
@@ -147,7 +147,19 @@ const productOrders = async(req,res) => {
     }
 }
 
-
+const orderItems = async(req,res) => {
+    try{
+        const carId = req.params
+        const cartId = mongoose.Types.ObjectId(carId)
+        const cartList = await checkoutData.aggregate([{$match:{_id:cartId}},{$unwind:'$cartItems'},
+                        {$project:{item:'$cartItems.productId',itemQuantity:'$cartItems.quantity'}},
+                        {$lookup:{from:process.env.PRODUCT_COLLECTION,localField:'item',foreignField:'_id',as:'product'}}]);
+        
+        res.render('admin/orderItems',{cartList})
+    } catch(err) {
+        console.log(err)
+    }
+}
 
 module.exports = {
     adminLogin,
@@ -158,6 +170,7 @@ module.exports = {
     logout,
     adminHomePage,
     editUser,
-    productOrders
+    productOrders,
+    orderItems
 }
 

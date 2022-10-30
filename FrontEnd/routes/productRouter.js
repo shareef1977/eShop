@@ -1,6 +1,8 @@
 const express = require('express')
+const multer = require('multer')
 const cloudinary = require('../utils/cloudinary')
-const upload = require('../utils/multer')
+const { storage } = require('../utils/cloudinary')
+const upload = multer({storage})
 
 const router = express()
 const {
@@ -28,10 +30,10 @@ router.get('/addProduct', addProduct)
 router.get('/editProduct/:id', editProduct)
 
 router.post('/addProduct/add', 
-   upload.single('image'), 
+   upload.array('image'), 
    saveAddedProduct)
 router.put('/editProduct/update/:id', 
-   upload.single('image'), 
+   upload.array('image'), 
    saveUpdatedProduct)
 router.put('/deleteProduct/:id', deleteProduct) 
 

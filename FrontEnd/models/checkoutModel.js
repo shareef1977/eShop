@@ -5,13 +5,18 @@ const checkoutSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
-    productId: {
-       
-        type: mongoose.Schema.Types.ObjectId, 
-        ref: 'Product'
-       
-       
-    },
+    cartItems: [
+        {
+            productId: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Product'
+            },
+            quantity: {
+                type: Number,
+                required: true
+            }
+        }
+    ],
     address: {
         name: {
             type: String,
@@ -54,11 +59,12 @@ const checkoutSchema = new mongoose.Schema({
         date: {
             type: Date
         },
-        isCompleted: {
-            type: Boolean,
-            default: false
-        } 
+       
     }],
+    isCompleted: {
+        type: Boolean,
+        default: false
+    },
     expectedDate: {
         type: Date,
         default: () => new Date( + new Date() + 7 * 24 * 60 * 1000)

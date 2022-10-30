@@ -21,6 +21,7 @@ const categoryRouter = require('./routes/categoryRouter')
 const cartRouter = require('./routes/cartRouter')
 const wishlistRouter = require('./routes/wishlistRouter')
 const checkoutRouter = require('./routes/checkoutRouter')
+const bannerRouter = require('./routes/bannerRouter')
 
 app.set('view engine','ejs')
 app.set(express.static(path.join(__dirname,'/views')))
@@ -72,6 +73,7 @@ app.use('/',categoryRouter)
 app.use('/',cartRouter)
 app.use('/',wishlistRouter)
 app.use('/',checkoutRouter)
+app.use('/',bannerRouter)
 
 app.use((req, res, next) => {
     res.set(

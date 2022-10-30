@@ -98,7 +98,7 @@
                 <div class="form-group">
                     <label for="name"class="text-light">Image</label>
                     
-                    <input type="file" name="image" value="<%= product.image %>"placeholder="Attatch image" required>
+                    <input type="file" name="image" value="<%= product.images[0].url %>"placeholder="Attatch image" required multiple>
                 </div>
                 <div class="form-group">
                     <input type="hidden" name="cloudinary_id"value="<%= product.cloudinary_id %>">

@@ -10,6 +10,7 @@ const {
     adminHomePage,
     editUser,
     productOrders,
+    orderItems,
     logout
    
 } = require('../controllers/adminController')
@@ -31,6 +32,7 @@ router.get('/adminUser', adminUser)
 router.put('/editUser/:id', editUser)
 
 router.get('/orders',productOrders)
+router.get('/orderitems/:id',orderItems)
 
 
 module.exports = router

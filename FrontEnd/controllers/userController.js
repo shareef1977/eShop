@@ -7,6 +7,8 @@ const brandData = require('../models/brandModel')
 const addressData = require('../models/addressModel')
 const cartData = require('../models/cartModel')
 const wishlistData = require('../models/wishlistModel')
+const bannerData = require('../models/bannerModel')
+const checkoutData = require('../models/checkoutModel')
 const mongoose = require('mongoose')
 
   
@@ -224,7 +226,7 @@ const verifyOTP = async(req,res) => {
                     //    console.log(UserOTPVerification.userId)
                     //    console.log(userData.verified)
                     //    console.log(userData._id)
-                        
+                         
                        
                         req.flash('success','Successfully Registered')
                        res.render('user/loginPage')
@@ -343,27 +345,31 @@ const userHomePage = async(req,res) => {
         let cartCount;
         let cartItems;
         let wishlistItems
+        let orderData
         if(req.session.user){
-        const userId = req.session.user._id
-        cartCount = await cartData.aggregate([{$match:{userId}},{$project:{count:{$size:"$cartItems"}}}]);
-        cartItems = await cartData.findOne({userId})
-        wishlistItems = await wishlistData.findOne({userId})
-    }
-        console.log(req.body)
+            const userId = req.session.user._id
+            orderData = await checkoutData.find({userId:userId})
+            cartCount = await cartData.aggregate([{$match:{userId}},{$project:{count:{$size:"$cartItems"}}}]);
+            cartItems = await cartData.findOne({userId})
+            wishlistItems = await wishlistData.findOne({userId})
+        }
+        // console.log(req.body)
         const products = await productData.find({deleted:false}).limit(4)
         const categories = await categoryData.find({})
-        const courosels = await productData.find({$and:[{
-            discount:{$gt:10}},{deleted:false}] 
-        }).sort({discount:-1})
+        // const courosels = await productData.find({$and:[{
+        //     discount:{$gt:10}},{deleted:false}] 
+        // }).sort({discount:-1})
+        const banner = await bannerData.find({}).sort({date:-1})
         
         
             
         const justArrived = await productData.find({$and:[{
             expiresAt:{$gte: Date.now()}},{deleted:false}]
         }).limit(4)
+       
         // console.log(justArrived)
         // console.log(courosels)
-        res.render('user/index',{products,categories,courosels,justArrived,cartCount,cartItems,wishlistItems})
+        res.render('user/index',{products,categories,justArrived,cartCount,cartItems,wishlistItems,orderData,banner})
     }catch(err) {
         console.log(err)
     }
@@ -374,11 +380,11 @@ const userHomePage = async(req,res) => {
 
 const userProfile = async(req,res) => {
     try {
-        console.log(req.params.id)
+        // console.log(req.params.id)
         const userId = req.params.id
-        console.log(userId)
+        // console.log(userId)
         const address = await addressData.find({userId})
-        console.log(address)
+        // console.log(address)
         res.render('user/profile',{address})
     } catch(err) {
         console.log(err)
@@ -403,11 +409,11 @@ const saveAddress = async(req,res) => {
 
         // console.log({houseNo, street, district, state, pincode})
         const count = await addressData.find({id}).count()
-        console.log(count)
+        // console.log(count)
 
         if(!req.body) {
             req.flash('error','Empty fields are not allowed')
-            res.redirect('/addAddress')
+            res.redirect('back')
         } 
         // else if(address){
         //     req.flash("error",'Cannot use multiple addresses')
@@ -432,7 +438,7 @@ const saveAddress = async(req,res) => {
             addr.save()
             .then(() => {
                 req.flash('success','Address successfully added')
-                res.redirect('/addAddress')
+                res.redirect('back')
             })
             .catch((err) => {
                 console.log(err)
@@ -449,12 +455,13 @@ const saveAddress = async(req,res) => {
 
 const deleteAddress = async(req,res) => {
     try {
-        const id = req.params.id
-
+        const {id} = req.params
+        console.log(id)
         const deletion = await addressData.findOneAndDelete({id})
         deletion.remove()
-        req.flash('success','Address successfully deleted')
-        res.redirect('back')
+        // console.log(deletion)
+        // req.flash('success','Address successfully deleted')
+        res.send({success:true})
     } catch(err) {
         console.log(err)
     }

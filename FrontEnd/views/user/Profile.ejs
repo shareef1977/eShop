@@ -84,6 +84,14 @@
             <div class="col-md-6 bg-secondary rounded  w-75">
                 <div class="row">
                     <div class="col-md-12">
+                        <div class="d-flex flex-column align-items-center  text-center p-3 py-5"><img class="rounded-circle mt-5"
+                            width="150px"
+                            src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+                        
+                    </div>
+                    </div>
+                    <div class="col-md-12">
+                        
                         <div class="col-md-4 pt-4  float-left">
                             <h6>User Name</h6>
                         </div>
@@ -123,7 +131,7 @@
                             <% } %>    
                         </div>
                         <div class="col-md-12 pt-4 float-left text-center">
-                            <h5>Address</h5>
+                            <h5 class="text-warning">Address</h5>
                         </div>
                         <% for(let addr of address) { %> 
                         <% if(addr) { %>
@@ -162,14 +170,15 @@
                             
                         
                         <!-- <div class="col-md-12 float-left"> -->
-                            <a href="/deleteAddress/<%= addr._id %>" class="btn btn-danger rounded">delete</a><br>
+                            <button class="btn btn-danger rounded m-3 " data-toggle="modal" data-target="#exampleModal"  type="button"  >Delete</button> <br>
+                            <!-- <a  href="/deleteAddress/<%= //addr._id %>" class="btn btn-danger rounded m-3">delete</a><br> -->
                         <!-- </div> -->
                        
                     <% } %> 
 
                     <% } %>
-                    <div class="col-md-6 mt-4">
-                        <a href="/addAddress " class="btn btn-success rounded">Add Another Address</a>
+                    <div class="col-md-6 mt-4 pb-4">
+                        <a href="/addAddress " class="btn btn-primary rounded">Add Another Address</a>
                     </div>
                 </div>
                 </div>
@@ -178,3 +187,46 @@
     </div>
 </div>
 <%- include('../partials/userFooter')  %> 
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Delete Address</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Do you want delete this Address ..?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+         
+          <button type="button"
+          <% for(let addr of address) { %>  
+            onclick="deleteAddress('<%= addr._id %>')"
+          <% } %> 
+          class="btn btn-danger" data-dismiss="modal">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<script>
+    function deleteAddress(id) {
+
+        fetch('/deleteAddress/'+id , {
+            method:'delete',
+            headers: {
+                'Content-type': 'application/json',
+                body: JSON.stringify({hai:"jhj"})
+            }
+        })
+        .then(res => res.json())
+        .then(data => {
+            success:location.reload()
+        })
+    }
+</script>

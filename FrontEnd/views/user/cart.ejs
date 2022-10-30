@@ -115,7 +115,9 @@
 
     <!-- Cart Start -->
     <div class="container-fluid pt-5">
-        <div class="row px-xl-5">
+       
+            <% if(cartList.length > 0) { %> 
+                <div class="row px-xl-5">
             <div class="col-lg-8 table-responsive mb-5">
                 <table class="table table-bordered text-center mb-0">
                     <thead class="bg-secondary text-dark">
@@ -132,49 +134,49 @@
                         
                         <% cartList.forEach((p) =>{ %> 
                             <% p.product.forEach((p2) => { %> 
-                        <tr>
+                        <tr id="row<%= p.item %>">
                             
                             <td class="align-middle"> <%= p2.name %> </td>
-                            <td class="align-middle"><img src="<%= p2.image %> " alt="" style="width: 50px;"> </td>
-                            <td class="align-middle">Rs.<%= p2.price %> </td>
+                            <td class="align-middle"><img src="<%= p2.images[0].url %> " alt="" style="width: 50px;"> </td>
+                            <td class="align-middle" > Rs. <span id="price<%= p.item %>"><%= p2.price %></span> </td>
                             <td class="align-middle">
                                 <div class="input-group quantity mx-auto" style="width: 100px;">
                                     <div class="input-group-btn">
                                         
 
-                                        <% if(p.itemQuantity == 1) { %>
+                                        <!-- <% //if(p.itemQuantity == 1) { %>
                                             <form action="" onsubmit="return false" id="minus" method="post">
                                                 <button type="submit" class="btn btn-sm btn-primary btn-minus" >
                                                 <i class="fa fa-minus"></i>
                                                 </button>
                                             </form>
-                                            <% } else { %>  
-                                                <form action="/itemDec/<%= p.item %> " id="minus" method="post">
-                                                    <button type="submit" class="btn btn-sm btn-primary btn-minus" >
+                                            <%// } else { %>   -->
+                                                
+                                                    <button type="button" id="minus" onclick="dec('<%= p.item %>')" class="btn btn-sm btn-primary btn-minus" >
                                                     <i class="fa fa-minus"></i>
                                                     </button>
-                                                </form>
-                                                <% } %> 
+                                                
+                                                <%// } %> 
 
                                                                                    
                                     </div>
-                                    <input type="text" class="form-control form-control-sm bg-secondary text-center" value="<%= p.itemQuantity %> " id="count">
+                                    <input type="text" readonly class="form-control form-control-sm bg-secondary text-center" value="<%= p.itemQuantity %> " id="<%= p.item %>">
                                     <div class="input-group-btn">
-                                        <form action="/itemInc/<%= p.item %> " method="post">
-                                        <button type="submit" class="btn btn-sm btn-primary btn-plus"id="minus">
+                                        
+                                        <button type="button" onclick="inc('<%= p.item %>')" class="btn btn-sm btn-primary btn-plus"id="plus">
                                             <i class="fa fa-plus"></i>
                                         </button>
-                                    </form>
+                                    
                                     </div>
                                 </div>
                             </td>
                             <% const total = parseInt(p.itemQuantity)*parseInt(p2.price) %> 
-                            <td class="align-middle">Rs.<%= total %> </td>
+                            <td class="align-middle " >Rs. <span id="total<%= p.item %>"><%= total %></span> </td>
                             
                             <td class="align-middle">
-                                <form action="/itemDelete/<%= p.item %> ">
-                                <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button>
-                            </form>
+                               
+                                <button type="button" data-toggle="modal" data-target="#exampleModal"  class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button>
+                             
                             </td>
                         </tr>
 
@@ -200,30 +202,175 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between mb-3 pt-1">
                             <h6 class="font-weight-medium">Subtotal</h6>
-                            <h6 class="font-weight-medium">Rs.<%= subtotal %> </h6>
+                            <h6 class="font-weight-medium">Rs. <span id="subtotal"><%= subtotal %></span> </h6>
                         </div>
                         <div class="d-flex justify-content-between">
                             <h6 class="font-weight-medium">Shipping</h6>
-                            <h6 class="font-weight-medium">Rs.<%= shipping%> </h6>
+                            <h6 class="font-weight-medium">Rs.<span id="shipping"><%= shipping%></span> </h6>
                         </div>
                     </div>
                     <div class="card-footer border-secondary bg-transparent">
                         <div class="d-flex justify-content-between mt-2">
                             <h5 class="font-weight-bold">Total</h5>
-                            <h5 class="font-weight-bold">Rs.<%= grandtotal %> </h5>
+                            <h5 class="font-weight-bold">Rs. <span id="grandtotal"><%= grandtotal %></span> </h5>
                             
                         </div>
-                       <% for (let p of cartList) { %> 
-                        <a href="/checkout/<%= p._id %> " class="btn btn-block btn-primary my-3 py-3">Proceed To Checkout</a>
-                        <% } %> 
+
+                        
+                        
+                        <a href="/checkout/<%= cartList[0]._id %> " class="btn btn-block btn-primary my-3 py-3">Proceed To Checkout</a>
+                       
                     </div>
                 </div>
             </div>
         </div>
+            <% } else { %> 
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <h3 class="text-danger">Nothing is in your Cart !!!</h3>
+                        <h5 class="pt-2">Add products to Cart</h5>
+                        <a class="btn btn-primary rounded font-weight-bold" href="/allProducts">Add</a>
+
+                    </div>
+                </div>
+                <% } %> 
+        
     </div>
     <!-- Cart End -->
-   
+    
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Remove Item</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              Do you want remove this Item from Cart ..?
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+             
+              <button type="button"
+              <% cartList.forEach((p) =>{ %> 
+                <% p.product.forEach((p2) => { %> 
+                    onclick="itemDel('<%= p.item %>')"
+                    <% }) }) %> 
+              class="btn btn-danger" data-dismiss="modal">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
 
     <%- include('../partials/userFooter') %> 
    
+
+
+
+   <script>
+    function inc(id) {
+        // console.log(id)
+        let count = document.getElementById(id).value
+        let price = document.getElementById('price'+id).innerHTML
+        // console.log(price)
+        
+        // let productId = document.getElementById('productId').value
+        fetch('/itemInc/'+id, {
+            method:'post',
+            headers: {
+                'Content-type': 'application/json',
+                body: JSON.stringify({hai:"jhj"})
+            }
+        })
+        .then(res => res.json())
+        .then(data => {
+            // console.log(data.quantity)
+            document.getElementById(id).value++
+            
+            document.getElementById('total'+id).innerHTML = parseInt(price)*parseInt(document.getElementById(id).value)
+            
+            document.getElementById('subtotal').innerHTML = parseInt(document.getElementById('subtotal').innerHTML) + parseInt(document.getElementById('price'+id).innerHTML)
+
+            document.getElementById('grandtotal').innerHTML = parseInt(document.getElementById('subtotal').innerHTML) + parseInt(document.getElementById('shipping').innerHTML)
+           
+           
+            
+        })
+            
+            
+    }
+
+    function dec(id) {
+        // console.log(id)
+        let price = document.getElementById('price'+id).innerHTML
+        let count = document.getElementById(id).value
+        let row = document.getElementById('row'+id)
+        // let productId = document.getElementById('productId').value
+        if(count == 1){
+            fetch('/itemDelete/'+id, {
+            method:'put',
+            headers: {
+                'Content-type': 'application/json',
+                body: JSON.stringify({hai:"jhj"})
+            }
+        })
+        .then(res => res.json())
+        .then(data => {
+            document.getElementById('subtotal').innerHTML = parseInt(document.getElementById('subtotal').innerHTML) - parseInt(document.getElementById('total'+id).innerHTML)
+            document.getElementById('grandtotal').innerHTML = parseInt(document.getElementById('subtotal').innerHTML) + parseInt(document.getElementById('shipping').innerHTML)
+            row.remove()
+            success: location.reload()
+        })
+         
+        } else {
+        fetch('/itemDec/'+id, {
+            method:'post',
+            headers: {
+                'Content-type': 'application/json',
+                body: JSON.stringify({hai:"jhj"})
+            }
+        })
+        .then(res => res.json())
+        .then(data => {
+            // console.log(data.quantity)
+            document.getElementById(id).value--
+            document.getElementById('total'+id).innerHTML = parseInt(price)*parseInt(document.getElementById(id).value)
+            document.getElementById('subtotal').innerHTML = parseInt(document.getElementById('subtotal').innerHTML) - parseInt(document.getElementById('price'+id).innerHTML)
+            document.getElementById('grandtotal').innerHTML = parseInt(document.getElementById('subtotal').innerHTML) + parseInt(document.getElementById('shipping').innerHTML)
+
+        })
+            
+    }
+    }
+
+    function itemDel(id) {
+        console.log(id)
+        let price = document.getElementById('price'+id).innerHTML
+        let count = document.getElementById(id).value
+        let row = document.getElementById('row'+id)
+        console.log(row)
+        // let productId = document.getElementById('productId').value
+        fetch('/itemDelete/'+id, {
+            method:'put',
+            headers: {
+                'Content-type': 'application/json',
+                body: JSON.stringify({hai:"jhj"})
+            }
+        })
+        .then(res => res.json())
+        .then(data => {
+            // console.log("hello")
+            document.getElementById('subtotal').innerHTML = parseInt(document.getElementById('subtotal').innerHTML) - parseInt(document.getElementById('total'+id).innerHTML)
+            document.getElementById('grandtotal').innerHTML = parseInt(document.getElementById('subtotal').innerHTML) + parseInt(document.getElementById('shipping').innerHTML)
+            row.remove()
+            success: location.reload()
+           
+
+        })
+         
+    }
+
+   </script>

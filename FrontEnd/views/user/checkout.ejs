@@ -94,7 +94,7 @@
             </button>
             <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                 <div class="navbar-nav mr-auto py-0">
-                    <a href="/" class="nav-item nav-link">Home</a>
+                    <a href="/cart/<%= cartList[0]._id %> " class="nav-item nav-link">Cart List</a>
 
 
                 </div>
@@ -112,7 +112,7 @@
         <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
             <h1 class="font-weight-semi-bold text-uppercase mb-3">Checkout</h1>
             <div class="d-inline-flex">
-                <p class="m-0"><a href="/">Home</a></p>
+                <p class="m-0"><a href="/cart/<%= cartList[0]._id %> ">Cart List</a></p>
                 <p class="m-0 px-2">-</p>
                 <p class="m-0">Checkout</p>
             </div>
@@ -130,9 +130,9 @@
             <form id="pay" method="post">
                 <div class="col-lg-8 float-left">
                     <div class="mb-4">
-                        <% cartList.forEach((p)=> { %>
-                            <input type="hidden" value="<%= p._id %>" name="cartId">
-                            <% }) %>
+                        
+                            <input type="hidden" value="<%= cartList[0]._id %>" name="cartId">
+                          
                                 <h4 class="font-weight-semi-bold mb-4">Billing Address</h4>
                                 <div class="row">
                                     <div class="col-md-6 form-group">
@@ -168,49 +168,16 @@
                                                                     address[i].pincode %>
                                             </label>
                                         </div>
-                                        <!-- <div class="col-md-6 form-group">
-                                <label>Street</label>
-                                <input class="form-control" type="text"name="street" placeholder="Street"value="<%= address[0].street %>" required>
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label>Country</label>
-                                <input class="form-control" type="text" name="country" placeholder="Country" value="India" required> -->
-
-
-
-                                        <!-- <select class="custom-select">
-                                    <option selected>United States</option>
-                                    <option>Afghanistan</option>
-                                    <option>Albania</option>
-                                    <option>Algeria</option>
-                                </select> -->
-
-                                        <!-- </div>
-                            <div class="col-md-6 form-group">
-                                <label>District</label>
-                                <input class="form-control" type="text" name="district" placeholder="District"value="<%= address[0].district %>" required >
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label>State</label>
-                                <input class="form-control" type="text" name="state" placeholder="State" value="<%= address[0].state %> " required >
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label>ZIP Code</label>
-                                <input class="form-control" type="text" name="pincode" placeholder="Pincode" value="<%= address[0].pincode %>" required >
-                            </div> -->
+                                        
                                         <% } %>
 
 
 
 
 
-                                            <!-- <div class="col-md-12 form-group">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" name="checkBox" id="shipto">
-                                <label class="custom-control-label" for="shipto"  data-toggle="collapse" data-target="#shipping-address">Ship to different address</label>
-                            </div>
-                        </div> -->
+                                         
                                 </div>
+                                <a class="btn btn-primary" href="/checkoutAddress">Add Another Address</a>
                     </div>
 
 
@@ -220,60 +187,7 @@
 
 
 
-                    <!-- <div class="collapse mb-4" id="shipping-address">
-                    <h4 class="font-weight-semi-bold mb-4">Shipping Address</h4>
-                    <div class="row">
-                        
-                        <div class="col-md-6 form-group">
-                            <label>Name</label>
-                            <input class="form-control" type="text" name="name" placeholder="Your name" value="<%= user.name %>"  >
-                        </div>
-                         <div class="col-md-6 form-group">
-                            <label>Last Name</label>
-                            <input class="form-control" type="text" placeholder="Doe">
-                        </div> -->
-                    <!-- <div class="col-md-6 form-group">
-                            <label>E-mail</label>
-                            <input class="form-control" type="text" name="email" placeholder="example@email.com" value="<%= user.email %>" >
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>Mobile No</label>
-                            <input class="form-control" type="text" name="mobile" value="<%= user.mobile %> " placeholder="Mobile No"  >
-                        </div>
-                        <% for(let i = 1; i < 2; i++) { %> 
-                        <div class="col-md-6 form-group">
-                            <label>House No</label>
-                            <input class="form-control" type="text" placeholder="House No"name="houseNo2" value="<%= address[1].houseNo %>"  >
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>Street</label>
-                            <input class="form-control" type="text"name="street2" placeholder="Street" value="<%= address[1].street %>">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>Country</label>
-                            <input class="form-control" type="text" name="contry2" placeholder="Country"  value="India"> -->
-                    <!-- <select class="custom-select">
-                                <option selected>United States</option>
-                                <option>Afghanistan</option>
-                                <option>Albania</option>
-                                <option>Algeria</option>
-                            </select> -->
-                    <!-- </div>
-                        <div class="col-md-6 form-group">
-                            <label>District</label>
-                            <input class="form-control" type="text" name="district2" placeholder="District" value="<%= address[1].district %> ">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>State</label>
-                            <input class="form-control" type="text" name="state2" placeholder="State" value="<%= address[1].state %> " >
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>ZIP Code</label>
-                            <input class="form-control" type="text" name="pincode2" placeholder="Pincode"  value="<%= address[1].pincode %> " >
-                        </div>
-                        <% } %> 
-                    </div>
-                </div> -->
+                   
                 </div>
                 <div class="col-lg-4 float-left">
                     <div class="card border-secondary mb-5">
@@ -451,7 +365,7 @@
                 method: 'post',
                 data: $("#pay").serialize(),
                 success: (response) => {
-                    alert(response)
+                    // alert(response)
 
                     if (response.codSuccess) {
                         location.href = '/orderSuccess'
@@ -472,9 +386,9 @@
                 "image": "https://example.com/your_logo",
                 "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
                 "handler": function (response) {
-                    alert(response.razorpay_payment_id);
-                    alert(response.razorpay_order_id);
-                    alert(response.razorpay_signature);
+                    // alert(response.razorpay_payment_id);
+                    // alert(response.razorpay_order_id);
+                    // alert(response.razorpay_signature);
 
                     verifyPayment(response,order)
                 },
@@ -500,7 +414,14 @@
                     payment,
                     order
                 },
-                method: 'post'
+                method: 'post',
+                success:(response) => {
+                    if(response.status) {
+                        location.href = '/orderSuccess'
+                    } else { 
+                        alert("Payment failed")
+                    }
+                }
             })
         }
     </script>

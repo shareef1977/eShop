@@ -108,16 +108,18 @@
                     <div class="col-md-4 float-left ">
                         <div class="row">
                             <div class="col-md-12">
-                                <img class="img-fluid  mx-auto d-block" alt="Responsive image" src="<%= details.image %> " alt="">
+                                <img class="img-fluid  mx-auto d-block" alt="Responsive image" src="<%= details.images[0].url %> " alt="">
                             </div>
                             <div class="col-md-1">
 
                             </div>
                             <div class="col-md-5 ps-5">
-                                <a href="/addToWishlist/<%= details._id %> " class="btn btn-primary rounded text-light" style="background-color:orange;">To Wishlist</a>
+                                <!-- <a href="/addToWishlist/<%= //details._id %> " class="btn btn-primary rounded text-light" style="background-color:orange;">To Wishlist</a> -->
+                                <button data-toggle="modal" data-target="#exampleModal" onclick="wishlist('<%= details._id %>')" class="btn rounded text-light"style=" background-color:orange;" >To wishlist</button>
                             </div>
                             <div class="col-md-5 ">
-                                <a href="/addToCart/<%= details._id %>" class="btn btn-primary rounded text-light"style="background-color: rgb(255, 94, 0);">Add to Cart</a>
+                                <!-- <a href="/addToCart/<%= //details._id %>" class="btn btn-primary rounded text-light"style="background-color: rgb(255, 94, 0);">Add to Cart</a> -->
+                                <button data-toggle="modal" data-target="#exampleModal1" onclick="cartList('<%= details._id %>')" class="btn rounded text-light"style="background-color: rgb(255, 94, 0);" >Add To Cart</button>
                             </div>
                         </div>
                     </div>
@@ -136,7 +138,7 @@
                                 <h4 class="text-success"><%= details.discount %>% OFF </h4>
                             </div>
                             <!-- <div class="col-md-4 pt-3">
-                                <a href="/one/<%= details._id %> " class="btn btn-success "style="border-radius:25px">Buy Now</a>
+                                <a href="/one/<%= //details._id %> " class="btn btn-success "style="border-radius:25px">Buy Now</a>
                             </div> -->
                             <div class="col-md-12">
                                 <h5 class=" text-danger " style="text-decoration:line-through ;">Rs.<%= details.originalPrice %> </h5>
@@ -153,8 +155,76 @@
             </div>
         </div>
     </div>
-</div>
+</div> 
 <!-- Navbar End -->
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Wishlist Item</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body text-success">
+          Item added to your Wishlist successfully...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
+         
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Cart Item</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body text-success">
+          Item added to your Cart successfully...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
+         
+          
+        </div>
+      </div>
+    </div>
+  </div>
 
 <%- include('../partials/userFooter') %> 
 
+<script>
+    function wishlist(id) {
+        fetch('/addToWishlist/'+id, {
+            method:'get',
+            headers: {
+                'Content-type': 'application/json',
+                body: JSON.stringify({hai:"jhj"})
+            }
+        })
+        .then(res => res.json())
+        
+    }
+
+
+    function cartList(id) {
+            fetch('/addToCart/'+id , {
+                method:'get',
+                headers: {
+                    'Content-type': 'application/json',
+                    body: JSON.stringify({hai:"jhj"})
+                }
+            })
+            .then(res => res.json())
+          
+        }
+</script>

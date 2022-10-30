@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express()
-
+ 
 const {
     userCart, 
     addToCart,
@@ -14,7 +14,7 @@ router.get('/addToCart/:id',addToCart)
 
 router.post('/itemInc/:id',itemInc)
 router.post('/itemDec/:id',itemDec)
-router.get('/itemDelete/:id',itemDelete)
+router.put('/itemDelete/:id',itemDelete)
 
 
 module.exports = router

@@ -15,49 +15,52 @@
     <div class="container">
         <div class="row">
           <!-- Image and text -->
-            <nav class="navbar navbar-light bg-light">
-              <a class="navbar-brand " href="#">
-                <img src="img/eshop.png" width="30" height="30" class="d-inline-block align-top " alt="">
-                  E-SHOP
-              </a>
-            </nav>
+          
+          <div class="col-md-12 d-flex bg-info">
+            <h1 class="text-light m-2  ps-1" style="background-color: pink;width: 2rem; font-weight: bold;">E</h1><h1 style="font-weight: bold;" class="text-light float-left mt-2">SHOP</h1>
+            <div class="col-md-10">
+                <h4 class="text-light mt-3" style="text-align: center;">Banner Management </h4>
+            </div>
+        </div>
             <%- include('../partials/flash') %> 
             <div class="m-4 d-flex">
-              <a href="/adminCategory"class="btn btn-primary">All Categories</a>
+              <a href="/addbanner"class="btn btn-primary">New banner</a>
+              <form action="/adminHome" >
+                <button type="submit" class="btn text-danger ms-2">Dashboard</button>
+            </form>
             </div>
             
 
             <table id="example" class="table table-striped table-bordered " style="width:100%">
               <thead>
                   <tr>
-                      <th>Product Name</th>
-                      <th>Price</th>
-                      <th>Discount</th>
-                      <th>Available Stock</th>
+                      <th>Highlight</th>
+                      <th>Description</th>
+                     
                       <th>Image</th>
-                      <th>Edit</th>
-                      <th>Remove</th>
+                     
+                     
                   </tr>
               </thead>
 
              
               <tbody>
-                <% for(let product of products) { %> 
-                  <tr>
-                      <td><%= product.name %></td>
-                      <td>Rs.<%= product.price %></td>
-                      <td><%= product.discount %>%</td>
-                      <td><%= product.stock %> Pcs</td>
-                      <td><img src="<%= product.images[0].url %>" class="w-25 h-25" alt=""></td>
-                      <td><a href="/editProduct/<%= product._id %> " class="btn card-link btn-success">Edit</a></td>
-                      <td><form action="/deleteProduct/<%= product._id %>?_method=PUT" method="post"><button
-                        class="btn btn-danger"
-                        type="submit"onclick="return confirm('Do you want to delete <%= product.name%>?')">Remove</button></form></td>
-                  </tr>
-                 <% } %>  
+                
+                  <% for (let banner of banners) { %> 
+                    <tr>
+                        <td><%= banner.highlight %> </td>
+
+                        <td><%= banner.description %> </td>
+                       
+                        <td><img src="<%= banner.images[0].url %> " class="w-25 h-25" alt=""></td>
+                      
+                      
+                    </tr>
+                    
+                  <% } %> 
               </tbody>
             </table>
-        </div>      
+          </div>
            
                
               

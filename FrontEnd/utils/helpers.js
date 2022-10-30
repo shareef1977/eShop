@@ -45,7 +45,29 @@ function generateRazorpay(orderId,bill) {
             }
         })
    })
+
 }
+
+function verifyPayment(details){
+    return new Promise((resolve,reject) => {
+        const crypto = require('crypto')
+        
+        let hmac = crypto.createHmac('sha256',process.env.KEY_SECRET)
+        
+        hmac.update(details.payment.razorpay_order_id + '|' + details.payment.razorpay_payment_id,process.env.KEY_SECRET)
+        hmac = hmac.digest('hex')
+        
+
+        if(hmac == details.payment.razorpay_signature){
+           
+            resolve()
+        } else {
+           
+            reject()
+        }
+    })
+}
+ 
 
 
 module.exports = {
@@ -53,5 +75,6 @@ module.exports = {
     comparePassword,
     hashOTP,
     compareOTP,
-    generateRazorpay
+    generateRazorpay,
+    verifyPayment
 } 

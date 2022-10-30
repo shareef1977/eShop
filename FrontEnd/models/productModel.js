@@ -29,12 +29,12 @@ const productSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    image: { 
-        type: [String]
-    },
-    cloudinary_id:{
-        type: [String]
-    },
+    images: [{ 
+        url: String,
+        filename: String
+        
+    }],
+   
     highlights:{
         type: String,
         required: true

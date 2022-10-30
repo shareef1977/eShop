@@ -116,13 +116,14 @@
          <div class="text-center mb-4">
              <h2 class="section-title px-5"><span class="px-2">Wishlist</span></h2>
          </div>
+         <% if(wishlistProducts.length > 0){ %> 
          <div class="row px-xl-5 pb-3">
             <% wishlistProducts.forEach((p) => { %> 
                 <% p.product.forEach((p2) => { %> 
-             <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+             <div class="col-lg-3 col-md-6 col-sm-12 pb-1" id="">
                  <div class="card product-item border-0 mb-4">
                      <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                         <img class="img-fluid w-100" src="<%= p2.image %>" alt="">
+                         <img class="img-fluid w-100" src="<%= p2.images[0].url %>" alt="">
                      </div>
                      <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
                          <h6 class="text-truncate mb-3"><%= p2.name %> </h6>
@@ -131,20 +132,77 @@
                          </div>
                      </div>
                      <div class="card-footer d-flex justify-content-between bg-light border">
-                         <a href="/deleteWishlistItem/<%= p2._id %> " class="btn btn-sm text-danger p-0">Remove</a>
-                         <a href="/addToCart/<%= p2._id %>" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
+                         <!-- <a href="/deleteWishlistItem/<%= //p2._id %> " class="btn btn-sm text-danger p-0">Remove</a> -->
+                         <button  data-toggle="modal" data-target="#exampleModal1" class="btn btn-sm text-danger p-0">Remove</button>
+                         <!-- <a href="/addToCart/<%=// p2._id %>" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a> -->
+                         <button data-toggle="modal" data-target="#exampleModal" onclick="cartList('<%= p2._id %>')" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</button>
                      </div>
                  </div>
              </div>
              <% }) %> 
              <% }) %> 
-             
-             
+             <% } else { %> 
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <h3 class="text-danger">Nothing is in your Wishlist !!!</h3>
+                        <h5 class="pt-2">Add products to wishlist</h5>
+                        <a class="btn btn-primary rounded font-weight-bold" href="/allProducts">Add</a>
+
+                    </div>
+                </div>
+             <% } %> 
              </div>
          </div>
      </div>
      <!-- Products End -->
  
+     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Cart Item</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body text-success">
+              Item added to your Cart successfully...
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
+             
+              
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Remove Item</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              Do you want remove this Item from wishlist..?
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+             
+              <button type="button"
+              <% wishlistProducts.forEach((p) => { %> 
+                <% p.product.forEach((p2) => { %> 
+                    onclick="deleteWishlist('<%= p2._id %>')"
+                    <% }) }) %> 
+              class="btn btn-danger" data-dismiss="modal">Remove</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
  
     
    
@@ -152,4 +210,34 @@
      <%- include('../partials/userFooter') %> 
  
  
-    
+    <script>
+        function cartList(id) {
+            fetch('/addToCart/'+id , {
+                method:'get',
+                headers: {
+                    'Content-type': 'application/json',
+                    body: JSON.stringify({hai:"jhj"})
+                }
+            })
+            .then(res => res.json())
+            .then(data => {
+                success:location.reload()
+            })
+          
+        }
+
+        
+        function deleteWishlist(id) {
+            fetch('/deleteWishlistItem/'+id , {
+                method:'delete',
+                headers: {
+                    'Content-type': 'application/json',
+                    body: JSON.stringify({hai:"jhj"})
+                }
+            })
+            .then(res => res.json())
+            .then(data => {
+                success:location.reload()
+            })
+        }
+    </script>

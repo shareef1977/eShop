@@ -40,13 +40,13 @@ const addToCart = async(req,res) => {
 
             if(productExist) {
                 await cartData.findOneAndUpdate({$and: [{userId},{"cartItems.productId":productId}]}, {$inc:{"cartItems.$.quantity":1}})
-                req.flash('success','Item added to cart successfully')
-                res.redirect('back')
+                // req.flash('success','Item added to cart successfully')
+                res.send({success:true})
             } else {
                 await cartData.updateOne({userId},{$push: {cartItems:{productId,quantity:1,price}}})
                 
-                req.flash('success','Item added to cart successfully')
-                res.redirect('back')
+                // req.flash('success','Item added to cart successfully')
+                res.send({success:true})
             }
         } else {
             const cart = new cartData ({
@@ -55,8 +55,8 @@ const addToCart = async(req,res) => {
             })
             await cart.save()
             .then(() => {
-                req.flash('success','Item added to cart successfully')
-                res.redirect('back')
+                // req.flash('success','Item added to cart successfully')
+                res.send({success:true})
             })
             .catch((err) =>{
                 console.log(err)
@@ -120,13 +120,13 @@ const userCart = async(req,res) => {
 
 const itemInc = async(req,res) => {
     try{
-        const prodId = req.params.id
-        // console.log(req.params)
-        const productId = new mongoose.Types.ObjectId(prodId)
-       
+        const prodId = req.params
+        // console.log(prodId)
+        const productId = mongoose.Types.ObjectId(prodId)
+        // console.log(productId)
         
         const userId = req.session.user._id
-        // console.log(productId)
+        
        
 
         const detail = await userData.findById({_id:userId})
@@ -134,16 +134,22 @@ const itemInc = async(req,res) => {
         if(detail.blockStatus == false) {
         const userExist = await cartData.findOne({ userId })
         // console.log(userExist)
-
+        // console.log("hello",userExist)
         if (userExist) {
+
             const productExist = await cartData.findOne({$and: [{userId},{cartItems: {$elemMatch: {
                 productId
             }}}]})
-
+            // console.log("hello",productExist)
             if(productExist) {
                 await cartData.findOneAndUpdate({$and: [{userId},{"cartItems.productId":productId}]}, {$inc:{"cartItems.$.quantity":1}})
+                console.log(productExist)
+                let quantity = 0
+               
+
+
                 req.flash('success','Item added to cart successfully')
-                res.redirect('back')
+                res.send({success:true})
             } else {
                 
                 
@@ -192,7 +198,7 @@ const itemDec = async(req,res) => {
                 
                     await cartData.findOneAndUpdate({$and: [{userId},{"cartItems.productId":productId}]}, {$inc:{"cartItems.$.quantity":-1}})
                     req.flash('success','Item removed from cart successfully')
-                    res.redirect('back')
+                    res.send({success:true})
                 
                    
                 
@@ -214,7 +220,7 @@ const itemDec = async(req,res) => {
     }
 
     } catch(err) {
-        console.log(err)
+        console.log(err) 
     }
 }
 
@@ -234,8 +240,8 @@ const itemDelete = async(req,res) => {
         if(detail.blockStatus == false) {
             await cartData.updateOne({userId},{$pull: {cartItems:{"productId":productId}}})
                 
-            req.flash('success','Item removed from cart successfully')
-            res.redirect('back')
+            // req.flash('success','Item removed from cart successfully')
+            res.send({success:true})
         } else {
             req.flash('error','You are unable to access the product')
             res.redirect('back')

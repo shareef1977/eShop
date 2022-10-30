@@ -29,7 +29,7 @@ const singleProduct = async (req,res) => {
         const cartItems = await cartData.findOne({userId})
         const wishlistItems = await wishlistData.findOne({userId})
 
-        res.render('user/singleProduct',{products,justArrived,categories,courosels,cartItems,wishlistItems})
+        res.render('user/singleProduct',{products,justArrived,categories,courosels,cartItems,wishlistItems,cata})
     }
     catch(err) {
         console.log(err)

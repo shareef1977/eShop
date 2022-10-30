@@ -39,7 +39,7 @@ router.get('/userProfile/:id',userProfile)
 
 router.get('/addAddress', addAddress)
 router.post('/saveAddress/:id',saveAddress)
-router.get('/deleteAddress/:id',deleteAddress)
+router.delete('/deleteAddress/:id',deleteAddress)
 // router.put('/saveChangedAddress/:id',saveChangedAddress)
 
 

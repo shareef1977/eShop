@@ -108,7 +108,7 @@
                 <h6 class="m-0">Categories</h6>
                 <i class="fa fa-angle-down text-dark"></i>
             </a>
-            <nav class="collapse show navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0" id="navbar-vertical">
+            <nav class="collapse navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0" id="navbar-vertical">
                 <div class="navbar-nav w-100 overflow-hidden" style="height: 410px">
                     <div class="nav-item dropdown">
                         <a href="/homePage" class="nav-link" >All Prouducts</a>
@@ -131,21 +131,18 @@
                 
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav mr-auto py-0">
-                        <a href="/homePage" class="nav-item nav-link active">Home</a>
-                        <a href="shop.html" class="nav-item nav-link">Shop</a>
+                        <a href="/" class="nav-item nav-link active">Home</a>
+                        <!-- <a href="/" class="nav-item nav-link">Shop</a> -->
                         <% if(locals.wishlistItems) { %> 
                         <a href="/wishlist/<%= wishlistItems._id %> " class="nav-item nav-link">Wishlist</a>
                         <% } %> 
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
-                            <div class="dropdown-menu rounded-0 m-0">
-                                <% if(locals.cartItems) { %> 
-                                <a href="/cart/<%= cartItems._id %> " class="dropdown-item">Shopping Cart</a>
-                                <% } %> 
-                                <a href="/checkout" class="dropdown-item">Checkout</a>
-                            </div>
-                        </div>
-                        <a href="contact.html" class="nav-item nav-link">Contact</a>
+                        <% if(locals.cartItems) { %> 
+                            <a href="/cart/<%= cartItems._id %> " class="nav-item nav-link">Shopping Cart</a>
+                            <% } %> 
+                            <% if(locals.orderData) { %> 
+                            <a href="/viewOrders" class="nav-item nav-link">Orders</a>
+                            <% } %> 
+                        <!-- <a href="contact.html" class="nav-item nav-link">Contact</a> -->
                     </div>
                    <% if(user) { %>
                     <div class="navbar-nav ml-auto py-0">
@@ -170,22 +167,23 @@
                 <div class="carousel-inner">
                     <div class="carousel-item active" style="height: 410px;">
                         <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                       <div class="row">
-                        
+                       <div class="row bg-secondary">
+                        <% for(let i = 0 ; i < 1; i++ ) { %> 
                         <div class="col-md-8">
                             
-                                <div class="p-3" style="max-width: 700px;">
+                                <div class="p-3 " style="max-width: 700px; margin-top: 10rem;">
                       
-                                    <h4 class="text-light text-uppercase font-weight-medium mb-3"><%= courosels[1].discount%>% Off</h4>
-                                    <h3 class="display-4 text-white font-weight-semi-bold mb-4"><%= courosels[1].name %></h3>
+                                    <h3 class="text-primary text-uppercase font-weight-medium mb-3 "><%=  banner[0].description %></h3>
+                                    <h2 class="display-4 text-warning text-uppercase font-weight-semi-bold mb-4"><%= banner[0].highlight %></h2>
                              
-                                    <a href="/productDetails/<%= courosels[1]._id %> " class="btn btn-light py-2 px-3">Shop Now</a>
+                                    <!-- <a href="/productDetails/<%=// courosels[1]._id %> " class="btn btn-light py-2 px-3">Shop Now</a> -->
                                 </div>
                             
                         </div>
                         <div class="col-md-4 ps-3">
-                            <img class="img-fluid " src="<%= courosels[1].image %>" alt="Image">
+                            <img class="" src="<%= banner[0].images[0].url %>" alt="Image">
                         </div>
+                        <% } %> 
                        </div>
                     </div>
                        
@@ -195,45 +193,47 @@
                     </div>
                     <div class="carousel-item" style="height: 410px;">
                        
-                        <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                            <div class="row">
-                             
+                        <div class="carousel-caption d-flex flex-column align-items-center justify-content-center bg-secondary">
+                            <div class="row ">
+                                <% for(let i = 1 ; i < 2; i++ ) { %> 
                              <div class="col-md-8">
                                  
-                                     <div class="p-3" style="max-width: 700px;">
+                                     <div class="p-3" style="max-width: 700px;margin-top: 3rem;">
                            
-                                         <h4 class="text-light text-uppercase font-weight-medium mb-3"><%= courosels[2].discount%>% Off</h4>
-                                         <h3 class="display-4 text-white font-weight-semi-bold mb-4"><%= courosels[2].name %></h3>
+                                         <h4 class="text-primary text-uppercase font-weight-medium mb-3"><%= banner[1].description %> </h4>
+                                         <h3 class="display-4 text-warning text-uppercase font-weight-semi-bold mb-4"><%= banner[1].highlight %></h3>
                                   
-                                         <a href="/productDetails/<%= courosels[2]._id %> " class="btn btn-light py-2 px-3">Shop Now</a>
+                                         <!-- <a href="/productDetails/<%= //courosels[2]._id %> " class="btn btn-light py-2 px-3">Shop Now</a> -->
                                      </div>
                                  
                              </div>
                              <div class="col-md-4 ps-3">
-                                 <img class="img-fluid " src="<%= courosels[2].image %>" alt="Image">
+                                 <img class="img-fluid " src="<%= banner[1].images[0].url %>" alt="Image">
                              </div>
+                             <% } %> 
                             </div>
                          </div>
                     </div>
                     <div class="carousel-item" style="height: 410px;">
                         
-                        <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                        <div class="carousel-caption d-flex flex-column align-items-center justify-content-center bg-secondary">
                             <div class="row">
-                             
-                             <div class="col-md-8">
+                                <% for(let i = 2 ; i < 3; i++ ) { %> 
+                             <div class="col-md-8 ">
                                  
-                                     <div class="p-3" style="max-width: 700px;">
+                                     <div class="p-3" style="max-width: 700px;margin-top: 10rem;">
                            
-                                         <h4 class="text-light text-uppercase font-weight-medium mb-3"><%= courosels[3].discount%>% Off</h4>
-                                         <h3 class="display-4 text-white font-weight-semi-bold mb-4"><%= courosels[3].name %></h3>
+                                         <h4 class="text-primary text-uppercase font-weight-medium mb-3"><%= banner[2].description %></h4>
+                                         <h3 class="display-4 text-warning text-uppercase font-weight-semi-bold mb-4"><%= banner[2].highlight %></h3>
                                   
-                                         <a href="/productDetails/<%= courosels[3]._id %> " class="btn btn-light py-2 px-3">Shop Now</a>
+                                         <!-- <a href="/productDetails/<%= //courosels[3]._id %> " class="btn btn-light py-2 px-3">Shop Now</a> -->
                                      </div>
                                  
                              </div>
                              <div class="col-md-4 ps-3">
-                                 <img class="img-fluid " src="<%= courosels[3].image %>" alt="Image">
+                                 <img class="img-fluid " src="<%= banner[2].images[0].url %>" alt="Image">
                              </div>
+                             <% } %> 
                             </div>
                          </div>
                 </div>

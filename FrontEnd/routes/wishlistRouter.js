@@ -10,7 +10,7 @@ const {
 
 router.get('/addToWishlist/:id',addToWishlist)
 router.get('/wishlist/:id',userWishlist)
-router.get('/deleteWishlistItem/:id',deleteWishlist)
+router.delete('/deleteWishlistItem/:id',deleteWishlist)
 
 
-module.exports = router
+module.exports = router 

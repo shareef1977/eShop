@@ -52,7 +52,7 @@
                       <td>Rs.<%= product.price %></td>
                       <td><%= product.discount %>%</td>
                       <td><%= product.stock %> Pcs</td>
-                      <td><img src="<%= product.image %>" class="w-25 h-25" alt=""></td>
+                      <td><img src="<%= product.images[0].url %>" class="w-25 h-25" alt=""></td>
                       <td><a href="/editProduct/<%= product._id %> " class="btn card-link btn-success">Edit</a></td>
                       <td><form action="/deleteProduct/<%= product._id %>?_method=PUT" method="post"><button
                         class="btn btn-danger"

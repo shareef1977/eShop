@@ -35,12 +35,12 @@ const addToWishlist = async(req,res) => {
             if(productExist) {
                 
                 req.flash('success','Item already added to wishlist')
-                res.redirect('back')
+                res.send({success:false})
             } else {
                 await wishlistData.updateOne({userId},{$push: {wishlistItems:{productId}}})
                 
-                req.flash('success','Item added to wishlist successfully')
-                res.redirect('back')
+                // req.flash('success','Item added to wishlist successfully')
+                res.send({success:true})
             }
         } else {
             const wishlist = new wishlistData ({
@@ -49,8 +49,8 @@ const addToWishlist = async(req,res) => {
             })
             await wishlist.save()
             .then(() => {
-                req.flash('success','Item added to wishlist successfully')
-                res.redirect('back')
+                // req.flash('success','Item added to wishlist successfully')
+                res.send({success:true})
             })
             .catch((err) =>{
                 console.log(err)
@@ -109,11 +109,11 @@ const deleteWishlist = async(req,res) => {
         if(detail.blockStatus == false) {
             await wishlistData.updateOne({userId},{$pull: {wishlistItems:{"productId":productId}}})
                 
-            req.flash('success','Item removed from wishlist successfully')
-            res.redirect('back')
+            // req.flash('success','Item removed from wishlist successfully')
+            res.send({success:true})
         } else {
             req.flash('error','You are unable to access the product')
-            res.redirect('back')
+            res.send({success:false})
         }
 
     } catch(err) {
