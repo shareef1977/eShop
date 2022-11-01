@@ -187,14 +187,14 @@
                 </table>
             </div>
             <div class="col-lg-4">
-                <form class="mb-5" action="">
-                    <div class="input-group">
-                        <input type="text" class="form-control p-4" placeholder="Coupon Code">
+                
+                    <div class="input-group mb-5">
+                        <input type="text" class="form-control p-4" id="usercode" name="usercode" placeholder="Coupon Code" required>
                         <div class="input-group-append">
-                            <button class="btn btn-primary">Apply Coupon</button>
+                            <button class="btn btn-primary" id="button" type="button" onclick="coupen()">Apply Coupon</button>
                         </div>
                     </div>
-                </form>
+                
                 <div class="card border-secondary mb-5">
                     <div class="card-header bg-secondary border-0">
                         <h4 class="font-weight-semi-bold m-0">Cart Summary</h4>
@@ -204,9 +204,13 @@
                             <h6 class="font-weight-medium">Subtotal</h6>
                             <h6 class="font-weight-medium">Rs. <span id="subtotal"><%= subtotal %></span> </h6>
                         </div>
-                        <div class="d-flex justify-content-between">
+                        <div class="d-flex justify-content-between mb-3">
                             <h6 class="font-weight-medium">Shipping</h6>
                             <h6 class="font-weight-medium">Rs.<span id="shipping"><%= shipping%></span> </h6>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <h6 class="font-weight-medium">Discount</h6>
+                            <h6 class="font-weight-medium">Rs.<span id="discount">0</span> </h6>
                         </div>
                     </div>
                     <div class="card-footer border-secondary bg-transparent">
@@ -249,6 +253,7 @@
             </div>
             <div class="modal-body">
               Do you want remove this Item from Cart ..?
+              
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -258,7 +263,9 @@
                 <% p.product.forEach((p2) => { %> 
                     onclick="itemDel('<%= p.item %>')"
                     <% }) }) %> 
-              class="btn btn-danger" data-dismiss="modal">Delete</button>
+              class="btn btn-danger" data-dismiss="modal">
+              
+              Delete</button>
             </div>
           </div>
         </div>
@@ -277,7 +284,7 @@
         let price = document.getElementById('price'+id).innerHTML
         // console.log(price)
         
-        // let productId = document.getElementById('productId').value
+        
         fetch('/itemInc/'+id, {
             method:'post',
             headers: {
@@ -372,5 +379,36 @@
         })
          
     }
+  
+        function coupen() {
+            const usercode = document.getElementById('usercode').value
+            let disc = document.getElementById('discount').innerHTML
+            fetch('/applyCoupen/'+usercode, {
+                method:'post',
+                headers: {
+                    'Content-type': 'application/json',
+                    body: JSON.stringify({jfd:disc})
+                }
+                
+            })
+            .then(res => res.json())
+            .then(data => {
+                
+                discount=data.success
+                console.log(discount)
+                
+                if(parseInt(document.getElementById('grandtotal').innerHTML) > 15000){
+                    if(parseInt(document.getElementById('discount').innerHTML) > 0){
+                        document.getElementById('button').disabled = true
+                    }else {
+                    
+                        document.getElementById('discount').innerHTML = discount
+                        document.getElementById('grandtotal').innerHTML = parseInt(document.getElementById('grandtotal').innerHTML) - parseInt(discount)
+                        console.log(document.getElementById('grandtotal').innerHTML)
+                    }
+                }
+            })
+        }
+  
 
    </script>

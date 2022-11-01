@@ -50,6 +50,9 @@ const checkoutSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    discount:{
+        type:Number
+    },
     orderStatus: [{
         type: {
             type: String,
@@ -57,7 +60,8 @@ const checkoutSchema = new mongoose.Schema({
             default: "Ordered"
         },
         date: {
-            type: Date
+            type: Date,
+            default:Date.now()
         },
        
     }],

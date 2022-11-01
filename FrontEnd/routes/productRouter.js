@@ -37,12 +37,12 @@ router.put('/editProduct/update/:id',
    saveUpdatedProduct)
 router.put('/deleteProduct/:id', deleteProduct) 
 
-router.get('/addBrand',addBrand)
+router.get('/addBrand', addBrand)
 router.post('/addBrand/add', saveBrandName )
-router.get('/addCategory',addCategory)
-router.post('/addCategory/add',saveCategory)
-router.get('/deleteCategory/:id',deleteCategory)
-router.get('/deleteBrand/:id',deleteBrand)
+router.get('/addCategory', addCategory)
+router.post('/addCategory/add', saveCategory)
+router.get('/deleteCategory/:id', deleteCategory)
+router.get('/deleteBrand/:id', deleteBrand)
 
 router.get('/productDetails/:id', viewProductDetails)
 router.get('/allProducts', allProducts)

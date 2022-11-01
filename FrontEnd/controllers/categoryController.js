@@ -17,7 +17,7 @@ const singleProduct = async (req,res) => {
         const products = await productData.find({$and:[{
             category:{$eq:cata}},{deleted:false}]
         })
-        // console.log(products)
+        // console.log(products) 
         const justArrived = await productData.find({
             $and:[{category:{$eq:cata}},{expiresAt:{$gte: Date.now()}}]
         })

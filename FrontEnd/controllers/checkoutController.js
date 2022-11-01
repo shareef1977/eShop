@@ -8,6 +8,7 @@ const addressData = require('../models/addressModel')
 const cartData = require('../models/cartModel')
 const wishlistData = require('../models/wishlistModel')
 const checkoutData = require('../models/checkoutModel')
+const coupenData = require('../models/coupenModel')
 const mongoose = require('mongoose')
 
 
@@ -20,6 +21,7 @@ const checkoutPage = async(req,res) => {
     try {
         
         if(req.session.user){
+            
             const userId = req.session.user._id   
             const user = await userData.findById(userId)
             const address = await addressData.find({userId})
@@ -27,8 +29,19 @@ const checkoutPage = async(req,res) => {
             const cartList = await cartData.aggregate([{$match:{userId}},{$unwind:'$cartItems'},
                         {$project:{item:'$cartItems.productId',itemQuantity:'$cartItems.quantity'}},
                         {$lookup:{from:process.env.PRODUCT_COLLECTION,localField:'item',foreignField:'_id',as:'product'}}]);
+            
+            const items = await cartData.findOne({userId})
+            const coupencode = items.coupenCode
+            
+            let discount;
+            if(coupencode) {
+                const coupens = await coupenData.findOne({code:coupencode})
+            
+                discount = coupens.discount
+                // console.log(discount)
+            }
                         
-                
+
         let total;
         let subtotal = 0;
         
@@ -38,11 +51,24 @@ const checkoutPage = async(req,res) => {
                 subtotal += total
             })
         })
-        const shipping = 50;
-        const grandtotal = subtotal+shipping
-        // console.log(cartList)
+        let shipping ;
+        if(subtotal < 15000) {
+            shipping = 50
+        } else {
+            shipping = 0
+        }
 
-            res.render('user/checkout',{user,address,cartList,grandtotal,shipping,subtotal})
+      
+        let grandtotal
+        if(discount) {
+            grandtotal = subtotal+shipping-discount
+        } else {
+            grandtotal = subtotal+shipping
+        }
+        // console.log(cartList)
+       
+
+            res.render('user/checkout',{user,address,cartList,grandtotal,shipping,subtotal,discount})
         } else {
             req.flash('error','You are not logged in')
             res.redirect('back')
@@ -63,8 +89,17 @@ const placeOrder = async(req,res) => {
         const prodId = req.body.cartId
         const cartId = new mongoose.Types.ObjectId(prodId)
         const items = await cartData.findById({_id:cartId})
-        console.log(items)
-        
+       
+        const coupencode = items.coupenCode
+            
+        let discount;
+        if(coupencode) {
+            const coupens = await coupenData.findOne({code:coupencode})
+            
+            discount = coupens.discount
+            // console.log(discount)
+        }
+
         const cartList = await cartData.aggregate([{$match:{userId:userId}},{$unwind:'$cartItems'},
                         {$project:{item:'$cartItems.productId',itemQuantity:'$cartItems.quantity'}},
                         {$lookup:{from:process.env.PRODUCT_COLLECTION,localField:'item',foreignField:'_id',as:'product'}}]);
@@ -78,10 +113,12 @@ const placeOrder = async(req,res) => {
                 subtotal += total
             })
         })
+
+        
       
-        const shipping = 40;
+        const shipping = 50;
         const bill = subtotal + shipping
-        let status = req.body.payment === 'cod'? true:false
+        let status = req.body.payment === 'cod'? false:true
 
         
 
@@ -98,7 +135,9 @@ const placeOrder = async(req,res) => {
             orderStatus: {
                 date:Date.now()
             },
+            
             bill,
+            discount,
             isCompleted: status
 
         })
@@ -152,7 +191,7 @@ const orderSuccess = async(req,res) => {
                 subtotal += total
             })
         })
-        const shipping = 200;
+        const shipping = 50;
         const bill = subtotal+shipping
         const orderData = await checkoutData.find({userId})
         // console.log(orderData)
@@ -184,13 +223,15 @@ const verifyPay = async(req,res) => {
 function changePaymentStatus(orderId) {
     return new Promise((resolve,reject) => {
         const Id = mongoose.Types.ObjectId(orderId.id)
-        checkoutData.findByIdAndUpdate({_id:Id},{$set:{
-            isCompleted:true
-        }}).then(()=>{
-            resolve()
-        }).catch((err) => {
-            console.log(err)
-        })
+       
+            checkoutData.findByIdAndUpdate({_id:Id},{$set:{
+                isCompleted: true
+            }}).then(()=>{
+                resolve()
+            }).catch((err) => {
+                console.log(err)
+            })
+       
     })
 }
 
@@ -218,7 +259,7 @@ const orderedProducts = async(req,res) => {
                         {$lookup:{from:process.env.PRODUCT_COLLECTION,localField:'item',foreignField:'_id',as:'product'}}]);
         // console.log(cartList)
         
-        res.send({cartList})
+        res.render('user/orderedProducts',{cartList})
     } catch(err) {
         console.log(err)
     }
@@ -238,6 +279,21 @@ const checkoutAddress = async(req,res) => {
     
 }
 
+const cancelOrder = async(req,res) => {
+    try {
+        const {id} = req.params
+        await checkoutData.findByIdAndUpdate(id,{
+            orderStatus: {
+                type: "Cancelled"
+            },
+            isCompleted: false
+        })
+        res.send({success:true})
+    } catch(err) {
+        console.log(err)
+    }
+}
+
 module.exports = {
     checkoutPage,
     placeOrder,
@@ -245,6 +301,7 @@ module.exports = {
     verifyPay,
     viewOrders,
     orderedProducts,
-    checkoutAddress
+    checkoutAddress,
+    cancelOrder
     
 }

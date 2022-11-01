@@ -6,6 +6,7 @@ const userData = require('../models/userModel')
 const brandData = require('../models/brandModel')
 const categoryData = require('../models/categoryModel')
 const checkoutData = require('../models/checkoutModel')
+
 const mongoose = require('mongoose')
 
 const bcrypt = require('bcrypt')
@@ -13,6 +14,19 @@ const bcrypt = require('bcrypt')
 const { hashPassword,
         comparePassword,
 } = require('../utils/helpers')
+
+
+const adminHomePage = async(req,res) => {
+    try {
+
+        // const daySales = await checkoutData.aggregate([{$match:{$lt:{createdAt:Date.now()}}}])
+        // console.log(daySales)
+        res.render('admin/adminHome')
+    } catch(err) {
+        console.log(err)
+    }
+}
+
 
 const adminLogin = async(req,res) => {
    try {
@@ -104,13 +118,7 @@ const logout = async(req,res) => {
    
 }
 
-const adminHomePage = async(req,res) => {
-    try {
-        res.render('admin/adminHome')
-    } catch(err) {
-        console.log(err)
-    }
-}
+
 
 
 const editUser = async(req,res) => {
@@ -133,7 +141,7 @@ const editUser = async(req,res) => {
 
 const productOrders = async(req,res) => {
     try {
-        const orderData = await checkoutData.find({})
+        const orderData = await checkoutData.find({}).sort({'orderStatus.date':-1})
         // console.log(orderData)
 
         
@@ -161,6 +169,47 @@ const orderItems = async(req,res) => {
     }
 }
 
+const editOrder = async(req,res) => {
+    try{
+        const {id} = req.params
+        const orderData = await checkoutData.findById(id)
+        console.log(orderData)
+        res.render('admin/editOrder',{orderData})
+
+    } catch(err) {
+        console.log(err)
+    }
+}
+
+
+const updateOrder = async(req,res) => {
+    try {
+        const {id} = req.params
+        await checkoutData.findByIdAndUpdate(id,{
+            
+            orderStatus: {
+                type: req.body.orderStatus,
+                date: req.body.date 
+
+            }
+        })
+        const orderData = await checkoutData.findById(id)
+        if(orderData.orderStatus[0].type == 'Delivered'&&orderData.paymentStatus == 'cod') {
+            await checkoutData.findByIdAndUpdate(id,{
+                isCompleted: true
+            })
+        } else {
+            await checkoutData.findOneAndUpdate({$and:[{_id:id},{paymentStatus:'cod'}]},{
+                isCompleted: false
+            })
+        }
+        req.flash('success','Order updated Successfully')
+        res.redirect('/orders')
+    } catch(err) {
+        console.log(err)
+    }
+}
+
 module.exports = {
     adminLogin,
     adminHome,
@@ -171,6 +220,8 @@ module.exports = {
     adminHomePage,
     editUser,
     productOrders,
-    orderItems
+    orderItems,
+    updateOrder,
+    editOrder
 }
 

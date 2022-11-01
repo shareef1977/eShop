@@ -11,6 +11,8 @@ const {
     editUser,
     productOrders,
     orderItems,
+    editOrder,
+    updateOrder,
     logout
    
 } = require('../controllers/adminController')
@@ -20,7 +22,7 @@ const {
 // } = require('../middleware')
  
 
-router.get('/adminLogin',   adminLogin)
+router.get('/adminLogin',   adminLogin) 
 router.get('/adminHome',adminHomePage)
 router.post('/adminHome', adminHome)
 router.get('/logout',  logout)
@@ -34,5 +36,7 @@ router.put('/editUser/:id', editUser)
 router.get('/orders',productOrders)
 router.get('/orderitems/:id',orderItems)
 
+router.get('/editOrders/:id',editOrder)
+router.post('/updateOrder/:id', updateOrder)
 
 module.exports = router

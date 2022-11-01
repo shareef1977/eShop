@@ -17,6 +17,9 @@ const cartSchema = mongoose.Schema ({
             },price: Number
         }
     ],
+    coupenCode:{
+        type: String
+    }
     
     
 })

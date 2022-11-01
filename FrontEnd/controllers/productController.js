@@ -14,7 +14,7 @@ const upload = require('../utils/multer')
 const adminProduct = async(req,res) => {
  
     try {
-        const products = await productData.find({deleted:false})
+        const products = await productData.find({})
         // console.log(products)
         res.render('admin/adminProducts',{products})
     } catch (err) {
@@ -85,7 +85,7 @@ const saveAddedProduct = async(req,res) => {
 
 const editProduct = async(req,res) => {
     try {
-        const {id} = req.params
+        const {id} = req.params 
         const product = await productData.findById(id)
         const categories = await categoryData.find({})
         const brands = await brandData.find({})
@@ -99,7 +99,7 @@ const editProduct = async(req,res) => {
 const saveUpdatedProduct = async(req,res) => {
     
    try {
-    const {id} = req.params
+    const {id} = req.params 
     // const prod = await productData.findByIdAndUpdate(id)
     // await cloudinary.uploader.destroy(prod.cloudinary_id)
     // const result = await cloudinary.uploader.upload(req.file.path)
@@ -239,6 +239,7 @@ const deleteCategory = async(req,res) => {
     
     await deletion.remove()
     res.redirect('/adminCategory')
+    // res.send({success:true})
     // .then(data => {
     //     if(!data){
     //         req.flash('error','Cannot complete delete operation')
