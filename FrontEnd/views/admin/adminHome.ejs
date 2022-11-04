@@ -29,6 +29,18 @@
 
     <!-- Template Stylesheet -->
     <link href="css/admin/style.css" rel="stylesheet">
+
+
+
+    
+    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script> -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf.min.js"  
+    integrity="sha512-Z8CqofpIcnJN80feS2uccz+pXWgZzeKxDsDNMD/dJ6997/LSRY+W4NmEt9acwR+Gt9OHN0kkI1CTianCwoqcjQ==" 
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>  
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"></script>
+    
 </head>
 
 <body>
@@ -41,23 +53,24 @@
         </div>
         <!-- Spinner End -->
 
-
+        <% if(admin) { %> 
         <!-- Sidebar Start -->
+
         <div class="sidebar pe-4 pb-3">
             <nav class="navbar bg-light navbar-light">
-                <a href="index.html" class="navbar-brand mx-4 mb-3">
+                <a href="#" class="navbar-brand mx-4 mb-3">
                     <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>E-SHOP</h3>
                 </a>
                 <div class="d-flex align-items-center ms-4 mb-4">
-                    <div class="position-relative">
-                        <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                        <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
-                    </div>
+                    <!-- <div class="position-relative"> -->
+                        <!-- <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;"> -->
+                        <!-- <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div> -->
+                    <!-- </div> -->
                     <div class="ms-3">
-                        <% if(locals.admin) { %> 
+                        
                         <h6 class="mb-0"><%= admin.email %> </h6>
-                        <% } %> 
-                        <span>Admin</span>
+                        
+                        
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
@@ -69,7 +82,7 @@
                     <a href="/adminUser" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Users</a>
                     <a href="/orders" class="nav-item nav-link"><i class="fa fa fa-th me-2"></i>Product Orders</a>
                     <a href="/setBanner" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Banners</a>
-                    <a href="/coupens" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Coupens</a>
+                    <a href="/coupons" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Coupons</a>
                    
                 </div>
             </nav>
@@ -81,7 +94,7 @@
         <div class="content">
             <!-- Navbar Start -->
             <nav class="navbar navbar-expand bg-light navbar-light sticky-top px-4 py-0">
-                <a href="index.html" class="navbar-brand d-flex d-lg-none me-4">
+                <a href="#" class="navbar-brand d-flex d-lg-none me-4">
                     <h2 class="text-primary mb-0"><i class="fa fa-hashtag"></i></h2>
                 </a>
                 <a href="#" class="sidebar-toggler flex-shrink-0">
@@ -94,80 +107,18 @@
                     <h5 class="mt-2">DASHBOARD</h5>
                 </div>
                 <div class="navbar-nav align-items-center ms-auto">
-                    <!-- <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <i class="fa fa-envelope me-lg-2"></i>
-                            <span class="d-none d-lg-inline-flex">Message</span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                            <a href="#" class="dropdown-item">
-                                <div class="d-flex align-items-center">
-                                    <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                                    <div class="ms-2">
-                                        <h6 class="fw-normal mb-0">Jhon send you a message</h6>
-                                        <small>15 minutes ago</small>
-                                    </div>
-                                </div>
-                            </a>
-                            <hr class="dropdown-divider">
-                            <a href="#" class="dropdown-item">
-                                <div class="d-flex align-items-center">
-                                    <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                                    <div class="ms-2">
-                                        <h6 class="fw-normal mb-0">Jhon send you a message</h6>
-                                        <small>15 minutes ago</small>
-                                    </div>
-                                </div>
-                            </a>
-                            <hr class="dropdown-divider">
-                            <a href="#" class="dropdown-item">
-                                <div class="d-flex align-items-center">
-                                    <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                                    <div class="ms-2">
-                                        <h6 class="fw-normal mb-0">Jhon send you a message</h6>
-                                        <small>15 minutes ago</small>
-                                    </div>
-                                </div>
-                            </a>
-                            <hr class="dropdown-divider">
-                            <a href="#" class="dropdown-item text-center">See all message</a>
-                        </div>
-                    </div> -->
-                    <!-- <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <i class="fa fa-bell me-lg-2"></i>
-                            <span class="d-none d-lg-inline-flex">Notificatin</span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                            <a href="#" class="dropdown-item">
-                                <h6 class="fw-normal mb-0">Profile updated</h6>
-                                <small>15 minutes ago</small>
-                            </a>
-                            <hr class="dropdown-divider">
-                            <a href="#" class="dropdown-item">
-                                <h6 class="fw-normal mb-0">New user added</h6>
-                                <small>15 minutes ago</small>
-                            </a>
-                            <hr class="dropdown-divider">
-                            <a href="#" class="dropdown-item">
-                                <h6 class="fw-normal mb-0">Password changed</h6>
-                                <small>15 minutes ago</small>
-                            </a>
-                            <hr class="dropdown-divider">
-                            <a href="#" class="dropdown-item text-center">See all notifications</a>
-                        </div>
-                    </div> -->
+                    
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                          <!-- <img class="rounded-circle me-lg-2" src="img/user.jpg" alt="" style="width: 40px; height: 40px;"> -->
-                         <% if(locals.admin) { %> 
+                         <% if(admin) { %> 
                             <span class="d-none d-lg-inline-flex"><%= admin.email %> </span>
                         <% } else { %> 
                             <span class="d-none d-lg-inline-flex">Admin </span>
                         <% } %> 
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                            <a href="#" class="dropdown-item">My Profile</a>
+                            <!-- <a href="#" class="dropdown-item">My Profile</a> -->
                             <!-- <a href="#" class="dropdown-item">Settings</a> -->
                             <a href="/logout" class="dropdown-item">Log Out</a>
                         </div>
@@ -185,7 +136,7 @@
                             <i class="fa fa-chart-line fa-3x text-primary"></i>
                             <div class="ms-3">
                                 <p class="mb-2">Today Sale</p>
-                                <h6 class="mb-0">$1234</h6>
+                                <h6 class="mb-0">Rs.<%= todaySale %>.00</h6>
                             </div>
                         </div>
                     </div>
@@ -194,7 +145,7 @@
                             <i class="fa fa-chart-bar fa-3x text-primary"></i>
                             <div class="ms-3">
                                 <p class="mb-2">Total Sale</p>
-                                <h6 class="mb-0">$1234</h6>
+                                <h6 class="mb-0">Rs.<%= totalSale %>.00 </h6>
                             </div>
                         </div>
                     </div>
@@ -203,7 +154,7 @@
                             <i class="fa fa-chart-area fa-3x text-primary"></i>
                             <div class="ms-3">
                                 <p class="mb-2">Today Revenue</p>
-                                <h6 class="mb-0">$1234</h6>
+                                <h6 class="mb-0">Rs.<%= todayRevenue %> </h6>
                             </div>
                         </div>
                     </div>
@@ -212,7 +163,7 @@
                             <i class="fa fa-chart-pie fa-3x text-primary"></i>
                             <div class="ms-3">
                                 <p class="mb-2">Total Revenue</p>
-                                <h6 class="mb-0">$1234</h6>
+                                <h6 class="mb-0">Rs.<%= totalRevenue %> </h6>
                             </div>
                         </div>
                     </div>
@@ -220,27 +171,39 @@
             </div>
             <!-- Sale & Revenue End -->
 
+                <input type="hidden" name="" id="array" value="<%= values %> ">
+                <input type="hidden" name="" id="revenue" value="<%= revenue %> ">
 
+                <input type="hidden" name="" id="ordered" value="<%= ordered %> ">
+                <input type="hidden" name="" id="packed" value="<%= packed %> ">
+                <input type="hidden" name="" id="shipped" value="<%= shipped %> ">
+                <input type="hidden" name="" id="delivered" value="<%= delivered %> ">
+                <input type="hidden" name="" id="cancelled" value="<%= cancelled %> ">
+          
+            
             <!-- Sales Chart Start -->
             <div class="container-fluid pt-4 px-4">
                 <div class="row g-4">
                     <div class="col-sm-12 col-xl-6">
                         <div class="bg-light text-center rounded p-4">
                             <div class="d-flex align-items-center justify-content-between mb-4">
-                                <h6 class="mb-0">Worldwide Sales</h6>
-                                <a href="">Show All</a>
+                                <h6 class="mb-0">Daily Sales</h6>
+                                <!-- <a href="">Show All</a> -->
                             </div>
-                            <canvas id="worldwide-sales"></canvas>
+                            <canvas id="worldwide-sales"  height="300"></canvas>
+                            
                         </div>
+                        <button class="mt-2" style="float: right; border-style:none" onclick="downloadPDF()">Download PDF</button>
                     </div>
                     <div class="col-sm-12 col-xl-6">
                         <div class="bg-light text-center rounded p-4">
                             <div class="d-flex align-items-center justify-content-between mb-4">
-                                <h6 class="mb-0">Salse & Revenue</h6>
-                                <a href="">Show All</a>
+                                <h6 class="mb-0">Sales & Revenue</h6>
+                                <!-- <a href="">Show All</a> -->
                             </div>
-                            <canvas id="salse-revenue"></canvas>
+                            <canvas id="orderStatusChart"></canvas>
                         </div>
+                        <button class="mt-2" style="float: right; border-style:none" onclick="downloadSecPDF()">Download PDF</button>
                     </div>
                 </div>
             </div>
@@ -252,67 +215,35 @@
                 <div class="bg-light text-center rounded p-4">
                     <div class="d-flex align-items-center justify-content-between mb-4">
                         <h6 class="mb-0">Recent Salse</h6>
-                        <a href="">Show All</a>
+                        <a href="/orders">Show All</a>
                     </div>
                     <div class="table-responsive">
                         <table class="table text-start align-middle table-bordered table-hover mb-0">
                             <thead>
                                 <tr class="text-dark">
-                                    <th scope="col"><input class="form-check-input" type="checkbox"></th>
-                                    <th scope="col">Date</th>
+                                    
+                                    
                                     <th scope="col">Invoice</th>
                                     <th scope="col">Customer</th>
                                     <th scope="col">Amount</th>
                                     <th scope="col">Status</th>
-                                    <th scope="col">Action</th>
+                                    
                                 </tr>
                             </thead>
                             <tbody>
+                                <% for(let item of completed) { %> 
                                 <tr>
-                                    <td><input class="form-check-input" type="checkbox"></td>
-                                    <td>01 Jan 2045</td>
-                                    <td>INV-0123</td>
-                                    <td>Jhon Doe</td>
-                                    <td>$123</td>
+                                    
+                                    
+                                    <td><%= item._id %></td>
+                                    <td><%= item.address.name %> </td>
+                                    <td>Rs.<%= item.bill %>.00 </td>
                                     <td>Paid</td>
-                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
+                                    
+                                    
                                 </tr>
-                                <tr>
-                                    <td><input class="form-check-input" type="checkbox"></td>
-                                    <td>01 Jan 2045</td>
-                                    <td>INV-0123</td>
-                                    <td>Jhon Doe</td>
-                                    <td>$123</td>
-                                    <td>Paid</td>
-                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                                </tr>
-                                <tr>
-                                    <td><input class="form-check-input" type="checkbox"></td>
-                                    <td>01 Jan 2045</td>
-                                    <td>INV-0123</td>
-                                    <td>Jhon Doe</td>
-                                    <td>$123</td>
-                                    <td>Paid</td>
-                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                                </tr>
-                                <tr>
-                                    <td><input class="form-check-input" type="checkbox"></td>
-                                    <td>01 Jan 2045</td>
-                                    <td>INV-0123</td>
-                                    <td>Jhon Doe</td>
-                                    <td>$123</td>
-                                    <td>Paid</td>
-                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                                </tr>
-                                <tr>
-                                    <td><input class="form-check-input" type="checkbox"></td>
-                                    <td>01 Jan 2045</td>
-                                    <td>INV-0123</td>
-                                    <td>Jhon Doe</td>
-                                    <td>$123</td>
-                                    <td>Paid</td>
-                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                                </tr>
+                                <% } %> 
+                               
                             </tbody>
                         </table>
                     </div>
@@ -322,7 +253,7 @@
 
 
             <!-- Widgets Start -->
-            <div class="container-fluid pt-4 px-4">
+            <!-- <div class="container-fluid pt-4 px-4">
                 <div class="row g-4">
                     <div class="col-sm-12 col-md-6 col-xl-4">
                         <div class="h-100 bg-light rounded p-4">
@@ -439,7 +370,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <!-- Widgets End -->
 
 
@@ -461,7 +392,96 @@
 
         <!-- Back to Top -->
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+        <% } else { %> 
+            <div class="sidebar pe-4 pb-3">
+                <nav class="navbar bg-light navbar-light">
+                    <a href="#" class="navbar-brand mx-4 mb-3">
+                        <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>E-SHOP</h3>
+                    </a>
+                    <div class="d-flex align-items-center ms-4 mb-4">
+                        <div class="position-relative">
+                            <!-- <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;"> -->
+                            <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
+                        </div>
+                        <div class="ms-3">
+                            
+                            <h6 class="mb-0"><%= admin %> </h6>
+                            
+                            
+                        </div>
+                    </div>
+                    <div class="navbar-nav w-100">
+                        <a href="/adminHome" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+                        
+                        <a href="/adminProducts" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Products</a>
+                        <a href="/adminCategory" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Categories</a>
+                        <a href="/adminBrand" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Brands</a>
+                        <a href="/adminUser" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Users</a>
+                        <a href="/orders" class="nav-item nav-link"><i class="fa fa fa-th me-2"></i>Product Orders</a>
+                        <a href="/setBanner" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Banners</a>
+                        <a href="/coupens" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Coupens</a>
+                       
+                    </div>
+                </nav>
+            </div>
+            <!-- Sidebar End -->
+    
+    
+            <!-- Content Start -->
+            <div class="content">
+                <!-- Navbar Start -->
+                <nav class="navbar navbar-expand bg-light navbar-light sticky-top px-4 py-0">
+                    <a href="#" class="navbar-brand d-flex d-lg-none me-4">
+                        <h2 class="text-primary mb-0"><i class="fa fa-hashtag"></i></h2>
+                    </a>
+                    <a href="#" class="sidebar-toggler flex-shrink-0">
+                        <i class="fa fa-bars"></i>
+                    </a>
+                    <form class="d-none d-md-flex ms-4">
+                        <input class="form-control border-0" type="search" placeholder="Search">
+                    </form>
+                    <div class="col-md-6 text-center">
+                        <h5 class="mt-2">DASHBOARD</h5>
+                    </div>
+                    <div class="navbar-nav align-items-center ms-auto">
+                        
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link ">
+                             <!-- <img class="rounded-circle me-lg-2" src="img/user.jpg" alt="" style="width: 40px; height: 40px;"> -->
+                             
+                             <a href="/adminLogin" class="dropdown-item">Login</a>
+                            
+                            </a>
+                            
+                        </div>
+                    </div>
+                </nav>
+                <% } %> 
     </div>
+    <script>
+        function downloadPDF() {
+            const canvas = document.getElementById('worldwide-sales')
+            const canvasImage = canvas.toDataURL('image/jpeg',1.0)
+           
+
+            let pdf =new jsPDF('landscape')
+            pdf.setFontSize(20)
+            pdf.addImage(canvasImage, 'JPEG' , 15,15,265,150)
+            pdf.save('salesrecord.pdf')
+        }   
+
+        function downloadSecPDF() {
+            const canvas = document.getElementById('orderStatusChart')
+            const canvasImage = canvas.toDataURL('image/jpeg',1.0)
+           
+
+            let pdf =new jsPDF('landscape')
+            pdf.setFontSize(20)
+            pdf.addImage(canvasImage, 'JPEG' , 15,15,265,150)
+            pdf.save('revenuerecord.pdf')
+        }   
+
+    </script>
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -476,6 +496,45 @@
 
     <!-- Template Javascript -->
     <script src="js/admin/main.js"></script>
+    <script>
+        const a = parseInt(document.getElementById('ordered').value)
+        const b = parseInt(document.getElementById('packed').value)
+        const c = parseInt(document.getElementById('shipped').value)
+        const d = parseInt(document.getElementById('delivered').value)
+        const e = parseInt(document.getElementById('cancelled').value)
+        console.log(a,b,c,d,e)
+        const data = {
+    labels: [
+        'Ordered',
+        'Packed',
+        'Shipped',
+        'Delivered',
+        'Cancelled'
+    ],
+     datasets: [{
+        label: 'My First Dataset',
+        data: [a,b,c,d,e],
+        backgroundColor: [
+            'rgb(255,255,0)',
+            'rgb(128,128,128)',
+            'rgb(54, 162, 235)',
+            'rgb(0, 255, 0)',
+            'rgb(255, 0, 0)'
+
+        ],
+        hoverOffset: 4
+    }]
+    };
+
+    const config = {
+        type: 'doughnut',
+        data: data,
+    };
+    const orderStatusCart = new Chart (
+        document.getElementById('orderStatusChart'),
+        config
+    )
+    </script>
 </body>
 
 </html>

@@ -23,7 +23,7 @@ const {
 } = require('../middleware')
 
  
-router.get('/', sessionCheckHomePage, userHomePage)
+router.get('/'  , userHomePage) 
 router.get('/signup', signupPage)
 router.post('/otpPage', otpPage)
 router.get('/otpPage', getOtpPage)
@@ -34,13 +34,13 @@ router.post('/homePage',  homePage)
 router.get('/loginPage', sessionCheck, loginPage)
 
 router.get('/user/logout',  logout)
-router.get('/userProfile/:id',userProfile)
+router.get('/userProfile/:id', sessionCheckHomePage, userProfile)
 
 
-router.get('/addAddress', addAddress)
-router.post('/saveAddress/:id',saveAddress)
-router.delete('/deleteAddress/:id',deleteAddress)
-// router.put('/saveChangedAddress/:id',saveChangedAddress)
+router.get('/addAddress', sessionCheckHomePage, addAddress)
+router.post('/saveAddress/:id', sessionCheckHomePage, saveAddress)
+router.delete('/deleteAddress/:id', sessionCheckHomePage, deleteAddress)
+
 
 
 

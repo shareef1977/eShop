@@ -105,13 +105,13 @@
     </div>
     </div>
     <!-- Navbar End -->
-    
-    <div class="container-fluid">
+
+    <div class="container-fluid px-5">
         <div class="row">
             <div class="col-md-12">
-    
+
             </div>
-            <% if(orderData.length > 0) { %> 
+            <% if(orderData.length> 0) { %>
                 <table class="table">
                     <thead>
                         <tr>
@@ -123,160 +123,180 @@
                             <th>Bill</th>
                             <th>Date</th>
                             <th>Items</th>
-                           
+
                             <th>Cancel Order</th>
-                            
+
                         </tr>
-                        
+
                     </thead>
                     <tbody>
-                        <% for(let data of orderData) { %> 
-                        <tr>
-                            <td><%= data._id %> </td>
-                            <td><%= data.paymentStatus %> </td>
-                            <% if(data.isCompleted == true) { %> 
-                                <td>Completed</td>
-                            <% } else { %>
-                                <td>Pending</td> 
-                            <% } %> 
-                            <td><%= data.address.addressLine %> </td>
-                            <td><%= data.orderStatus[0].type %> </td>
-                            <td>Rs.<%= data.bill %> </td>
-                            <td><%= data.orderStatus[0].date %> </td>
-                            <td>
-                                <!-- <button data-toggle="modal" class="btn btn-success rounded" onclick="orderedProducts('<%= //data._id %>')" data-target="#exampleModal">Items</button> -->
-                                <a class="btn btn-success rounded" href="/orderedProducts/<%= data._id %> ">Items</a>
-                            </td>
-                            <td>
-                                <% if(data.orderStatus[0].type != 'Cancelled') { %> 
-                                    <button class=" btn btn-danger rounded"  data-toggle="modal" data-target="#exampleModal1">Cancel </button> 
-                                <% } else if(data.orderStatus[0].type == 'Delivered') { %>
-                                    Delivered
-                                <% } else { %> 
-                                    Cancelled
-                                <% } %> 
-                                
+                        <% for(let data of orderData) { %>
+                            <tr>
+                                <td>
+                                    <%= data._id %>
+                                </td>
+                                <td>
+                                    <%= data.paymentStatus %>
+                                </td>
+                                <% if(data.isCompleted==true) { %>
+                                    <td>Completed</td>
+                                    <% } else { %>
+                                        <td>Pending</td>
+                                        <% } %>
+                                            <td>
+                                                <%= data.address.addressLine %>
+                                            </td>
+                                            <td>
+                                                <%= data.orderStatus[0].type %>
+                                            </td>
+                                            <td>Rs.<%= data.bill %>
+                                            </td>
+                                            <td>
+                                                <%= data.orderStatus[0].date %>
+                                            </td>
+                                            <td>
+                                                <button data-toggle="modal" class="btn btn-success rounded"
+                                                    onclick="products('<%= data._id %>')"
+                                                    data-target="#exampleModal">Items</button>
+                                                <!-- <a class="btn btn-success rounded" href="/orderedProducts/<%= //data._id %> ">Items</a> -->
+                                            </td>
+                                            <td>
+                                                <% if(data.orderStatus[0].type !='Cancelled' && data.orderStatus[0].type
+                                                    !='Delivered' ) { %>
 
-                            </td>
-                        </tr>
-                        <% } %> 
+                                                    <button type="button" class=" btn btn-danger rounded"
+                                                        data-toggle="modal"
+                                                        data-target="#exampleModal<%= data._id %>">Cancel </button>
+
+                                                    <% } else if(data.orderStatus[0].type=='Delivered' ) { %>
+                                                        Delivered
+                                                        <% } else { %>
+                                                            Cancelled
+                                                            <% } %>
+
+
+                                            </td>
+                            </tr>
+
+
+                            <% } %>
                     </tbody>
                 </table>
-            </div>
         </div>
+    </div>
 
-        <% } else { %> 
-            <div class="col-md-12 text-center ">
-                <h4 class="text-danger">No Orders Available Here !!!</h4>
-            </div>
-        <% } %> 
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Products</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <div class="row">
-                <% if(locals.cartList) { %> 
-                <% cartList.forEach((p) => { %> 
-                    <% p.product.forEach((p1) => { %> 
-                <div class="col-md-12">
-                    <div class="col-md-3">
-                        <img class="img-fluid" src="<%= p1.images[0].url %> " alt="">
-                    </div>
-                    <div class="col-md-4">
-                        <div class="row pt-5">
-                            <div class="col-md-12 align-middle">
-                                <h4><%= p1.name %> </h4>
+    <% } else { %>
+        <div class="col-md-12 text-center ">
+            <h4 class="text-danger">No Orders Available Here !!!</h4>
+        </div>
+        <% } %>
+
+
+
+
+
+
+            <% for(let data of orderData) { %>
+                <div class="modal fade" id="exampleModal<%= data._id %>" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Cancel Order</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
                             </div>
-                            <div class="col-md-12">
-                                <h6><%= p1.highlights %> </h6>
+                            <div class="modal-body text-danger">
+                                Are you sure to cancel the order...?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" onclick="cancelOrder('<%= data._id %>') "
+                                    class="btn btn-primary">Sure</button>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-2 pt-5">
-                        <h5>Qty: <%= p.itemQuantity %> Psc </h5>
-                    </div>
-                    <div class="col-md-3 pt-5">
-                        <h4 class="text-success">Rs.<%= p1.price %> </h4>
-                    </div>
                 </div>
-                <% }) }) %> 
-                <% } %> 
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-success" data-dismiss="modal">Done</button>
-             
-             
-              
-            </div>
-          </div>
-        </div>
-      </div>
 
-      <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Cancel Order</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              Do you want Cancel Order ..?
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-             
-              <button type="button"
-              <% for(let data of orderData) { %>  
-                onclick="cancelOrder('<%= data._id %>')"
-              <% } %> 
-              class="btn btn-danger" data-dismiss="modal">Sure</button>
-            </div>
-          </div>
-        </div>
-      </div>
+                <% } %>
 
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-l" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Products</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body" id="table">
 
-    <%- include('../partials/userFooter') %> 
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-success" data-dismiss="modal">Done</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
 
 
-    <script>
-        function orderedProducts(id) {
-            fetch('/orederedProducts/'+id, {
-                method:'get',
-                headers: {
-                    'Content-type': 'application/json',
-                    body: JSON.stringify({hai:"jhj"})
-                }
-        })
-        .then(res => res.json())
-        .then(data => {
-            
-            console.log(data)
-        })
-        }
 
-        function cancelOrder(id) {
-            fetch('/cancelOrder/'+id, {
-                method:'put',
-                headers: {
-                    'Content-type': 'application/json',
-                    body: JSON.stringify({hai:"jhj"})
-                }
-        })
-        .then(res => res.json())
-        .then(data => {
-            success:location.reload()
-            // console.log(data)
-        })
-        }
-    </script>
+
+                    <script>
+                        function products(id) {
+                            let tableMain = document.getElementById('table')
+                            console.log(id)
+                            fetch('/orderedProducts', {
+                                method: 'post',
+                                headers: {
+                                    'Content-type': 'application/json',
+
+                                }, body: JSON.stringify({ id })
+                            })
+                                .then(res => res.json())
+                                .then(data => {
+                                    const items = data.cartList
+
+                                    let table = `<table class="table table-striped table-hover"><thead><tr><th>product</th>
+                                                    <th>product name</th>
+                                                        <th>product price</th>
+                                                        <th>quantity</th>
+                                                        </tr><thead><tbody>`
+                                    items.forEach(p => {
+                                        p.product.forEach(p1 => {
+                                            console.log(p1)
+                                            table += `<tr><td><div class="mb-3" style="background-image:url(${p1.images[0].url}); width:50px;height:50px;background-size:cover;background-repeat:no-repeat "></div></td>
+                                            <td>${p1.name}</td>
+                                            <td>₹${p1.price}</td>
+                                            <td>${p.itemQuantity}</td></tr>`
+
+                                        })
+                                    })
+
+                                    table += `</tbody></table>`
+                                    tableMain.innerHTML = table
+
+
+                                })
+                        }
+
+                        function cancelOrder(id) {
+                            fetch('/cancelOrder/' + id, {
+                                method: 'put',
+                                headers: {
+                                    'Content-type': 'application/json',
+                                    body: JSON.stringify({ hai: "jhj" })
+                                }
+                            })
+                                .then(res => res.json())
+                                .then(data => {
+                                    success: location.reload()
+                                    // console.log(data)
+                                })
+                        }
+                    </script>
+
+                    <%- include('../partials/userFooter') %>

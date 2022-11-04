@@ -25,10 +25,15 @@ const singleProduct = async (req,res) => {
         const courosels = await productData.find({ $and:[{
             discount:{$gt:10}},{deleted:false}]
         })
-        const userId = req.session.user._id
-        const cartItems = await cartData.findOne({userId})
-        const wishlistItems = await wishlistData.findOne({userId})
-
+        let cartItems 
+        let wishlistItems 
+        if(req.session.user){
+            const userId = req.session.user._id
+           
+        
+            cartItems = await cartData.findOne({userId})
+            wishlistItems = await wishlistData.findOne({userId})
+        }
         res.render('user/singleProduct',{products,justArrived,categories,courosels,cartItems,wishlistItems,cata})
     }
     catch(err) {

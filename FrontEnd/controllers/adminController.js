@@ -18,10 +18,57 @@ const { hashPassword,
 
 const adminHomePage = async(req,res) => {
     try {
+        const dailySale = await checkoutData.find({$and:[{createdAt:{$lt:Date.now(),$gt:Date.now() - 86400000}},{'orderStatus.type':{$ne:'Cancelled'}}]})
+        let todaySale = 0
+        dailySale.forEach((s) => {
+            todaySale += s.bill
+        })
+        let totalSale = 0
 
-        // const daySales = await checkoutData.aggregate([{$match:{$lt:{createdAt:Date.now()}}}])
-        // console.log(daySales)
-        res.render('admin/adminHome')
+     
+        const sale = await checkoutData.find({'orderStatus.type':{$ne:'Cancelled'}})
+        sale.forEach((s) => {
+            totalSale += s.bill
+        })
+        console.log(todaySale,totalSale)
+
+        todayRevenue = todaySale * 10 / 100
+        totalRevenue = totalSale * 10 / 100
+        
+
+        const completed = await checkoutData.find({isCompleted:true}).sort({createdAt:-1}).limit(10)
+        
+
+        const graph = await checkoutData.aggregate(
+            [
+               {
+                 $group : {
+                    _id : { month: { $month: "$createdAt" }, day: { $dayOfMonth: "$createdAt" }, year: { $year: "$createdAt" } },
+                    totalPrice: { $sum: '$bill' },
+                    count: { $sum: 1 }
+
+                 }
+
+               },{$sort:{_id :-1}},
+               {$project:{totalPrice:1,_id:0}},{$limit:7}
+            ]
+         );
+         
+         let values = [];
+         let revenue = []
+         graph.forEach((g)=> {
+            values.push(g.totalPrice)
+            revenue.push(g.totalPrice*10/100)
+         })
+      
+         const ordered = await checkoutData.find({'orderStatus.type':'Ordered'}).count()
+         const packed = await checkoutData.find({'orderStatus.type':'Packed'}).count()
+         const shipped = await checkoutData.find({'orderStatus.type':'Shipped'}).count()
+         const delivered = await checkoutData.find({'orderStatus.type':'Delivered'}).count()
+         const cancelled = await checkoutData.find({'orderStatus.type':'Cancelled'}).count()
+         
+
+        res.render('admin/adminHome',{todaySale,totalSale,todaySale,totalRevenue,completed,values,revenue,ordered,packed,shipped,delivered,cancelled})
     } catch(err) {
         console.log(err)
     }
@@ -30,10 +77,7 @@ const adminHomePage = async(req,res) => {
 
 const adminLogin = async(req,res) => {
    try {
-     // await adminData.create({name:'shareef',email:'shareefmohammedmm@gmail.com',password:hashedPassword},
-    // {name:'yaser',email:'yaser@gmail.com',password:hashedPassword})
-    
-    res.render('admin/adminLogin')
+     res.render('admin/adminLogin')
    }catch(err){
     console.log(err)
    }
@@ -53,8 +97,7 @@ const adminHome = async(req,res) => {
     
     
         const isValid = comparePassword(password,admin.password)
-        // console.log(password)
-        // console.log(admin.password)
+       
 
         if(isValid) {
             req.session.admin = admin
@@ -75,7 +118,7 @@ const adminHome = async(req,res) => {
 const adminCategory = async(req,res) => {
 
     try{
-       const categories = await categoryData.find({})
+       const categories = await categoryData.find({deleteStatus:false})
        
     
         res.render('admin/adminCategory',{categories})
@@ -87,7 +130,7 @@ const adminCategory = async(req,res) => {
 const adminBrand = async(req,res) => {
     try {
         
-        const brands = await brandData.find({})
+        const brands = await brandData.find({deleteStatus:false})
         res.render('admin/adminBrand',{brands}) 
     } catch (err){
         console.log(err)
@@ -110,7 +153,7 @@ const logout = async(req,res) => {
 
     try {
         req.session.destroy()
-        res.redirect('/adminLogin')
+        res.redirect('/adminHome')
     } catch(err) {
         console.log(err)
     }
@@ -129,10 +172,10 @@ const editUser = async(req,res) => {
 
         if(user.blockStatus == false){
             await userData.findByIdAndUpdate(id,{blockStatus: true})
-            res.redirect('/adminUser')
+            res.send({success:true})
         } else {
             await userData.findByIdAndUpdate(id,{blockStatus: false})
-            res.redirect('/adminUser')
+            res.send({success:true})
         }
     } catch(err) {
         console.log(err)
@@ -157,13 +200,14 @@ const productOrders = async(req,res) => {
 
 const orderItems = async(req,res) => {
     try{
-        const carId = req.params
+        console.log(req.body)
+        const carId = req.body
         const cartId = mongoose.Types.ObjectId(carId)
         const cartList = await checkoutData.aggregate([{$match:{_id:cartId}},{$unwind:'$cartItems'},
                         {$project:{item:'$cartItems.productId',itemQuantity:'$cartItems.quantity'}},
                         {$lookup:{from:process.env.PRODUCT_COLLECTION,localField:'item',foreignField:'_id',as:'product'}}]);
         
-        res.render('admin/orderItems',{cartList})
+        res.send({cartList})
     } catch(err) {
         console.log(err)
     }

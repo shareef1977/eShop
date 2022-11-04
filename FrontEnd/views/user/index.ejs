@@ -197,9 +197,15 @@
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
+            <% if(user){ %> 
             <div class="modal-body text-success">
               Item added to your Cart successfully...
             </div>
+            <% } else { %>
+            <div class="modal-body text-danger">
+                You are not logged in !!!
+            </div>
+            <% } %> 
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
              

@@ -5,6 +5,10 @@ const categorySchema = mongoose.Schema({
     name: {
         type: String,
         required: true
+    },
+    deleteStatus: {
+        type: Boolean,
+        default: false
     }
         
 },{timestamps: true})

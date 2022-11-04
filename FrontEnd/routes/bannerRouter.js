@@ -12,9 +12,15 @@ const {
     saveBanner
 } = require('../controllers/bannerController')
 
-router.get('/setBanner', setBanner)
-router.get('/addBanner', addBanner)
-router.post('/addBanner/add', upload.array('image'), saveBanner)
+const {
+    adminSessionCheck,
+    adminSessionCheckHomePage
+ } = require('../middleware')
+ 
+
+router.get('/setBanner',  adminSessionCheckHomePage, setBanner)
+router.get('/addBanner', adminSessionCheckHomePage, addBanner)
+router.post('/addBanner/add', adminSessionCheckHomePage, upload.array('image'), saveBanner)
 
 
 module.exports = router

@@ -17,26 +17,28 @@ const {
    
 } = require('../controllers/adminController')
 
-// const {
-//     adminSessionCheck
-// } = require('../middleware')
+const {
+    adminSessionCheck,
+    adminSessionCheckHomePage
+} = require('../middleware')
  
 
-router.get('/adminLogin',   adminLogin) 
-router.get('/adminHome',adminHomePage)
+router.get('/adminLogin', adminSessionCheck, adminLogin) 
+router.get('/adminHome', adminSessionCheckHomePage, adminHomePage)
 router.post('/adminHome', adminHome)
 router.get('/logout',  logout)
 
-router.get('/adminCategory', adminCategory) 
-router.get('/adminBrand', adminBrand)
-router.get('/adminUser', adminUser)
+router.get('/adminCategory', adminSessionCheckHomePage, adminCategory) 
+router.get('/adminBrand', adminSessionCheckHomePage, adminBrand)
+router.get('/adminUser',adminSessionCheckHomePage, adminUser)
 
-router.put('/editUser/:id', editUser)
+router.put('/editUser/:id', adminSessionCheckHomePage, editUser)
 
-router.get('/orders',productOrders)
-router.get('/orderitems/:id',orderItems)
+router.get('/orders', adminSessionCheckHomePage, productOrders)
+router.post('/orderitems',adminSessionCheckHomePage, orderItems)
 
-router.get('/editOrders/:id',editOrder)
-router.post('/updateOrder/:id', updateOrder)
+router.get('/editOrders/:id', adminSessionCheckHomePage, editOrder)
+router.post('/updateOrder/:id', adminSessionCheckHomePage, updateOrder)
+
 
 module.exports = router

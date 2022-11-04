@@ -157,7 +157,7 @@
                                     <% for(let i=0; i < address.length; i++) { %>
                                         <div class="col-md-12 form-group d-flex ">
                                             <div class="col-md-1">
-                                                <input class="w-75" type="radio" placeholder="House No"
+                                                <input class="w-75" type="radio" id="address" placeholder="House No"
                                                     name="addressLine"
                                                     value="<%= address[i].houseNo %>, <%= address[i].street %>, <%= address[i].district %>, <%= address[i].state %>, <%= address[i].pincode %>"
                                                     required>
@@ -177,7 +177,11 @@
 
                                          
                                 </div>
-                                <a class="btn btn-primary" href="/checkoutAddress">Add Another Address</a>
+                                <% if(address.length > 0) { %> 
+                                    <a class="btn btn-primary" href="/checkoutAddress">Add Another Address</a>
+                                <% } else { %> 
+                                    <a class="btn btn-primary" href="/checkoutAddress">Add Address</a>
+                                <% } %> 
                     </div>
 
 
@@ -257,10 +261,17 @@
                             </div>
 
                         </div>
+                        <% if(address.length > 0) { %> 
                         <div class="card-footer border-secondary bg-transparent">
-                            <button class="btn btn-lg btn-block btn-primary font-weight-bold my-3 py-3"
+                            <button class="btn btn-lg btn-block btn-primary font-weight-bold my-3 py-3" id="order"
                                 type="submit">Place Order</button>
                         </div>
+                        <% } else { %> 
+                            <div>
+                                <h6 class="text-danger">Your address is not added to place order..?</h6>
+                                <h4 class="text-success">Please add an address...</h4>
+                            </div>
+                        <% } %> 
                     </div>
                 </div>
         </div>
@@ -270,99 +281,7 @@
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <script>
 
-        // const form = document.querySelector('#pay')
-
-
-        //   form.addEventListener('submit',(e)=>{
-        //   e.preventDefault();
-        //   const paymethod = form.elements.payment.value;
-        //   fetch('/placeOrder',{
-        //     method: 'POST',
-        //     headers: { 'Content-Type': 'application/json' },
-        //     body: JSON.stringify({ payment })
-        //     }).then(res => res.json()).then(data => {
-        //       if(data.cod===true){
-        //         window.location.href='/orderSuccess'
-        //       }
-        //       console.log('data=',data)
-        //       const order = data.order
-        //       rzrpay(order);
-
-        //     }).catch(e=>{
-        //       console.log('erros=',e)
-        //     })
-        //     })
-
-        // function rzrpay(data){
-        //   console.log('amount=',data.bill)
-        //   var options = {
-        //     "key": "rzp_test_hMqwAizfgv8cdG", // Enter the Key ID generated from the Dashboard
-        //     "amount": data.bill, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
-        //     "currency": "INR",
-        //     "name": "eShop",
-        //     "description": "Test Transaction",
-        //     "image": "https://img.icons8.com/ios-filled/344/amazon-alexa-logo.png",
-        //     "order_id": data.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-        //     "handler": function (response){
-        //         // alert(`${response}`)
-        //         // alert(response.razorpay_payment_id);
-        //         // alert(response.razorpay_order_id);
-        //         // alert(response.razorpay_signature)
-        //         verifypayment(response,data)
-        //     },
-        //     "theme": {
-        //         "color": "#444444"
-        //     }
-        //   };
-        //   const rzp1 = new Razorpay(options);
-        //   rzp1.open();
-
-        // }
-        // function verifypayment(payment,order){
-
-        //   fetch('/verifyPay',{
-        //     method:'POST',
-        //     headers: { 'Content-Type': 'application/json' },
-        //     body: JSON.stringify({ payment,order})
-        //   }).then(res=>res.json()).then(data=>{
-        //     console.log('data===',data.success);
-        //     if(data.success){
-        //       window.location.href='/orderSuccess'
-        //     }else{
-        //       window.location.reload();
-        //     }
-        //   })
-
-
-        // }
-
-
-        //     let form = document.querySelector('#pay')
-        //     form.addEventListener("submit", (e)=> {
-        //     e.preventDefault();
-        //   const payment =form.elements.payment.value;
-        //   const  name = form.elements.name.value;
-        //   const email = form.elements.email.value;
-        //   const mobile = form.elements.mobile.value;
-        //   const addressLine =  form.elements.addressLine.value;
-
-
-        //     fetch('/placeOrder', {
-        //         method: 'POST',
-        //         headers: { 'Content-Type': 'application/json' },
-        //         body: JSON.stringify({payment,name,email,mobile,addressLine})
-        //     }).then(res=> res.json()).then(data=>{
-        //         console.log(data.status)
-        //         if(data.status == true){
-        //             window.location.href='/orderSuccess'
-        //         }
-        //     })
-        // }).then(res => res.json()).then(data => {
-        //     let productDetails = data.product;
-
-
-        // });
-
+       
 
 
         $("#pay").submit((e) => {
@@ -431,6 +350,15 @@
                 }
             })
         }
+
+
+
+        // let address = document.getElementById('address').value
+        // console.log(address)
+        // if(address == ''){
+        //     document.getElementById('order').disabled = true
+        //     alert('You need address to place order')
+        // }
     </script>
 
     <%- include('../partials/userFooter') %>

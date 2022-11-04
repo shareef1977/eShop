@@ -87,8 +87,8 @@ const editProduct = async(req,res) => {
     try {
         const {id} = req.params 
         const product = await productData.findById(id)
-        const categories = await categoryData.find({})
-        const brands = await brandData.find({})
+        const categories = await categoryData.find({deleteStatus:false})
+        const brands = await brandData.find({deleteStatus:false})
         res.render('admin/editProduct',{product,categories,brands})
     } catch(err) {
         console.log(err)
@@ -123,25 +123,11 @@ const saveUpdatedProduct = async(req,res) => {
 const deleteProduct = async(req,res) => {
    try {
     const {id} = req.params
-    const product = await productData.findByIdAndUpdate(id,{deleted:true})
-    console.log(product)
-    // await cloudinary.uploader.destroy(product.cloudinary_id)
-    // await product
-    // .remove()
-    // .then(data => {
-    //     if(!data){
-    //         res.status(404).send({message:`Cannot delete with id ${id}. May be is wrong`})
-    //     } else {
-    //         // res.send({message:"product was deleted successfully"})
-            
-    //         res.redirect('/adminProducts')
-    //     }
-    //  })
-    //  .catch(err => {
-    //     res.status(500).send({message:"could not find product with id = "+id})
-    //  })
+    await productData.findByIdAndUpdate(id,{deleted:true})
     
-    res.redirect('/adminProducts')
+    
+    
+    res.send({success:true})
    } catch(err) {
         console.log(err)
    }
@@ -165,7 +151,8 @@ const saveBrandName = async(req,res) => {
             res.redirect('/addBrand')
         } 
 
-        const redundunt = await brandData.find({name})
+        const redundunt = await brandData.find({name},{deleteStatus:false})
+        console.log(redundunt)
         if(redundunt.length > 0){
             req.flash('error','Brand is already exists')
             res.redirect('/addBrand')
@@ -190,9 +177,10 @@ const saveBrandName = async(req,res) => {
 const deleteBrand = async(req,res) => {
     try {
         const {id} = req.params
-        const deletion = brandData.findByIdAndDelete(id)
-        await deletion.remove()
-        res.redirect('/adminBrand')
+        
+        await brandData.findByIdAndUpdate(id,{deleteStatus: true})
+        
+        res.send({status:true})
     } catch(err) {
         console.log(err)
     }
@@ -235,23 +223,9 @@ const deleteCategory = async(req,res) => {
    try{
     const {id} = req.params
 
-    const deletion = await categoryData.findByIdAndDelete(id)
+    await categoryData.findByIdAndUpdate(id,{deleteStatus: true})
+    res.send({success:true})
     
-    await deletion.remove()
-    res.redirect('/adminCategory')
-    // res.send({success:true})
-    // .then(data => {
-    //     if(!data){
-    //         req.flash('error','Cannot complete delete operation')
-    //     } else {
-    //         // res.send({message:"product was deleted successfully"})
-            
-           
-    //     }
-    //  })
-    //  .catch(err => {
-    //     res.status(500).send({message:"could not find product with id = "+id})
-    //  })
    } catch(err) {
     console.log(err)
    }

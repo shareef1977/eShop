@@ -159,7 +159,9 @@
                             <td>Rs.<%= order.bill %> </td>
                             <td><%= order.orderStatus[0].type %> </td>
                             <td><%= order.orderStatus[0].date %> </td>
-                            <td><a class="btn rounded btn-success" href="/orderItems/<%= order._id %> ">View</a></td>
+                            <td> <button data-bs-toggle="modal" class="btn btn-success rounded"
+                                onclick="products('<%= order._id %>')"
+                                data-bs-target="#exampleModal">Items</button></td>
                         </tr>
                        <% } %>  
                     </tbody>
@@ -182,6 +184,25 @@
         </div>
         <!-- Content End -->
 
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-l" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Products</h5>
+                                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body" id="table">
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-success" data-bs-dismiss="modal">Done</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
         <!-- Back to Top -->
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
@@ -209,9 +230,49 @@
 
     <script>
         $(document).ready(function () {
-    $('#example').DataTable();
-});
+            $('#example').DataTable();
+        });
+        
     </script>
+    <script>
+        function products(id) {
+            let tableMain = document.getElementById('table')
+            console.log(id)
+            fetch('/orderitems', {
+                method: 'post',
+                headers: {
+                    'Content-type': 'application/json',
+
+                }, body: JSON.stringify({ id })
+            })
+                .then(res => res.json())
+                .then(data => {
+                    const items = data.cartList
+
+                    let table = `<table class="table table-striped table-hover"><thead><tr><th>product</th>
+                                    <th>product name</th>
+                                        <th>product price</th>
+                                        <th>quantity</th>
+                                        </tr><thead><tbody>`
+                    items.forEach(p => {
+                        p.product.forEach(p1 => {
+                            console.log(p1)
+                            table += `<tr><td><div class="mb-3" style="background-image:url(${p1.images[0].url}); width:50px;height:50px;background-size:cover;background-repeat:no-repeat "></div></td>
+                            <td>${p1.name}</td>
+                            <td>₹${p1.price}</td>
+                            <td>${p.itemQuantity}</td></tr>`
+
+                        })
+                    })
+
+                    table += `</tbody></table>`
+                    tableMain.innerHTML = table
+
+
+                })
+        }
+    </script>
+
 </body>
 
 </html>

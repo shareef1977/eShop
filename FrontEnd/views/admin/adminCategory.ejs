@@ -75,7 +75,7 @@
                     <a href="/adminUser" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Users</a>
                     <a href="/orders" class="nav-item nav-link"><i class="fa fa fa-th me-2"></i>Product Orders</a>
                     <a href="/setBanner" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Banners</a>
-                    <a href="/coupens" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Coupens</a>
+                    <a href="/coupons" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Coupons</a>
                    
                 </div>
             </nav>
@@ -145,15 +145,11 @@
                         <tr>
                             <td><%= category.name %></td>
                             
-                            <td><a href="/admin/singleProduct/<%= category._id %>  " class="btn btn-success ">View</a></td>
+                            <td><a href="/admin/singleProduct/<%= category._id %>" class="btn btn-success ">View</a></td>
                             <td>
                                 <!-- <input type="hidden" name="" id="id" value="<%=// category._id %> "> -->
                                 <!-- <a href="/deleteCategory/<%= //category._id %> " class="btn btn-danger ">Delete</a> -->
-                                <form action="/deleteCategory/<%= category._id %>">
-                                    <button
-                                class="btn btn-danger"
-                                type="submit"onclick="return confirm('Do you want to remove <%= category.name%>?')">Remove</button>
-                                </form>
+                                <button type="button" class="btn btn-danger " data-bs-toggle="modal" data-bs-target="#exampleModal<%= category._id %>" >Remove</button>
                             </td>
                            
                            
@@ -179,34 +175,49 @@
             <!-- Footer End -->
         </div>
         <!-- Content End -->
+        <%  for(let category of categories) { %> 
+            <div class="modal fade" id="exampleModal<%= category._id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Remove Brand</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-danger">
+                      Do you want remove this Category...?
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="button" onclick="deleteCategory('<%= category._id %>')" class="btn btn-primary" data-bs-dismiss="modal">Sure</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+            <% } %> 
 
 
         <!-- Back to Top -->
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
     </div>
 
-    <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              ...
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
-              <% //for(let product of categories) { %> 
-                onclick="deleteCategory('<%=// product._id %>')"
-              <% //} %> 
-              >Save changes</button>
-            </div>
-          </div>
-        </div>
-      </div> -->
-    <!-- JavaScript Libraries -->
+    <script>
+        function deleteCategory(id) {
+           fetch('/deleteCategory/'+id, {
+               method:'put',
+               headers: {
+                   'Content-type': 'application/json',
+                   body: JSON.stringify({hai:"jhj"})
+               }
+       })
+       .then(res => res.json())
+       .then(data => {
+           
+           success:location.reload()
+          
+       })
+       }
+   </script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/admin/chart.min.js"></script>
@@ -231,24 +242,7 @@
             $('#example').DataTable();
         });
     </script>
-    <script>
-        function deleteCategory(id) {
-            // const id = document.getElementById('id').value   
-            fetch('/deleteCategory/'+id, {
-                method:'delete',
-            headers: {
-                'Content-type': 'application/json',
-                body: JSON.stringify({hai:"jhj"})
-            }
-        })
-        .then(res => res.json())
-        .then(data => {
-            location.reload()
-        })
-          
-        }
-    </script>
-
+    
 </body>
 
 </html>

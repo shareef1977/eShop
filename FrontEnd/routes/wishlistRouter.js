@@ -7,10 +7,14 @@ const {
     deleteWishlist,
 } = require('../controllers/wishlistController')
 
-
-router.get('/addToWishlist/:id',addToWishlist)
-router.get('/wishlist/:id',userWishlist)
-router.delete('/deleteWishlistItem/:id',deleteWishlist)
+const {
+    sessionCheck,
+    sessionCheckHomePage
+ } = require('../middleware')
+ 
+router.get('/addToWishlist/:id',sessionCheckHomePage, addToWishlist)
+router.get('/wishlist/:id', sessionCheckHomePage, userWishlist)
+router.delete('/deleteWishlistItem/:id',sessionCheckHomePage, deleteWishlist)
 
 
 module.exports = router 

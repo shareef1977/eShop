@@ -7,6 +7,10 @@ const brandSchema = new Schema({
         type: String,
         required: true
     },
+    deleteStatus:{
+        type: Boolean,
+        default: false
+    }
    
         
 },{timestamps: true})

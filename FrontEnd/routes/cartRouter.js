@@ -9,12 +9,18 @@ const {
     itemDelete,
 } = require('../controllers/cartController')
 
-router.get('/cart/:id', userCart)
-router.get('/addToCart/:id',addToCart)
+const {
+    sessionCheck,
+    sessionCheckHomePage    
+ } = require('../middleware')
+ 
 
-router.post('/itemInc/:id',itemInc)
-router.post('/itemDec/:id',itemDec)
-router.put('/itemDelete/:id',itemDelete)
+router.get('/cart/:id', sessionCheckHomePage, userCart)
+router.get('/addToCart/:id', sessionCheckHomePage, addToCart)
+
+router.post('/itemInc/:id', itemInc)
+router.post('/itemDec/:id', itemDec)
+router.put('/itemDelete/:id', itemDelete)
 
 
 module.exports = router

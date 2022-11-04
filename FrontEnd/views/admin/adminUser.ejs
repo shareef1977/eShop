@@ -77,7 +77,7 @@
                     <a href="/adminUser" class="nav-item nav-link active"><i class="fa fa-chart-bar me-2"></i>Users</a>
                     <a href="/orders" class="nav-item nav-link"><i class="fa fa fa-th me-2"></i>Product Orders</a>
                     <a href="/setBanner" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Banners</a>
-                    <a href="/coupens" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Coupens</a>
+                    <a href="/coupons" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Coupons</a>
                    
                 </div>
             </nav>
@@ -146,15 +146,11 @@
                             <td><%= user.verified %></td>
                         <% if(user.blockStatus == false) { %> 
                             <td>
-                                <form action="/editUser/<%= user._id %>?_method=PUT " method="post">
-                                    <button class="btn btn-danger" type="submit">Block</button>
-                                </form>
+                                <button type="button" class="btn btn-danger " data-bs-toggle="modal" data-bs-target="#exampleModal<%= user._id %>" >Block</button>
                             </td>
                         <% } else { %> 
                             <td>
-                                <form action="/editUser/<%= user._id %>?_method=PUT " method="post">
-                                    <button class="btn btn-success" type="submit">Unblock</button>
-                                </form>
+                                <button type="button" class="btn btn-success " data-bs-toggle="modal" data-bs-target="#exampleModal<%= user._id %>" >Unblock</button>
                             </td>
                         <% } %> 
                         </tr>
@@ -179,6 +175,45 @@
         </div>
         <!-- Content End -->
 
+        <% for(let user of users) { %> 
+            <div class="modal fade" id="exampleModal<%= user._id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">
+                        <% if(user.blockStatus == false) { %> 
+                            Block User
+                        <% } else { %> 
+                            Unblock User
+                        <% } %> 
+                      </h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                   
+                        <% if(user.blockStatus == false) { %> 
+                            <div class="modal-body text-danger">
+                            Do you want block this user...?
+                        </div>
+                        <% } else { %> 
+                            <div class="modal-body text-success">
+                            Do you want unblock this user...?
+                        </div>
+                        <% } %>
+                       
+                    
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      
+                        <button type="button" onclick="editUser('<%= user._id %>')" class="btn btn-primary" data-bs-dismiss="modal">Sure</button>
+                      
+                           
+                      
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+            <% } %> 
 
         <!-- Back to Top -->
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
@@ -206,9 +241,26 @@
 
     <script>
         $(document).ready(function () {
-    $('#example').DataTable();
-});
+        $('#example').DataTable();
+    });
     </script>
+    <script>
+        function editUser(id) {
+           fetch('/editUser/'+id, {
+               method:'put',
+               headers: {
+                   'Content-type': 'application/json',
+                   body: JSON.stringify({hai:"jhj"})
+               }
+       })
+       .then(res => res.json())
+       .then(data => {
+           
+           success:location.reload()
+          
+       })
+       }
+   </script>
 </body>
 
 </html>

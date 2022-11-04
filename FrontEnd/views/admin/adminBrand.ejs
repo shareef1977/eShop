@@ -75,7 +75,7 @@
                     <a href="/adminUser" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Users</a>
                     <a href="/orders" class="nav-item nav-link"><i class="fa fa fa-th me-2"></i>Product Orders</a>
                     <a href="/setBanner" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Banners</a>
-                    <a href="/coupens" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Coupens</a>
+                    <a href="/coupons" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Coupons</a>
                 </div>
             </nav>
         </div>
@@ -145,9 +145,8 @@
                             <td><%= brand.name %></td>
                             
                             
-                            <td><form action="/deleteBrand/<%= brand._id %>"><button type="submit" class="btn btn-danger " onclick = "return confirm('Do you want remove <%= brand.name %>')">
-                                Remove
-                            </button></form></td>
+                            <td><button type="button" class="btn btn-danger " data-bs-toggle="modal" data-bs-target="#exampleModal<%= brand._id %>" >Remove</button>
+                            </td>
                            
                            
                            
@@ -171,9 +170,28 @@
                 </div>
             </div>
             <!-- Footer End -->
-        </div>
+        </div> 
         <!-- Content End -->
-
+        <% for(let brand of brands) { %> 
+            <div class="modal fade" id="exampleModal<%= brand._id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Remove Brand</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-danger">
+                      Do you want remove this brand...?
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="button" onclick="deleteBrand('<%= brand._id %>')" class="btn btn-primary" data-bs-dismiss="modal">Sure</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+            <% } %> 
 
         <!-- Back to Top -->
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
@@ -201,9 +219,26 @@
 
     <script>
         $(document).ready(function () {
-    $('#example').DataTable();
-});
+        $('#example').DataTable();
+    });
     </script>
+    <script>
+     function deleteBrand(id) {
+        fetch('/deleteBrand/'+id, {
+            method:'put',
+            headers: {
+                'Content-type': 'application/json',
+                body: JSON.stringify({hai:"jhj"})
+            }
+    })
+    .then(res => res.json())
+    .then(data => {
+        
+        success:location.reload()
+       
+    })
+    }
+</script>
 </body>
 
 </html>

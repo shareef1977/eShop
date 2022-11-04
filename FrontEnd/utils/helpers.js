@@ -32,7 +32,7 @@ const instance = new Razorpay({
 function generateRazorpay(orderId,bill) {
    return new Promise((resolve,reject) => {
         const options = {
-            amount: bill*10,
+            amount: bill*100,
             currency: "INR", 
             receipt: `${orderId}`
         };

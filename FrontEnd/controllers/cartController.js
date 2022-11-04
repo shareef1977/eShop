@@ -93,6 +93,7 @@ const userCart = async(req,res) => {
                         {$lookup:{from:process.env.PRODUCT_COLLECTION,localField:'item',foreignField:'_id',as:'product'}}]);
                         
 
+        console.log(cartList[0].item)
         let total;
         let subtotal = 0;
         
@@ -102,7 +103,13 @@ const userCart = async(req,res) => {
                 subtotal += total
             })
         })
-        const shipping = 50;
+        
+        let shipping = 0;
+        if(subtotal < 15000){
+            shipping = 150
+        } else {
+            shipping = 0
+        }
         const grandtotal = subtotal+shipping
         // console.log(total)
         // console.log(subtotal)

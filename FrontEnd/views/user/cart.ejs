@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>EShopper - Bootstrap Shop Template</title>
+    <title>E-Shop Cart</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
@@ -138,25 +138,18 @@
                             
                             <td class="align-middle"> <%= p2.name %> </td>
                             <td class="align-middle"><img src="<%= p2.images[0].url %> " alt="" style="width: 50px;"> </td>
-                            <td class="align-middle" > Rs. <span id="price<%= p.item %>"><%= p2.price %></span> </td>
+                            <td class="align-middle " > Rs.<span id="price<%= p.item %>"><%= p2.price %></span> </td>
                             <td class="align-middle">
                                 <div class="input-group quantity mx-auto" style="width: 100px;">
                                     <div class="input-group-btn">
                                         
 
-                                        <!-- <% //if(p.itemQuantity == 1) { %>
-                                            <form action="" onsubmit="return false" id="minus" method="post">
-                                                <button type="submit" class="btn btn-sm btn-primary btn-minus" >
-                                                <i class="fa fa-minus"></i>
-                                                </button>
-                                            </form>
-                                            <%// } else { %>   -->
-                                                
+                                                                            
                                                     <button type="button" id="minus" onclick="dec('<%= p.item %>')" class="btn btn-sm btn-primary btn-minus" >
                                                     <i class="fa fa-minus"></i>
                                                     </button>
                                                 
-                                                <%// } %> 
+                                            
 
                                                                                    
                                     </div>
@@ -171,11 +164,11 @@
                                 </div>
                             </td>
                             <% const total = parseInt(p.itemQuantity)*parseInt(p2.price) %> 
-                            <td class="align-middle " >Rs. <span id="total<%= p.item %>"><%= total %></span> </td>
+                            <td class="align-middle " >Rs.<span id="total<%= p.item %>"><%= total %></span> </td>
                             
                             <td class="align-middle">
                                
-                                <button type="button" data-toggle="modal" data-target="#exampleModal"  class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button>
+                                <button type="button" data-toggle="modal" data-target="#exampleModal<%= p.item %>"  class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button>
                              
                             </td>
                         </tr>
@@ -241,8 +234,9 @@
         
     </div>
     <!-- Cart End -->
-    
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <% cartList.forEach((p) =>{ %> 
+        <% p.product.forEach((p2) => { %> 
+    <div class="modal fade" id="exampleModal<%= p.item %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -259,10 +253,9 @@
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
              
               <button type="button"
-              <% cartList.forEach((p) =>{ %> 
-                <% p.product.forEach((p2) => { %> 
+             
                     onclick="itemDel('<%= p.item %>')"
-                    <% }) }) %> 
+                   
               class="btn btn-danger" data-dismiss="modal">
               
               Delete</button>
@@ -271,7 +264,7 @@
         </div>
       </div>
 
-
+      <% }) }) %> 
     <%- include('../partials/userFooter') %> 
    
 
@@ -279,10 +272,10 @@
 
    <script>
     function inc(id) {
-        // console.log(id)
+        
         let count = document.getElementById(id).value
         let price = document.getElementById('price'+id).innerHTML
-        // console.log(price)
+        
         
         
         fetch('/itemInc/'+id, {
@@ -294,7 +287,7 @@
         })
         .then(res => res.json())
         .then(data => {
-            // console.log(data.quantity)
+        
             document.getElementById(id).value++
             
             document.getElementById('total'+id).innerHTML = parseInt(price)*parseInt(document.getElementById(id).value)
@@ -311,11 +304,11 @@
     }
 
     function dec(id) {
-        // console.log(id)
+        
         let price = document.getElementById('price'+id).innerHTML
         let count = document.getElementById(id).value
         let row = document.getElementById('row'+id)
-        // let productId = document.getElementById('productId').value
+        
         if(count == 1){
             fetch('/itemDelete/'+id, {
             method:'put',
@@ -342,7 +335,7 @@
         })
         .then(res => res.json())
         .then(data => {
-            // console.log(data.quantity)
+            
             document.getElementById(id).value--
             document.getElementById('total'+id).innerHTML = parseInt(price)*parseInt(document.getElementById(id).value)
             document.getElementById('subtotal').innerHTML = parseInt(document.getElementById('subtotal').innerHTML) - parseInt(document.getElementById('price'+id).innerHTML)
@@ -359,7 +352,7 @@
         let count = document.getElementById(id).value
         let row = document.getElementById('row'+id)
         console.log(row)
-        // let productId = document.getElementById('productId').value
+        
         fetch('/itemDelete/'+id, {
             method:'put',
             headers: {
@@ -369,7 +362,7 @@
         })
         .then(res => res.json())
         .then(data => {
-            // console.log("hello")
+        
             document.getElementById('subtotal').innerHTML = parseInt(document.getElementById('subtotal').innerHTML) - parseInt(document.getElementById('total'+id).innerHTML)
             document.getElementById('grandtotal').innerHTML = parseInt(document.getElementById('subtotal').innerHTML) + parseInt(document.getElementById('shipping').innerHTML)
             row.remove()

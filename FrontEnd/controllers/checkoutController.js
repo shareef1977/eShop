@@ -173,15 +173,9 @@ const orderSuccess = async(req,res) => {
         const userId = req.session.user._id
         
         const productId = req.params
-        console.log(productId)
-        
-        // const productId = new mongoose.Types.ObjectId(prodId)
-        // console.log(userId)
-        // console.log(productId)
         const cartList = await cartData.aggregate([{$match:{_id:productId}},{$unwind:'$cartItems'},
                         {$project:{item:'$cartItems.productId',itemQuantity:'$cartItems.quantity'}},
                         {$lookup:{from:process.env.PRODUCT_COLLECTION,localField:'item',foreignField:'_id',as:'product'}}]);
-        // console.log(cartList)
         let total;
         let subtotal = 0;
         
@@ -191,10 +185,14 @@ const orderSuccess = async(req,res) => {
                 subtotal += total
             })
         })
-        const shipping = 50;
+        let shipping = 0;
+        if(subtotal < 15000) {
+            shipping = 150
+        } else {
+            shipping = 0
+        }
         const bill = subtotal+shipping
         const orderData = await checkoutData.find({userId})
-        // console.log(orderData)
         res.render('user/orderSuccess',{cartList,bill,shipping,orderData})
     } catch(err) {
         console.log(err)
@@ -250,16 +248,16 @@ const viewOrders = async(req,res) => {
 }
 
 const orderedProducts = async(req,res) => {
+    
     try{
         
-        const carId = req.params
-        const cartId = mongoose.Types.ObjectId(carId)
+        const cartId = mongoose.Types.ObjectId(req.body)
         const cartList = await checkoutData.aggregate([{$match:{_id:cartId}},{$unwind:'$cartItems'},
                         {$project:{item:'$cartItems.productId',itemQuantity:'$cartItems.quantity'}},
                         {$lookup:{from:process.env.PRODUCT_COLLECTION,localField:'item',foreignField:'_id',as:'product'}}]);
-        // console.log(cartList)
         
-        res.render('user/orderedProducts',{cartList})
+        
+        res.send({cartList})
     } catch(err) {
         console.log(err)
     }
@@ -288,7 +286,7 @@ const cancelOrder = async(req,res) => {
             },
             isCompleted: false
         })
-        res.send({success:true})
+        res.send({status:true})
     } catch(err) {
         console.log(err)
     }

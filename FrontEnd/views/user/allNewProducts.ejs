@@ -70,7 +70,7 @@
             <div class="col-lg-6 col-6 text-left">
                 <form action="">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search for products">
+                        <input type="text" class="form-control" id="myFilter" onkeyup="myFunction()" placeholder="Search for products">
                         <div class="input-group-append">
                             <span class="input-group-text bg-transparent text-primary">
                                 <i class="fa fa-search"></i>
@@ -131,7 +131,7 @@
          <div class="text-center mb-4">
              <h2 class="section-title px-5"><span class="px-2">All New Products</span></h2>
          </div>
-         <div class="row px-xl-5 pb-3">
+         <div class="row px-xl-5 pb-3" id="myProducts">
             <% for(let justArrives of justArrived) { %>
              <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                  <div class="card product-item border-0 mb-4">
@@ -139,7 +139,7 @@
                          <img class="img-fluid w-100" src="<%= justArrives.images[0].url %>" alt="">
                      </div>
                      <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
-                         <h6 class="text-truncate mb-3"><%= justArrives.name %> </h6>
+                         <h6 class="card-title text-truncate mb-3"><%= justArrives.name %> </h6>
                          <div class="d-flex justify-content-center">
                              <h6>Rs.<%= justArrives.price %></h6><h6 class="text-muted ml-2"><del>Rs.<%= justArrives.originalPrice %> </del></h6>
                          </div>
@@ -195,4 +195,25 @@
           
         }
        </script>
-    
+    <script>
+        function myFunction() {
+            console.log(1)
+            let input, filter, cards, cardContainer, title, i;
+            input = document.getElementById("myFilter");
+            console.log(input)
+            filter = input.value.toUpperCase();
+            console.log(filter)
+            cardContainer = document.getElementById("myProducts");
+            console.log(cardContainer)
+            cards = cardContainer.getElementsByClassName("card");
+            console.log(input, filter, cards, cardContainer, title, i);
+            for (i = 0; i < cards.length; i++) {
+                title = cards[i].querySelector(".card-title");
+                if (title.innerText.toUpperCase().indexOf(filter) > -1) {
+                    cards[i].style.display = "";
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+        }
+    </script>

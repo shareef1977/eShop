@@ -37,7 +37,7 @@ const deleteCoupen = async(req,res) => {
         const {id} = req.params
         console.log(id)
         await coupenData.findByIdAndDelete(id)
-        res.redirect('/coupens')
+        res.send({send:true})
     } catch(err) {
         console.log(err)
     }
@@ -55,10 +55,17 @@ const applyCoupen = async(req,res) => {
         // console.log(code[0].discount)
         
         if(code){
+
+           if(code[0].expiresAt > Date.now()){
             const userId = req.session.user._id
             await cartData.findOneAndUpdate({userId},{coupenCode:usercode})
             const discount = code[0].discount    
             res.send({success:discount})
+           } else {
+            await coupenData.findOneAndDelete({code: usercode})
+            req.flash('error','Invalid code')
+            res.redirect('back')
+           }
         } else {
             req.flash('error','Invalid code')
             res.redirect('back')

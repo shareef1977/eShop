@@ -75,7 +75,7 @@
                     <a href="/adminUser" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Users</a>
                     <a href="/orders" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Product Orders</a>
                     <a href="/setBanner" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Banners</a>
-                    <a href="/Coupens" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Coupens</a>
+                    <a href="/Coupons" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Coupons</a>
                    
                 </div>
             </nav>
@@ -158,9 +158,7 @@
                                 <% } %> 
                             </td>
                             <td><a href="/editProduct/<%= product._id %> " class="btn card-link btn-success">Edit</a></td>
-                            <td><form action="/deleteProduct/<%= product._id %>?_method=PUT" method="post"><button
-                                class="btn btn-danger"
-                                type="submit"onclick="return confirm('Do you want to delete <%= product.name%>?')">Remove</button></form></td>
+                            <td><button type="button" class="btn btn-danger " data-bs-toggle="modal" data-bs-target="#exampleModal<%= product._id %>" >Remove</button></td>
                         </tr>
                        <% } %>  
                     </tbody>
@@ -173,21 +171,35 @@
                 <div class="bg-light rounded-top p-4">
                     <div class="row">
                         <div class="col-12 col-sm-6 text-center text-sm-start">
-                            &copy; <a href="#">Your Site Name</a>, All Right Reserved. 
+                            <h6> &copy; <a href="#">www.eShop.com</a>, All Right Reserved.</h6>
                         </div>
-                        <div class="col-12 col-sm-6 text-center text-sm-end">
-                            <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-                            Designed By <a href="https://htmlcodex.com">HTML Codex</a>
-                        </br>
-                        Distributed By <a class="border-bottom" href="https://themewagon.com" target="_blank">ThemeWagon</a>
-                        </div>
+                        
                     </div>
                 </div>
             </div>
             <!-- Footer End -->
         </div>
         <!-- Content End -->
-
+        <% for(let product of products ){ %> 
+            <div class="modal fade" id="exampleModal<%= product._id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Remove Brand</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-danger">
+                      Do you want remove this Product...?
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="button" onclick="deleteProduct('<%= product._id %>')" class="btn btn-primary" data-bs-dismiss="modal">Sure</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+            <% } %> 
 
         
 
@@ -195,55 +207,7 @@
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
     </div>
     
-    <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Remove Product</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body text-danger">
-              Do you want remove this Product..?
-              
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              
-              <button type="button" class="btn btn-primary" data-bs-dismiss="modal" 
-              <% //for(let product of products) { %>
-              onclick="deleteProduct('<%=// product._id %>')" 
-              <% //} %> 
-              >Save changes</button>
-              
-            </div>
-          </div>
-        </div>
-      </div> -->
-
-      <!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Remove Item</h5>
-              <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              Do you want remove this Item from Cart ..?
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-             
-              <button type="button"
-              <% //for(let product of products) { %> 
-                    onclick="deleteProduct('<%=// product._id %>')"
-                    <%// } %> 
-              class="btn btn-danger" data-bs-dismiss="modal">Delete</button>
-            </div>
-          </div>
-        </div>
-      </div> -->
+    
 
 
     <!-- JavaScript Libraries -->
@@ -286,8 +250,8 @@
         })
         .then(res => res.json())
         .then(data => {
-            // success:location.reload()
-            console.log(data)
+            success:location.reload()
+            // console.log(data)
         })
         }
     </script>

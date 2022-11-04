@@ -9,11 +9,21 @@ const {
     
 } = require('../controllers/categoryController')
 
-router.get('/user/singleProduct/:id',singleProduct)
+const {
+    adminSessionCheck,
+    adminSessionCheckHomePage
+ } = require('../middleware')
+ 
+ const {
+    sessionCheck,
+    sessionCheckHomePage    
+ } = require('../middleware')
+
+router.get('/user/singleProduct/:id', sessionCheckHomePage, singleProduct)
 
 
 
-router.get('/admin/singleProduct/:id', adminSingleProduct)
+router.get('/admin/singleProduct/:id', adminSessionCheckHomePage, adminSingleProduct)
 
 
 module.exports = router

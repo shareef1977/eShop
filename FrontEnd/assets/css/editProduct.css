@@ -235,8 +235,11 @@ table{
 }
 #success{
     background-color: #61f5cd;
+    height: 2rem;
 }
 
 #error{
     background-color: rgb(245, 116, 116);
+    height: 2rem;
 }
+

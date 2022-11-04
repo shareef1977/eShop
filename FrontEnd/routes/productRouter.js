@@ -23,28 +23,32 @@ const {
    allProducts,
 } = require('../controllers/productController') 
 
+const {
+   adminSessionCheck,
+   adminSessionCheckHomePage
+} = require('../middleware')
 
 
-router.get('/adminProducts', adminProduct)
-router.get('/addProduct', addProduct)
-router.get('/editProduct/:id', editProduct)
+router.get('/adminProducts', adminSessionCheckHomePage, adminProduct)
+router.get('/addProduct', adminSessionCheckHomePage, addProduct)
+router.get('/editProduct/:id', adminSessionCheckHomePage, editProduct)
 
-router.post('/addProduct/add', 
+router.post('/addProduct/add', adminSessionCheckHomePage,
    upload.array('image'), 
    saveAddedProduct)
-router.put('/editProduct/update/:id', 
+router.put('/editProduct/update/:id', adminSessionCheckHomePage,
    upload.array('image'), 
    saveUpdatedProduct)
-router.put('/deleteProduct/:id', deleteProduct) 
+router.put('/deleteProduct/:id', adminSessionCheckHomePage, deleteProduct) 
+ 
+router.get('/addBrand', adminSessionCheckHomePage, addBrand)
+router.post('/addBrand/add',adminSessionCheckHomePage, saveBrandName )
+router.get('/addCategory', adminSessionCheckHomePage, addCategory)
+router.post('/addCategory/add', adminSessionCheckHomePage, saveCategory)
+router.put('/deleteCategory/:id', adminSessionCheckHomePage, deleteCategory)
+router.put('/deleteBrand/:id', adminSessionCheckHomePage, deleteBrand)
 
-router.get('/addBrand', addBrand)
-router.post('/addBrand/add', saveBrandName )
-router.get('/addCategory', addCategory)
-router.post('/addCategory/add', saveCategory)
-router.get('/deleteCategory/:id', deleteCategory)
-router.get('/deleteBrand/:id', deleteBrand)
-
-router.get('/productDetails/:id', viewProductDetails)
+router.get('/productDetails/:id',  viewProductDetails)
 router.get('/allProducts', allProducts)
 router.get('/allNewProducts', allNewProducts)
 

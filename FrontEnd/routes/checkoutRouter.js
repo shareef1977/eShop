@@ -14,14 +14,21 @@ const {
 } = require('../controllers/checkoutController')
 
 
-router.get('/checkout/:id', checkoutPage)
-router.post('/placeOrder', placeOrder)
+const {
+    sessionCheck,
+    sessionCheckHomePage    
+ } = require('../middleware')
+
+
+
+router.get('/checkout/:id', sessionCheckHomePage, checkoutPage)
+router.post('/placeOrder', sessionCheckHomePage, placeOrder)
 router.get('/orderSuccess',orderSuccess)
-router.post('/verifyPay',verifyPay)
-router.get('/viewOrders',viewOrders)
-router.get('/orderedProducts/:id',orderedProducts)
-router.get('/checkoutAddress',checkoutAddress)
-router.put('/cancelOrder/:id', cancelOrder)
+router.post('/verifyPay', sessionCheckHomePage, verifyPay)
+router.get('/viewOrders',sessionCheckHomePage, viewOrders)
+router.post('/orderedProducts',sessionCheckHomePage, orderedProducts)
+router.get('/checkoutAddress', sessionCheckHomePage, checkoutAddress)
+router.put('/cancelOrder/:id', sessionCheckHomePage, cancelOrder)
 
 
 

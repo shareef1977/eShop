@@ -9,11 +9,16 @@ const {
     applyCoupen
 } = require('../controllers/coupenController')
 
+const {
+    adminSessionCheck,
+    adminSessionCheckHomePage
+ } = require('../middleware')
+ 
 
-router.get('/coupens', coupens)
-router.get('/addCoupen', addCoupen)
-router.post('/saveCoupen', saveCoupen)
-router.get('/deleteCoupen/:id', deleteCoupen)
+router.get('/coupons', adminSessionCheckHomePage, coupens)
+router.get('/addCoupen', adminSessionCheckHomePage, addCoupen)
+router.post('/saveCoupen', adminSessionCheckHomePage, saveCoupen)
+router.delete('/deleteCoupen/:id', adminSessionCheckHomePage, deleteCoupen)
 router.post('/applyCoupen/:id', applyCoupen)
 
 module.exports = router
