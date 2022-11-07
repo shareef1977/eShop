@@ -1,8 +1,8 @@
 const express = require('express')
 const router = express()
- 
+
 const {
-    userCart, 
+    userCart,
     addToCart,
     itemInc,
     itemDec,
@@ -10,17 +10,13 @@ const {
 } = require('../controllers/cartController')
 
 const {
-    sessionCheck,
-    sessionCheckHomePage    
- } = require('../middleware')
- 
+    sessionCheckHomePage
+} = require('../middleware')
 
 router.get('/cart/:id', sessionCheckHomePage, userCart)
 router.get('/addToCart/:id', sessionCheckHomePage, addToCart)
-
 router.post('/itemInc/:id', itemInc)
 router.post('/itemDec/:id', itemDec)
 router.put('/itemDelete/:id', itemDelete)
-
 
 module.exports = router

@@ -1,18 +1,17 @@
-
-    <%- include('../partials/userHeader') %> 
+<%- include('../partials/userHeader') %>
 
     <!-- Carousel wrapper -->
 
-    
 
-   <!-- Categories Start -->
+
+    <!-- Categories Start -->
     <div class="container-fluid pt-5">
         <div class="row px-xl-5 pb-3">
             <div class="col-lg-4 col-md-6 pb-1">
                 <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
                     <p class="text-right"></p>
-                    <!-- <a href="" class="cat-img position-relative overflow-hidden mb-3 " > -->
-                        <img class="img-fluid  h-75" src="img/apple1.png" alt="">
+                    
+                    <img class="img-fluid  h-75" src="img/apple1.png" alt="">
                     </a>
                     <h5 class="font-weight-semi-bold m-0">Apple</h5>
                 </div>
@@ -20,8 +19,8 @@
             <div class="col-lg-4 col-md-6 pb-1">
                 <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
                     <p class="text-right"></p>
-                    <!-- <a href="" class="cat-img position-relative overflow-hidden mb-3"> -->
-                        <img class="img-fluid h-75" src="img/onePlus.png" alt="">
+                    
+                    <img class="img-fluid h-75" src="img/onePlus.png" alt="">
                     </a>
                     <h5 class="font-weight-semi-bold m-0">OnePlus</h5>
                 </div>
@@ -30,7 +29,7 @@
                 <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
                     <p class="text-right"></p>
                     <!-- <a href="" class="cat-img position-relative overflow-hidden mb-3"> -->
-                        <img class="img-fluid h-75" src="img/pixel.png" alt="">
+                    <img class="img-fluid h-75" src="img/pixel.png" alt="">
                     </a>
                     <h5 class="font-weight-semi-bold m-0">Pixel</h5>
                 </div>
@@ -38,8 +37,8 @@
             <div class="col-lg-4 col-md-6 pb-1">
                 <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
                     <p class="text-right"></p>
-                    <!-- <a href="" class="cat-img position-relative overflow-hidden mb-3"> -->
-                        <img class="img-fluid h-75" src="img/samsung.png" alt="">
+                    
+                    <img class="img-fluid h-75" src="img/samsung.png" alt="">
                     </a>
                     <h5 class="font-weight-semi-bold m-0">Samsung</h5>
                 </div>
@@ -47,8 +46,8 @@
             <div class="col-lg-4 col-md-6 pb-1">
                 <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
                     <p class="text-right"></p>
-                    <!-- <a href="" class="cat-img position-relative overflow-hidden mb-3"> -->
-                        <img class="img-fluid h-75" src="img/canon.png" alt="">
+                    
+                    <img class="img-fluid h-75" src="img/canon.png" alt="">
                     </a>
                     <h5 class="font-weight-semi-bold m-0">Canon</h5>
                 </div>
@@ -56,8 +55,8 @@
             <div class="col-lg-4 col-md-6 pb-1">
                 <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
                     <p class="text-right"></p>
-                    <!-- <a href="" class="cat-img position-relative overflow-hidden mb-3"> -->
-                        <img class="img-fluid h-75" src="img/realme.png" alt="">
+
+                    <img class="img-fluid h-75" src="img/realme.png" alt="">
                     </a>
                     <h5 class="font-weight-semi-bold m-0">Realme</h5>
                 </div>
@@ -76,7 +75,7 @@
                     <div class="position-relative" style="z-index: 1;">
                         <h5 class="text-uppercase text-primary mb-3">10% off for all order</h5>
                         <h1 class="mb-4 font-weight-semi-bold">Laptop-Products</h1>
-                        <!-- <a href="" class="btn btn-outline-primary py-md-2 px-md-3">Shop Now</a> -->
+                        
                     </div>
                 </div>
             </div>
@@ -86,7 +85,7 @@
                     <div class="position-relative" style="z-index: 1;">
                         <h5 class="text-uppercase text-primary mb-3">10% off for all order</h5>
                         <h1 class="mb-4 font-weight-semi-bold">Mobiles-Products</h1>
-                        <!-- <a href="" class="btn btn-outline-primary py-md-2 px-md-3">Shop Now</a> -->
+                       
                     </div>
                 </div>
             </div>
@@ -101,33 +100,41 @@
             <h2 class="section-title px-5"><span class="px-2">Products</span></h2>
         </div>
         <div class="row px-xl-5 pb-3">
-           <% for(let product of products) { %>
-            <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
-                <div class="card product-item border-0 mb-4">
-                    <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0 ">
-                        <img class="img-fluid w-100" src="<%= product.images[0].url %>" alt="">
-                        <!-- <div style="background-image:url('<%= //product.images[0].url %>') ; width: 25rem; height: 20rem; background-size: cover; background-repeat: no-repeat;"></div> -->
-                    </div>
-                    <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
-                        <h6 class="text-truncate mb-3"><%= product.name %> </h6>
-                        <div class="d-flex justify-content-center">
-                            <h6>Rs.<%= product.price %> </h6><h6 class="text-muted ml-2"><del>Rs.<%= product.originalPrice %> </del></h6>
+            <% for(let product of products) { %>
+                <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+                    <div class="card product-item border-0 mb-4">
+                        <div
+                            class="card-header product-img position-relative overflow-hidden bg-transparent border p-0 ">
+                            <img class="img-fluid w-100" src="<%= product.images[0].url %>" alt="">
+                            
+                        </div>
+                        <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
+                            <h6 class="text-truncate mb-3">
+                                <%= product.name %>
+                            </h6>
+                            <div class="d-flex justify-content-center">
+                                <h6>Rs.<%= product.price %>
+                                </h6>
+                                <h6 class="text-muted ml-2"><del>Rs.<%= product.originalPrice %> </del></h6>
+                            </div>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between bg-light border">
+                            <a href="/productDetails/<%= product._id %> " class="btn btn-sm text-dark p-0"><i
+                                    class="fas fa-eye text-primary mr-1"></i>View Detail</a>
+                            
+                            <button data-toggle="modal" data-target="#exampleModal"
+                                onclick="cartList('<%= product._id %>')" class="btn btn-sm text-dark p-0"><i
+                                    class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</button>
                         </div>
                     </div>
-                    <div class="card-footer d-flex justify-content-between bg-light border">
-                        <a href="/productDetails/<%= product._id %> " class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View Detail</a>
-                        <!-- <a href="/addToCart/<%= //product._id %>" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a> -->
-                        <button data-toggle="modal" data-target="#exampleModal" onclick="cartList('<%= product._id %>')" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</button>
-                    </div>
                 </div>
-            </div>
-            <% } %> 
-            <div class="col-md-12">
-                <a href="/allProducts" class="btn btn-success float-right rounded">See more</a>
-            </div>
-            
-            </div>
+                <% } %>
+                    <div class="col-md-12">
+                        <a href="/allProducts" class="btn btn-success float-right rounded">See more</a>
+                    </div>
+
         </div>
+    </div>
     </div>
     <!-- Products End -->
 
@@ -138,16 +145,9 @@
             <div class="col-md-6 col-12 py-5">
                 <div class="text-center mb-2 pb-2">
                     <h2 class="section-title px-5 mb-3"><span class="bg-secondary px-2">Stay Updated</span></h2>
-                    <p>Amet lorem at rebum amet dolores. Elitr lorem dolor sed amet diam labore at justo ipsum eirmod duo labore labore.</p>
+                    
                 </div>
-                <form action="">
-                    <div class="input-group">
-                        <input type="text" class="form-control border-white p-4" placeholder="Email Goes Here">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary px-4">Subscribe</button>
-                        </div>
-                    </div>
-                </form>
+               
             </div>
         </div>
     </div>
@@ -160,79 +160,88 @@
             <h2 class="section-title px-5"><span class="px-2">Just Arrived</span></h2>
         </div>
         <div class="row px-xl-5 pb-3">
-           <% for(let justArrives of justArrived) { %>
-            <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
-                <div class="card product-item border-0 mb-4">
-                    <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                        <img class="img-fluid w-100" src="<%= justArrives.images[0].url %>" alt="">
-                    </div>
-                    <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
-                        <h6 class="text-truncate mb-3"><%= justArrives.name %> </h6>
-                        <div class="d-flex justify-content-center">
-                            <h6>Rs.<%= justArrives.price %></h6><h6 class="text-muted ml-2"><del>Rs.<%= justArrives.originalPrice %> </del></h6>
+            <% for(let justArrives of justArrived) { %>
+                <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+                    <div class="card product-item border-0 mb-4">
+                        <div
+                            class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+                            <img class="img-fluid w-100" src="<%= justArrives.images[0].url %>" alt="">
+                        </div>
+                        <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
+                            <h6 class="text-truncate mb-3">
+                                <%= justArrives.name %>
+                            </h6>
+                            <div class="d-flex justify-content-center">
+                                <h6>Rs.<%= justArrives.price %>
+                                </h6>
+                                <h6 class="text-muted ml-2"><del>Rs.<%= justArrives.originalPrice %> </del></h6>
+                            </div>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between bg-light border">
+                            <a href="/productDetails/<%= justArrives._id %>" class="btn btn-sm text-dark p-0"><i
+                                    class="fas fa-eye text-primary mr-1"></i>View Detail</a>
+                           
+                            <button data-toggle="modal" data-target="#exampleModal"
+                                onclick="cartList('<%= justArrives._id %>')" class="btn btn-sm text-dark p-0"><i
+                                    class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</button>
                         </div>
                     </div>
-                    <div class="card-footer d-flex justify-content-between bg-light border">
-                        <a href="/productDetails/<%= justArrives._id %>" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View Detail</a>
-                        <!-- <a href="/addToCart/<%= //justArrives._id %>" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a> -->
-                        <button data-toggle="modal" data-target="#exampleModal" onclick="cartList('<%= justArrives._id %>')" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</button>
-                    </div>
                 </div>
-            </div>
-           <% } %>  
-           <div class="col-md-12">
-            <a href="/allNewProducts" class="btn btn-success float-right rounded">See more</a>
-        </div>
+                <% } %>
+                    <div class="col-md-12">
+                        <a href="/allNewProducts" class="btn btn-success float-right rounded">See more</a>
+                    </div>
         </div>
     </div>
     <!-- Products End -->
 
 
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Cart Item</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Cart Item</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <% if(user){ %>
+                    <div class="modal-body text-success">
+                        Item added to your Cart successfully...
+                    </div>
+                    <% } else { %>
+                        <div class="modal-body text-danger">
+                            You are not logged in !!!
+                        </div>
+                        <% } %>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
+
+
+                            </div>
             </div>
-            <% if(user){ %> 
-            <div class="modal-body text-success">
-              Item added to your Cart successfully...
-            </div>
-            <% } else { %>
-            <div class="modal-body text-danger">
-                You are not logged in !!!
-            </div>
-            <% } %> 
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
-             
-              
-            </div>
-          </div>
         </div>
-      </div>
-
-    
-
-    <%- include('../partials/userFooter') %> 
+    </div>
 
 
-   <script>
-    function cartList(id) {
-        fetch('/addToCart/'+id , {
-            method:'get',
-            headers: {
-                'Content-type': 'application/json',
-                body: JSON.stringify({hai:"jhj"})
+
+    <%- include('../partials/userFooter') %>
+
+
+        <script>
+            function cartList(id) {
+                fetch('/addToCart/' + id, {
+                    method: 'get',
+                    headers: {
+                        'Content-type': 'application/json',
+                        body: JSON.stringify({ hai: "jhj" })
+                    }
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        success: location.reload()
+                    })
+
             }
-        })
-        .then(res => res.json())
-        .then(data => {
-            success:location.reload()
-        })
-      
-    }
-   </script>
+        </script>

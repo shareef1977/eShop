@@ -1,6 +1,5 @@
 const mongoose = require('mongoose')
 
-// ObjectId = userSc
 const productSchema = mongoose.Schema({
     name: {
         type: String,
@@ -9,12 +8,10 @@ const productSchema = mongoose.Schema({
     price: {
         type: String,
         required: true,
-        
     },
     discount: {
         type: Number,
         required: true,
-        
     },
     originalPrice: {
         type: String,
@@ -23,23 +20,20 @@ const productSchema = mongoose.Schema({
     category: {
         type: String,
         required: true,
-        
-    }, 
+    },
     brand: {
         type: String,
         required: true
     },
-    images: [{ 
+    images: [{
         url: String,
         filename: String
-        
     }],
-   
-    highlights:{
+    highlights: {
         type: String,
         required: true
     },
-    description:{
+    description: {
         type: String,
         required: true
     },
@@ -49,9 +43,6 @@ const productSchema = mongoose.Schema({
     },
     expiresAt: Date,
     deleted: false
-        
-},{timestamps: true})
+}, { timestamps: true })
 
-
-
-module.exports = mongoose.model('Product',productSchema)
+module.exports = mongoose.model('Product', productSchema)

@@ -9,15 +9,11 @@ cloudinary.config({
 
 const storage = new CloudinaryStorage({
     cloudinary,
-    folder:'eShop-banner',
-    allowedFormats: ['jpeg','png','jpg']
+    folder: 'eShop-banner',
+    allowedFormats: ['jpeg', 'png', 'jpg']
 })
-
-
-
 
 module.exports = {
     cloudinary,
     storage,
-    
 }

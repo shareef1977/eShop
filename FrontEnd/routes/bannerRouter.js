@@ -4,7 +4,7 @@ const cloudinary = require('../utils/cloudinary')
 const multer = require('multer')
 
 const { storage } = require('../utils/cloudinary')
-const upload = multer({storage})
+const upload = multer({ storage })
 
 const {
     setBanner,
@@ -13,14 +13,11 @@ const {
 } = require('../controllers/bannerController')
 
 const {
-    adminSessionCheck,
     adminSessionCheckHomePage
- } = require('../middleware')
- 
+} = require('../middleware')
 
-router.get('/setBanner',  adminSessionCheckHomePage, setBanner)
+router.get('/setBanner', adminSessionCheckHomePage, setBanner)
 router.get('/addBanner', adminSessionCheckHomePage, addBanner)
 router.post('/addBanner/add', adminSessionCheckHomePage, upload.array('image'), saveBanner)
-
 
 module.exports = router

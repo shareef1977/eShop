@@ -1,32 +1,33 @@
 <!DOCTYPE html>
-    <html lang="en">
-    
-    <head>
-        <meta charset="utf-8">
-        <title>EShop - allProducts</title>
-        <meta content="width=device-width, initial-scale=1.0" name="viewport">
-        <meta content="Free HTML Templates" name="keywords">
-        <meta content="Free HTML Templates" name="description">
-    
-        <!-- Favicon -->
-        <link href="img/favicon.ico" rel="icon">
-    
-        <!-- Google Web Fonts -->
-        <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"> 
-    
-        <!-- Font Awesome -->
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-    
-        <!-- Libraries Stylesheet -->
-        <link href="/css/owl.carousel.min.css" rel="stylesheet">
-    
-        <!-- Customized Bootstrap Stylesheet -->
-        <link href="/css/userIndex.css" rel="stylesheet">
-    </head>
-    
-    <body>
-    
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>EShop - Wishlist</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="/css/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/css/userIndex.css" rel="stylesheet">
+</head>
+
+<body>
+
     <!-- Topbar Start -->
     <div class="container-fluid">
         <div class="row bg-secondary py-2 px-xl-5">
@@ -39,7 +40,7 @@
                     <a class="text-dark" href="">Support</a>
                 </div>
             </div>
-            
+
             <div class="col-lg-6 text-center text-lg-right">
                 <div class="d-inline-flex align-items-center">
                     <a class="text-dark px-2" href="">
@@ -63,181 +64,194 @@
         <div class="row align-items-center py-3 px-xl-5">
             <div class="col-lg-3 d-none d-lg-block">
                 <a href="" class="text-decoration-none">
-                    <h1 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">E</span>Shop</h1>
+                    <h1 class="m-0 display-5 font-weight-semi-bold"><span
+                            class="text-primary font-weight-bold border px-3 mr-1">E</span>Shop</h1>
                 </a>
             </div>
             <div class="col-lg-6 col-6 text-left">
-                
+
             </div>
-            
+
         </div>
     </div>
     <!-- Topbar End -->
-    <%- include('../partials/flash') %> 
-    <!-- Navbar Start -->
-    
-            <div class="col-lg-9">
-                <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
-                    <a href="" class="text-decoration-none d-block d-lg-none">
-                        <h1 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">E</span>Shopper</h1>
-                    </a>
-                    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    
-                    <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                        <div class="navbar-nav mr-auto py-0">
-                            <a href="/" class="nav-item nav-link active">Home</a>
-                            
-                        </div>
-                        
+    <%- include('../partials/flash') %>
+        <!-- Navbar Start -->
+
+        <div class="col-lg-9">
+            <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
+                <a href="" class="text-decoration-none d-block d-lg-none">
+                    <h1 class="m-0 display-5 font-weight-semi-bold"><span
+                            class="text-primary font-weight-bold border px-3 mr-1">E</span>Shopper</h1>
+                </a>
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                    <div class="navbar-nav mr-auto py-0">
+                        <a href="/" class="nav-item nav-link active">Home</a>
+
                     </div>
-                </nav>
-                
-                  
-                
-                
-            </div>
+
+                </div>
+            </nav>
+
+
+
+
         </div>
-    </div>
-    <!-- Navbar End -->
-    
-   
+        </div>
+        </div>
+        <!-- Navbar End -->
 
-    
 
-    
- 
- 
-    
- 
-     <!-- Products Start -->
-     <div class="container-fluid pt-5">
-         <div class="text-center mb-4">
-             <h2 class="section-title px-5"><span class="px-2">Wishlist</span></h2>
-         </div>
-         <% if(wishlistProducts.length > 0){ %> 
-         <div class="row px-xl-5 pb-3">
-            <% wishlistProducts.forEach((p) => { %> 
-                <% p.product.forEach((p2) => { %> 
-             <div class="col-lg-3 col-md-6 col-sm-12 pb-1" id="">
-                 <div class="card product-item border-0 mb-4">
-                     <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                         <img class="img-fluid w-100" src="<%= p2.images[0].url %>" alt="">
-                     </div>
-                     <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
-                         <h6 class="text-truncate mb-3"><%= p2.name %> </h6>
-                         <div class="d-flex justify-content-center">
-                             <h6>Rs.<%= p2.price %> </h6><h6 class="text-muted ml-2"><del>Rs.<%= p2.originalPrice %> </del></h6>
-                         </div>
-                     </div>
-                     <div class="card-footer d-flex justify-content-between bg-light border">
-                         <!-- <a href="/deleteWishlistItem/<%= //p2._id %> " class="btn btn-sm text-danger p-0">Remove</a> -->
-                         <button  data-toggle="modal" data-target="#exampleModal1" class="btn btn-sm text-danger p-0">Remove</button>
-                         <!-- <a href="/addToCart/<%=// p2._id %>" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a> -->
-                         <button data-toggle="modal" data-target="#exampleModal" onclick="cartList('<%= p2._id %>')" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</button>
-                     </div>
-                 </div>
-             </div>
-             <% }) %> 
-             <% }) %> 
-             <% } else { %> 
-                <div class="row">
-                    <div class="col-md-12 text-center">
-                        <h3 class="text-danger">Nothing is in your Wishlist !!!</h3>
-                        <h5 class="pt-2">Add products to wishlist</h5>
-                        <a class="btn btn-primary rounded font-weight-bold" href="/allProducts">Add</a>
+
+
+
+
+
+
+
+
+        <!-- Products Start -->
+        <div class="container-fluid pt-5">
+            <div class="text-center mb-4">
+                <h2 class="section-title px-5"><span class="px-2">Wishlist</span></h2>
+            </div>
+            <% if(wishlistProducts.length> 0){ %>
+                <div class="row px-xl-5 pb-3">
+                    <% wishlistProducts.forEach((p)=> { %>
+                        <% p.product.forEach((p2)=> { %>
+                            <div class="col-lg-3 col-md-6 col-sm-12 pb-1" id="">
+                                <div class="card product-item border-0 mb-4">
+                                    <div
+                                        class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+                                        <img class="img-fluid w-100" src="<%= p2.images[0].url %>" alt="">
+                                    </div>
+                                    <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
+                                        <h6 class="text-truncate mb-3">
+                                            <%= p2.name %>
+                                        </h6>
+                                        <div class="d-flex justify-content-center">
+                                            <h6>Rs.<%= p2.price %>
+                                            </h6>
+                                            <h6 class="text-muted ml-2"><del>Rs.<%= p2.originalPrice %> </del></h6>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer d-flex justify-content-between bg-light border">
+                                       
+                                        <button data-toggle="modal" data-target="#exampleModal1"
+                                            class="btn btn-sm text-danger p-0">Remove</button>
+                                       
+                                        <button data-toggle="modal" data-target="#exampleModal"
+                                            onclick="cartList('<%= p2._id %>')" class="btn btn-sm text-dark p-0"><i
+                                                class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <% }) %>
+                                <% }) %>
+                                    <% } else { %>
+                                        <div class="row">
+                                            <div class="col-md-12 text-center">
+                                                <h3 class="text-danger">Nothing is in your Wishlist !!!</h3>
+                                                <h5 class="pt-2">Add products to wishlist</h5>
+                                                <a class="btn btn-primary rounded font-weight-bold"
+                                                    href="/allProducts">Add</a>
+
+                                            </div>
+                                        </div>
+                                        <% } %>
+                </div>
+        </div>
+        </div>
+        <!-- Products End -->
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Cart Item</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body text-success">
+                        Item added to your Cart successfully...
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
+
 
                     </div>
                 </div>
-             <% } %> 
-             </div>
-         </div>
-     </div>
-     <!-- Products End -->
- 
-     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Cart Item</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
             </div>
-            <div class="modal-body text-success">
-              Item added to your Cart successfully...
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
-             
-              
-            </div>
-          </div>
         </div>
-      </div>
 
-      <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Remove Item</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
+        <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Remove Item</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Do you want remove this Item from wishlist..?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                        <button type="button" <% wishlistProducts.forEach((p)=> { %>
+                            <% p.product.forEach((p2)=> { %>
+                                onclick="deleteWishlist('<%= p2._id %>')"
+                                    <% }) }) %>
+                                        class="btn btn-danger" data-dismiss="modal">Remove
+                        </button>
+                    </div>
+                </div>
             </div>
-            <div class="modal-body">
-              Do you want remove this Item from wishlist..?
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-             
-              <button type="button"
-              <% wishlistProducts.forEach((p) => { %> 
-                <% p.product.forEach((p2) => { %> 
-                    onclick="deleteWishlist('<%= p2._id %>')"
-                    <% }) }) %> 
-              class="btn btn-danger" data-dismiss="modal">Remove</button>
-            </div>
-          </div>
         </div>
-      </div>
 
- 
-    
-   
- 
-     <%- include('../partials/userFooter') %> 
- 
- 
-    <script>
-        function cartList(id) {
-            fetch('/addToCart/'+id , {
-                method:'get',
-                headers: {
-                    'Content-type': 'application/json',
-                    body: JSON.stringify({hai:"jhj"})
-                }
-            })
-            .then(res => res.json())
-            .then(data => {
-                success:location.reload()
-            })
-          
-        }
 
-        
-        function deleteWishlist(id) {
-            fetch('/deleteWishlistItem/'+id , {
-                method:'delete',
-                headers: {
-                    'Content-type': 'application/json',
-                    body: JSON.stringify({hai:"jhj"})
+
+
+
+        <%- include('../partials/userFooter') %>
+
+
+            <script>
+                function cartList(id) {
+                    fetch('/addToCart/' + id, {
+                        method: 'get',
+                        headers: {
+                            'Content-type': 'application/json',
+                            body: JSON.stringify({ hai: "jhj" })
+                        }
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            success: location.reload()
+                        })
+
                 }
-            })
-            .then(res => res.json())
-            .then(data => {
-                success:location.reload()
-            })
-        }
-    </script>
+
+
+                function deleteWishlist(id) {
+                    fetch('/deleteWishlistItem/' + id, {
+                        method: 'delete',
+                        headers: {
+                            'Content-type': 'application/json',
+                            body: JSON.stringify({ hai: "jhj" })
+                        }
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            success: location.reload()
+                        })
+                }
+            </script>

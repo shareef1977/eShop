@@ -158,7 +158,7 @@
                                                 <button data-toggle="modal" class="btn btn-success rounded"
                                                     onclick="products('<%= data._id %>')"
                                                     data-target="#exampleModal">Items</button>
-                                                <!-- <a class="btn btn-success rounded" href="/orderedProducts/<%= //data._id %> ">Items</a> -->
+                                               
                                             </td>
                                             <td>
                                                 <% if(data.orderStatus[0].type !='Cancelled' && data.orderStatus[0].type
@@ -248,7 +248,7 @@
                     <script>
                         function products(id) {
                             let tableMain = document.getElementById('table')
-                            console.log(id)
+                         
                             fetch('/orderedProducts', {
                                 method: 'post',
                                 headers: {
@@ -267,7 +267,7 @@
                                                         </tr><thead><tbody>`
                                     items.forEach(p => {
                                         p.product.forEach(p1 => {
-                                            console.log(p1)
+                                          
                                             table += `<tr><td><div class="mb-3" style="background-image:url(${p1.images[0].url}); width:50px;height:50px;background-size:cover;background-repeat:no-repeat "></div></td>
                                             <td>${p1.name}</td>
                                             <td>₹${p1.price}</td>
@@ -294,7 +294,7 @@
                                 .then(res => res.json())
                                 .then(data => {
                                     success: location.reload()
-                                    // console.log(data)
+                                    
                                 })
                         }
                     </script>

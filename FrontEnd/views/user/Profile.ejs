@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>EShop - Home Page</title>
+    <title>EShop - User Profile</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
@@ -13,7 +13,8 @@
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
 
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
@@ -27,209 +28,277 @@
 
 <body>
 
-<!-- Topbar Start -->
-<div class="container-fluid">
-    <div class="row bg-secondary py-2 px-xl-5">
-        <div class="col-lg-6 d-none d-lg-block">
-            <div class="d-inline-flex align-items-center">
-                <a class="text-dark" href="">FAQs</a>
-                <span class="text-muted px-2">|</span>
-                <a class="text-dark" href="">Help</a>
-                <span class="text-muted px-2">|</span>
-                <a class="text-dark" href="">Support</a>
-            </div>
-        </div>
-        
-        <div class="col-lg-6 text-center text-lg-right">
-            <div class="d-inline-flex align-items-center">
-                <a class="text-dark px-2" href="">
-                    <i class="fab fa-facebook-f"></i>
-                </a>
-                <a class="text-dark px-2" href="">
-                    <i class="fab fa-twitter"></i>
-                </a>
-                <a class="text-dark px-2" href="">
-                    <i class="fab fa-linkedin-in"></i>
-                </a>
-                <a class="text-dark px-2" href="">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                <a class="text-dark pl-2" href="">
-                    <i class="fab fa-youtube"></i>
-                </a>
-            </div>
-        </div>
-    </div>
-    <div class="row align-items-center py-3 px-xl-5">
-        <div class="col-lg-3 d-none d-lg-block">
-            <a href="" class="text-decoration-none">
-                <h1 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">E</span>Shop</h1>
-            </a>
-        </div>
-        <div class="col-lg-6 col-6 text-left">
-            
-        </div>
-       
-    </div>
-</div>
-<!-- Topbar End -->
-
-
-<%- include('../partials/flash') %> 
-
-<div class="container ">
-    <div class="row ">
-        <a href="/" class="nav-item nav-link active ps-5">Home</a>
-        <div class="col-md-12 d-flex align-items-center justify-content-center">
-            <div class="col-md-6 bg-secondary rounded  w-75">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="d-flex flex-column align-items-center  text-center p-3 py-5"><img class="rounded-circle mt-5"
-                            width="150px"
-                            src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
-                        
-                    </div>
-                    </div>
-                    <div class="col-md-12">
-                        
-                        <div class="col-md-4 pt-4  float-left">
-                            <h6>User Name</h6>
-                        </div>
-                        <div class="col-md-8 pt-4  float-left">
-                            <h6><%= user.name %> </h6>
-                        </div>
-                        <div class="col-md-4 pt-4  float-left">
-                            <h6>Email</h6>
-                        </div>
-                        <div class="col-md-8 pt-4  float-left">
-                            <h6><%= user.email %> </h6>
-                        </div>
-                        <div class="col-md-4 pt-4  float-left">
-                            <h6>Mobile</h6>
-                        </div>
-                        <div class="col-md-8 pt-4  float-left">
-                            <h6><%= user.mobile %> </h6>
-                        </div>
-                        <div class="col-md-4 pt-4  float-left">
-                            <h6>Email Verification</h6>
-                        </div>
-                        <div class="col-md-8 pt-4  float-left">
-                            <% if(user.verified == true) { %> 
-                            <h6>Completed</h6>
-                            <% } else { %> 
-                             <h6>Not Completed</h6>
-                             <% } %>    
-                        </div>
-                        <div class="col-md-4 pt-4  float-left">
-                            <h6>Block Status</h6>
-                        </div>
-                        <div class="col-md-8 pt-4  float-left">
-                            <% if(user.blockStatus == false) { %> 
-                            <h6>Unblocked</h6>
-                            <% } else { %> 
-                             <h6>Blocked</h6>
-                            <% } %>    
-                        </div>
-                        <div class="col-md-12 pt-4 float-left text-center">
-                            <h5 class="text-danger">ADDRESS</h5>
-                        </div>
-                        <% for(let addr of address) { %> 
-                        <% if(addr) { %>
-                            
-                            <div class="col-md-4 pt-4 float-left ">
-                                <h6>House No</h6>
-                            </div>
-                            <div class="col-md-8 pt-4  float-left">
-                                <h6><%= addr.houseNo %> </h6>
-                            </div>
-                            <div class="col-md-4 pt-4 float-left text-left">
-                                <h6>Street</h6>
-                            </div>
-                            <div class="col-md-8 pt-4   float-left">
-                                <h6><%= addr.street %> </h6>
-                            </div>
-                            <div class="col-md-4 pt-4 float-left">
-                                <h6>District</h6>
-                            </div>
-                            <div class="col-md-8 pt-4  float-left">
-                                <h6><%= addr.district %> </h6>
-                            </div>
-                            <div class="col-md-4 pt-4 float-left">
-                                <h6>State</h6>
-                            </div>
-                            <div class="col-md-8 pt-4  float-left">
-                                <h6><%= addr.state %> </h6>
-                            </div>
-                            <div class="col-md-4 pt-4 float-left">
-                                <h6>Pincode</h6>
-                            </div>
-                            <div class="col-md-8 pt-4  float-left">
-                                <h6><%= addr.pincode %> </h6>
-                            </div><br>
-                            
-                            
-                        
-                       
-                            <button class="btn btn-danger rounded m-3 " data-toggle="modal" data-target="#exampleModal<%= addr._id %>"  type="button"  >Delete</button> <br>
-                            
-                       
-                    <% } %> 
-
-                    <% } %>
-                    <div class="col-md-6 mt-4 pb-4">
-                        <% if(address.length > 0) { %> 
-                            <a href="/addAddress " class="btn btn-primary rounded">Add Another Address</a>
-                        <% } else { %> 
-                            <a href="/addAddress " class="btn btn-primary rounded">Add Address</a>
-                        <% } %> 
-                    </div>
+    <!-- Topbar Start -->
+    <div class="container-fluid">
+        <div class="row bg-secondary py-2 px-xl-5">
+            <div class="col-lg-6 d-none d-lg-block">
+                <div class="d-inline-flex align-items-center">
+                    <a class="text-dark" href="">FAQs</a>
+                    <span class="text-muted px-2">|</span>
+                    <a class="text-dark" href="">Help</a>
+                    <span class="text-muted px-2">|</span>
+                    <a class="text-dark" href="">Support</a>
                 </div>
+            </div>
+
+            <div class="col-lg-6 text-center text-lg-right">
+                <div class="d-inline-flex align-items-center">
+                    <a class="text-dark px-2" href="">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a class="text-dark px-2" href="">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a class="text-dark px-2" href="">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a class="text-dark px-2" href="">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a class="text-dark pl-2" href="">
+                        <i class="fab fa-youtube"></i>
+                    </a>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-<%- include('../partials/userFooter')  %> 
-<% for(let addr of address) { %>  
-<div class="modal fade" id="exampleModal<%= addr._id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Remove Address</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          Do you want remove this Address ..?
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-         
-          <button type="button"
-          
-            onclick="deleteAddress('<%= addr._id %>')"
-       
-          class="btn btn-danger" data-dismiss="modal">Delete</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <% } %>
+        <div class="row align-items-center py-3 px-xl-5">
+            <div class="col-lg-3 d-none d-lg-block">
+                <a href="" class="text-decoration-none">
+                    <h1 class="m-0 display-5 font-weight-semi-bold"><span
+                            class="text-primary font-weight-bold border px-3 mr-1">E</span>Shop</h1>
+                </a>
+            </div>
+            <div class="col-lg-6 col-6 text-left">
 
-<script>
-    function deleteAddress(id) {
+            </div>
 
-        fetch('/deleteAddress/'+id , {
-            method:'delete',
-            headers: {
-                'Content-type': 'application/json',
-                body: JSON.stringify({hai:"jhj"})
-            }
-        })
-        .then(res => res.json())
-        .then(data => {
-            success:location.reload()
-        })
-    }
-</script>
+        </div>
+    </div>
+    <!-- Topbar End -->
+
+
+    <%- include('../partials/flash') %>
+
+        <div class="container ">
+            <div class="row ">
+                <a href="/" class="nav-item nav-link active ps-5">Home</a>
+                <div class="col-md-12 d-flex align-items-center justify-content-center">
+                    <div class="col-md-6 bg-secondary rounded  w-75">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="d-flex flex-column align-items-center  text-center p-3 py-5"><img
+                                        class="rounded-circle mt-5" width="150px"
+                                        src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+
+                                <div class="col-md-4 pt-4  float-left">
+                                    <h6>User Name</h6>
+                                </div>
+                                <div class="col-md-8 pt-4  float-left">
+                                    <h6>
+                                        <%= user.name %>
+                                    </h6>
+                                </div>
+                                <div class="col-md-4 pt-4  float-left">
+                                    <h6>Email</h6>
+                                </div>
+                                <div class="col-md-8 pt-4  float-left">
+                                    <h6>
+                                        <%= user.email %>
+                                    </h6>
+                                </div>
+                                <div class="col-md-4 pt-4  float-left">
+                                    <h6>Mobile</h6>
+                                </div>
+                                <div class="col-md-8 pt-4  float-left">
+                                    <h6>
+                                        <%= user.mobile %>
+                                    </h6>
+                                </div>
+                                <div class="col-md-4 pt-4  float-left">
+                                    <h6>Email Verification</h6>
+                                </div>
+                                <div class="col-md-8 pt-4  float-left">
+                                    <% if(user.verified==true) { %>
+                                        <h6>Completed</h6>
+                                        <% } else { %>
+                                            <h6>Not Completed</h6>
+                                            <% } %>
+                                </div>
+                                <div class="col-md-4 pt-4  float-left">
+                                    <h6>Block Status</h6>
+                                </div>
+                                <div class="col-md-8 pt-4  float-left">
+                                    <% if(user.blockStatus==false) { %>
+                                        <h6>Unblocked</h6>
+                                        <% } else { %>
+                                            <h6>Blocked</h6>
+                                            <% } %>
+                                </div>
+                                <div class="col-md-12 text-center">
+                                    <button type="button" data-toggle="modal" data-target="#exampleModal"
+                                        class="btn btn-primary mt-2 rounded">Update Name</button>
+                                </div>
+                                <div class="col-md-12 pt-4 float-left text-center">
+                                    <h5 class="text-danger">ADDRESS</h5>
+                                </div>
+                                <% for(let addr of address) { %>
+                                    <% if(addr) { %>
+
+                                        <div class="col-md-4 pt-4 float-left ">
+                                            <h6>House No</h6>
+                                        </div>
+                                        <div class="col-md-8 pt-4  float-left">
+                                            <h6>
+                                                <%= addr.houseNo %>
+                                            </h6>
+                                        </div>
+                                        <div class="col-md-4 pt-4 float-left text-left">
+                                            <h6>Street</h6>
+                                        </div>
+                                        <div class="col-md-8 pt-4   float-left">
+                                            <h6>
+                                                <%= addr.street %>
+                                            </h6>
+                                        </div>
+                                        <div class="col-md-4 pt-4 float-left">
+                                            <h6>District</h6>
+                                        </div>
+                                        <div class="col-md-8 pt-4  float-left">
+                                            <h6>
+                                                <%= addr.district %>
+                                            </h6>
+                                        </div>
+                                        <div class="col-md-4 pt-4 float-left">
+                                            <h6>State</h6>
+                                        </div>
+                                        <div class="col-md-8 pt-4  float-left">
+                                            <h6>
+                                                <%= addr.state %>
+                                            </h6>
+                                        </div>
+                                        <div class="col-md-4 pt-4 float-left">
+                                            <h6>Pincode</h6>
+                                        </div>
+                                        <div class="col-md-8 pt-4  float-left">
+                                            <h6>
+                                                <%= addr.pincode %>
+                                            </h6>
+                                        </div><br>
+
+
+
+
+                                        <button class="btn btn-danger rounded m-3 " data-toggle="modal"
+                                            data-target="#exampleModal<%= addr._id %>" type="button">Delete</button>
+                                        <br>
+
+
+                                        <% } %>
+
+                                            <% } %>
+                                                <div class="col-md-6 mt-4 pb-4">
+                                                    <% if(address.length> 0) { %>
+                                                        <a href="/addAddress " class="btn btn-primary rounded">Add
+                                                            Another Address</a>
+                                                        <% } else { %>
+                                                            <a href="/addAddress " class="btn btn-primary rounded">Add
+                                                                Address</a>
+                                                            <% } %>
+                                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <%- include('../partials/userFooter') %>
+            <% for(let addr of address) { %>
+                <div class="modal fade" id="exampleModal<%= addr._id %>" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Remove Address</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Do you want remove this Address ..?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                                <button type="button" onclick="deleteAddress('<%= addr._id %>')" class="btn btn-danger"
+                                    data-dismiss="modal">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <% } %>
+
+
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-l" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Update Profile</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <label class="w-100" for="name">Name</label>
+                                            <input class="w-100" type="text" name="name" id="name"
+                                                placeholder="New name">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" onclick="updateProfile()" class="btn btn-success"
+                                        data-dismiss="modal">Update</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <script>
+                        function deleteAddress(id) {
+
+                            fetch('/deleteAddress/' + id, {
+                                method: 'delete',
+                                headers: {
+                                    'Content-type': 'application/json',
+                                    body: JSON.stringify({ hai: "jhj" })
+                                }
+                            })
+                                .then(res => res.json())
+                                .then(data => {
+                                    success: location.reload()
+                                })
+                        }
+
+                        function updateProfile() {
+                            const name = document.getElementById('name').value
+
+
+
+                            fetch('/updateProfile', {
+                                method: 'put',
+                                headers: {
+                                    'Content-type': 'application/json',
+
+                                }, body: JSON.stringify({ name })
+                            })
+                                .then(res => res.json())
+                                .then(data => {
+                                    success: location.reload()
+                                })
+                        }
+                    </script>

@@ -1,71 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <style>
-        .btn{
+        .btn {
             font-weight: bold;
         }
-        .btn:hover{
+
+        .btn:hover {
             background-color: black;
             color: white;
             font-weight: bold
         }
     </style>
 </head>
+
 <body>
 
     <div class="container-fluid bg-secondary " style="height: 43.4rem;">
         <div class="row">
             <div class="col-md-12 ">
                 <div class="col-md-12 d-flex bg-info">
-                    <h1 class="text-light m-2 ps-2" style="background-color: pink;width: 2.5rem; font-weight: bold;">E</h1><h1 style="font-weight: bold;" class="text-light float-left mt-2">SHOP</h1>
+                    <h1 class="text-light m-2 ps-2" style="background-color: pink;width: 2.5rem; font-weight: bold;">E
+                    </h1>
+                    <h1 style="font-weight: bold;" class="text-light float-left mt-2">SHOP</h1>
                 </div>
-                <%- include('../partials/flash') %> 
-               <div class="col-md-12 d-flex justify-content-center"> 
-                
-                <div class="col-md-4 bg-success " style="margin-top:4rem ; height: 30rem; border-radius: 20px;">
-                    <h3 class="text-center pt-5 text-light">LOGIN PAGE</h3>
-                    <div class="row">
-                        <form action="/homePage" method="post">
+                <%- include('../partials/flash') %>
+                    <div class="col-md-12 d-flex justify-content-center">
 
-                    <div class="col-md-12 pt-5 ">
-                        <div class="col-md-12" style="margin-left:3.2rem ;">
-                            <label for="name"><h5 class="text-light">Email Address</h5></label><br>
-                        </div>
-                        <div class="col-md-12 "style="margin-left:3.2rem ;">
-                            <input class="w-75 " style="height: 2.5rem ; border-radius: 8px; font-weight: 600;" type="email" name="email" placeholder="Enter your email">
-                        </div>
-                    </div>
-                    <div class="col-md-12 pt-4 ">
-                        <div class="col-md-12 "style="margin-left:3.2rem ;">
-                            <label for="name"><h5 class="text-light">Password</h5></label><br>
-                        </div>
-                        <div class="col-md-12" style="margin-left:3.2rem ;">
-                            <input class="w-75" style="height: 2.5rem ; border-radius: 8px; font-weight: 600;" type="password" name="password" placeholder="Enter your password">
-                        </div>
-                    </div>
-                    <div class="col-md-12 d-flex justify-content-center mt-4">
-                        <button class="btn rounded btn-light mt-4" type="submit">Submit</button>
-                    </div>
-                    <div class="col-md-12 text-center pt-4 text-light">
-                        Don't have an Account? <a class=" " href="/signup" style=" font-size:1.2rem ; text-decoration: none;font-weight: bold; color: rgb(253, 167, 181);">Register</a>
-                    </div>
-                </form>
-                </div>
-                
+                        <div class="col-md-4 bg-success " style="margin-top:4rem ; height: 30rem; border-radius: 20px;">
+                            <h3 class="text-center pt-5 text-light">LOGIN PAGE</h3>
+                            <div class="row">
+                                <form action="/homePage" method="post">
 
-                </div>
-            </div>
+                                    <div class="col-md-12 pt-5 ">
+                                        <div class="col-md-12" style="margin-left:3.2rem ;">
+                                            <label for="name">
+                                                <h5 class="text-light">Email Address</h5>
+                                            </label><br>
+                                        </div>
+                                        <div class="col-md-12 " style="margin-left:3.2rem ;">
+                                            <input class="w-75 "
+                                                style="height: 2.5rem ; border-radius: 8px; font-weight: 600;"
+                                                type="email" name="email" placeholder="Enter your email">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 pt-4 ">
+                                        <div class="col-md-12 " style="margin-left:3.2rem ;">
+                                            <label for="name">
+                                                <h5 class="text-light">Password</h5>
+                                            </label><br>
+                                        </div>
+                                        <div class="col-md-12" style="margin-left:3.2rem ;">
+                                            <input class="w-75"
+                                                style="height: 2.5rem ; border-radius: 8px; font-weight: 600;"
+                                                type="password" name="password" placeholder="Enter your password">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 d-flex justify-content-center mt-4">
+                                        <button class="btn rounded btn-light mt-4" type="submit">Submit</button>
+                                    </div>
+                                    <div class="col-md-12 text-center pt-4 text-light">
+                                        Don't have an Account? <a class=" " href="/signup"
+                                            style=" font-size:1.2rem ; text-decoration: none;font-weight: bold; color: rgb(253, 167, 181);">Register</a>
+                                    </div>
+                                </form>
+                            </div>
+
+
+                        </div>
+                    </div>
             </div>
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
 </body>
+
 </html>

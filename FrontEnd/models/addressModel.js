@@ -1,12 +1,10 @@
 const mongoose = require('mongoose')
 
-
 const addressSchema = mongoose.Schema({
-    userId:{
+    userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
-    
     houseNo: {
         type: String,
         required: true,
@@ -31,13 +29,7 @@ const addressSchema = mongoose.Schema({
         type: Number,
         required: true,
         trim: true
-
-
     }
-    
-        
-},{timestamps: true})
+}, { timestamps: true })
 
-
-
-module.exports = mongoose.model('Address',addressSchema)
+module.exports = mongoose.model('Address', addressSchema)

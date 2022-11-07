@@ -8,14 +8,11 @@
     <meta content="" name="keywords">
     <meta content="" name="description">
 
-    <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
-
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
+
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
@@ -33,14 +30,13 @@
     <!-- data tabel css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
-    
-
 </head>
 
 <body>
     <div class="container-xxl position-relative bg-white d-flex p-0">
         <!-- Spinner Start -->
-        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div id="spinner"
+            class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
             <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
                 <span class="sr-only">Loading...</span>
             </div>
@@ -57,20 +53,26 @@
                 <div class="d-flex align-items-center ms-4 mb-4">
                     <div class="position-relative">
                         <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                        <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
+                        <div
+                            class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1">
+                        </div>
                     </div>
                     <div class="ms-3">
-                        <% if(locals.admin) { %> 
-                        <h6 class="mb-0"><%= admin.email %> </h6>
-                        <% } %> 
-                        <span>Admin</span>
+                        <% if(locals.admin) { %>
+                            <h6 class="mb-0">
+                                <%= admin.email %>
+                            </h6>
+                            <% } %>
+                                <span>Admin</span>
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
-                    <a href="/adminHome" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
-                    
+                    <a href="/adminHome" class="nav-item nav-link "><i
+                            class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+
                     <a href="/adminProducts" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Products</a>
-                    <a href="/adminCategory" class="nav-item nav-link "><i class="fa fa-keyboard me-2"></i>Categories</a>
+                    <a href="/adminCategory" class="nav-item nav-link "><i
+                            class="fa fa-keyboard me-2"></i>Categories</a>
                     <a href="/adminBrand" class="nav-item nav-link active"><i class="fa fa-table me-2"></i>Brands</a>
                     <a href="/adminUser" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Users</a>
                     <a href="/orders" class="nav-item nav-link"><i class="fa fa fa-th me-2"></i>Product Orders</a>
@@ -99,20 +101,20 @@
                     <h5 class="mt-2">BRANDS</h5>
                 </div>
                 <div class="navbar-nav align-items-center ms-auto">
-                    
+
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                         <!-- <img class="rounded-circle me-lg-2" src="img/user.jpg" alt="" style="width: 40px; height: 40px;"> -->
-                         <% if(locals.admin) { %> 
-                            <span class="d-none d-lg-inline-flex"><%= admin.email %> </span>
-                        <% } else { %> 
-                            <span class="d-none d-lg-inline-flex">Admin </span>
-                        <% } %> 
+                            <% if(locals.admin) { %>
+                                <span class="d-none d-lg-inline-flex">
+                                    <%= admin.email %>
+                                </span>
+                                <% } else { %>
+                                    <span class="d-none d-lg-inline-flex">Admin </span>
+                                    <% } %>
                         </a>
-                        
+
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
                             <a href="#" class="dropdown-item">My Profile</a>
-                            <!-- <a href="#" class="dropdown-item">Settings</a> -->
                             <a href="/logout" class="dropdown-item">Log Out</a>
                         </div>
                     </div>
@@ -121,42 +123,30 @@
             <!-- Navbar End -->
 
             <div class="m-4 d-flex">
-                <a href="/addBrand"class="btn btn-primary me-3">Add Brand</a>
+                <a href="/addBrand" class="btn btn-primary me-3">Add Brand</a>
             </div>
             <div class="container">
                 <table id="example" class="table table-striped table-bordered " style="width:100%">
                     <thead>
                         <tr>
-                            
                             <th>Brand Names</th>
-                           
-                            
-                           
                             <th>Delete Brand</th>
-                            
                         </tr>
                     </thead>
-      
-                   
                     <tbody>
-                       
-                      <% for (let brand of brands) { %> 
-                        <tr>
-                            <td><%= brand.name %></td>
-                            
-                            
-                            <td><button type="button" class="btn btn-danger " data-bs-toggle="modal" data-bs-target="#exampleModal<%= brand._id %>" >Remove</button>
-                            </td>
-                           
-                           
-                           
-                        </tr>
+                        <% for (let brand of brands) { %>
+                            <tr>
+                                <td>
+                                    <%= brand.name %>
+                                </td>
+                                <td><button type="button" class="btn btn-danger " data-bs-toggle="modal"
+                                        data-bs-target="#exampleModal<%= brand._id %>">Remove</button>
+                                </td>
+                            </tr>
                         <% } %>
-                        
                     </tbody>
-                  </table>
+                </table>
             </div>
-
 
             <!-- Footer Start -->
             <div class="container-fluid pt-4 px-4">
@@ -165,36 +155,37 @@
                         <div class="col-12 col-sm-6 text-center text-sm-start">
                             <h6> &copy; <a href="#">www.eShop.com</a>, All Right Reserved.</h6>
                         </div>
-                        
                     </div>
                 </div>
             </div>
             <!-- Footer End -->
-        </div> 
+        </div>
         <!-- Content End -->
-        <% for(let brand of brands) { %> 
-            <div class="modal fade" id="exampleModal<%= brand._id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <% for(let brand of brands) { %>
+            <div class="modal fade" id="exampleModal<%= brand._id %>" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
                 <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Remove Brand</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Remove Brand</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body text-danger">
+                            Do you want remove this brand...?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" onclick="deleteBrand('<%= brand._id %>')" class="btn btn-primary"
+                                data-bs-dismiss="modal">Sure</button>
+                        </div>
                     </div>
-                    <div class="modal-body text-danger">
-                      Do you want remove this brand...?
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      <button type="button" onclick="deleteBrand('<%= brand._id %>')" class="btn btn-primary" data-bs-dismiss="modal">Sure</button>
-                    </div>
-                  </div>
                 </div>
-              </div>
-              
-            <% } %> 
+            </div>
 
-        <!-- Back to Top -->
-        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+            <% } %>
+
+                <!-- Back to Top -->
+                <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
     </div>
 
     <!-- JavaScript Libraries -->
@@ -213,32 +204,32 @@
 
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>    
+    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
 
 
 
     <script>
         $(document).ready(function () {
-        $('#example').DataTable();
-    });
+            $('#example').DataTable();
+        });
     </script>
     <script>
-     function deleteBrand(id) {
-        fetch('/deleteBrand/'+id, {
-            method:'put',
-            headers: {
-                'Content-type': 'application/json',
-                body: JSON.stringify({hai:"jhj"})
-            }
-    })
-    .then(res => res.json())
-    .then(data => {
-        
-        success:location.reload()
-       
-    })
-    }
-</script>
+        function deleteBrand(id) {
+            fetch('/deleteBrand/' + id, {
+                method: 'put',
+                headers: {
+                    'Content-type': 'application/json',
+                    body: JSON.stringify({ hai: "jhj" })
+                }
+            })
+                .then(res => res.json())
+                .then(data => {
+
+                    success: location.reload()
+
+                })
+        }
+    </script>
 </body>
 
 </html>

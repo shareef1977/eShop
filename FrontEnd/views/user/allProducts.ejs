@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>EShop - allProducts</title>
+    <title>EShop - Products</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
@@ -24,6 +24,16 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="/css/userIndex.css" rel="stylesheet">
+    <style>
+        .page-load-status {
+            display: none;
+            /* hidden by default */
+            padding-top: 20px;
+            border-top: 1px solid #DDD;
+            text-align: center;
+            color: #777;
+        }
+    </style>
 </head>
 
 <body>
@@ -71,7 +81,8 @@
             <div class="col-lg-6 col-6 text-left">
                 <form action="">
                     <div class="input-group">
-                        <input type="text" class="form-control"id="myFilter" onkeyup="myFunction()" placeholder="Search for products">
+                        <input type="text" class="form-control" id="myFilter" onkeyup="myFunction()"
+                            placeholder="Search for products">
                         <div class="input-group-append">
                             <span class="input-group-text bg-transparent text-primary">
                                 <i class="fa fa-search"></i>
@@ -150,7 +161,7 @@
                             <div class="card-footer d-flex justify-content-between bg-light border">
                                 <a href="/productDetails/<%= product._id %> " class="btn btn-sm text-dark p-0"><i
                                         class="fas fa-eye text-primary mr-1"></i>View Detail</a>
-                                <!-- <a href="/addToCart/<%= //product._id %>" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a> -->
+
                                 <button data-toggle="modal" data-target="#exampleModal"
                                     onclick="cartList('<%= product._id %>')" class="btn btn-sm text-dark p-0"><i
                                         class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</button>
@@ -160,6 +171,16 @@
                     <% } %>
 
 
+            </div>
+            <div class="page-load-status">
+                <div class="loader-ellips infinite-scroll-request">
+                    <span class="loader-ellips__dot"></span>
+                    <span class="loader-ellips__dot"></span>
+                    <span class="loader-ellips__dot"></span>
+                    <span class="loader-ellips__dot"></span>
+                </div>
+                <p class="infinite-scroll-last">End of content</p>
+                <p class="infinite-scroll-error">No more pages to load</p>
             </div>
         </div>
         </div>
@@ -208,16 +229,16 @@
             </script>
             <script>
                 function myFunction() {
-                    console.log(1)
+
                     let input, filter, cards, cardContainer, title, i;
                     input = document.getElementById("myFilter");
-                    console.log(input)
+
                     filter = input.value.toUpperCase();
-                    console.log(filter)
+
                     cardContainer = document.getElementById("myProducts");
-                    console.log(cardContainer)
+
                     cards = cardContainer.getElementsByClassName("card");
-                    console.log(input, filter, cards, cardContainer, title, i);
+
                     for (i = 0; i < cards.length; i++) {
                         title = cards[i].querySelector(".card-title");
                         if (title.innerText.toUpperCase().indexOf(filter) > -1) {
@@ -228,3 +249,4 @@
                     }
                 }
             </script>
+           

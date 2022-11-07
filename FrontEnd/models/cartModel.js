@@ -1,11 +1,11 @@
 const mongoose = require('mongoose')
 
-const cartSchema = mongoose.Schema ({
+const cartSchema = mongoose.Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref:'User'
+        ref: 'User'
     },
-    cartItems:[
+    cartItems: [
         {
             productId: {
                 type: mongoose.Schema.Types.ObjectId,
@@ -14,15 +14,12 @@ const cartSchema = mongoose.Schema ({
             quantity: {
                 type: Number,
                 required: true
-            },price: Number
+            }, price: Number
         }
     ],
-    coupenCode:{
+    coupenCode: {
         type: String
     }
-    
-    
 })
-
 
 module.exports = mongoose.model('CartItem', cartSchema)

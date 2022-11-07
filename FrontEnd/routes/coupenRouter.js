@@ -10,10 +10,8 @@ const {
 } = require('../controllers/coupenController')
 
 const {
-    adminSessionCheck,
     adminSessionCheckHomePage
- } = require('../middleware')
- 
+} = require('../middleware')
 
 router.get('/coupons', adminSessionCheckHomePage, coupens)
 router.get('/addCoupen', adminSessionCheckHomePage, addCoupen)

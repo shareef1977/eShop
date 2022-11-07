@@ -37,33 +37,32 @@ const checkoutSchema = new mongoose.Schema({
             type: String,
             required: true,
             trim: true
-    
-    
+
+
         }
     },
     paymentStatus: {
         type: String,
-        enum: ["cod","online"],
+        enum: ["cod", "online"],
         required: true
     },
     bill: {
         type: Number,
         required: true
     },
-    discount:{
-        type:Number
+    discount: {
+        type: Number
     },
     orderStatus: [{
         type: {
             type: String,
-            enum: ["Ordered","Packed","Shipped","Delivered","Cancelled"],
+            enum: ["Ordered", "Packed", "Shipped", "Delivered", "Cancelled"],
             default: "Ordered"
         },
         date: {
             type: Date,
-            default:Date.now()
+            default: Date.now()
         },
-       
     }],
     isCompleted: {
         type: Boolean,
@@ -71,9 +70,8 @@ const checkoutSchema = new mongoose.Schema({
     },
     expectedDate: {
         type: Date,
-        default: () => new Date( + new Date() + 7 * 24 * 60 * 1000)
+        default: () => new Date(+ new Date() + 7 * 24 * 60 * 1000)
     }
-},{timestamps: true})
+}, { timestamps: true })
 
-
-module.exports =mongoose.model("Checkout",checkoutSchema)
+module.exports = mongoose.model("Checkout", checkoutSchema)

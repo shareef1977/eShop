@@ -10,8 +10,6 @@ const MongoDBStore = require('connect-mongodb-session')(session)
 const flash = require('connect-flash')
 const methodOverride = require('method-override')
 
-
-
 const app = express()
 
 const userRouter = require('./routes/userRouter')
@@ -33,7 +31,6 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
 
-
 const store = new MongoDBStore({
     uri: process.env.MONG_URI,
     collection: 'sessionValues'
@@ -41,6 +38,7 @@ const store = new MongoDBStore({
 store.on('error', function (error) {
     console.log(error)
 })
+
 app.use(cookieParser())
 app.use(session({
     key: "user_sid",
@@ -60,8 +58,6 @@ app.use((req, res, next) => {
     res.locals.admin = req.session.admin
     next();
 })
-
-
 
 app.use('/css', express.static(path.join(__dirname, "assets/css")))
 app.use('/img', express.static(path.join(__dirname, "assets/img")))
@@ -84,7 +80,6 @@ app.use((req, res, next) => {
     );
     next();
 })
-
 
 mongoose.connect(process.env.MONG_URI)
     .then(() => {

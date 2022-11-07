@@ -9,11 +9,11 @@ const bannerSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    images:[{
+    images: [{
         url: String,
         filename: String
     }],
-    date:{
+    date: {
         type: Date
     }
 })

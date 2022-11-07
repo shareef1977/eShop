@@ -7,5 +7,4 @@ const otpSchema = mongoose.Schema({
     expiresAt: Date
 })
 
-
-module.exports = mongoose.model('UserOTPVerification',otpSchema)
+module.exports = mongoose.model('UserOTPVerification', otpSchema)

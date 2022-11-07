@@ -13,7 +13,8 @@
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
 
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
@@ -24,7 +25,7 @@
     <!-- Customized Bootstrap Stylesheet -->
     <link href="/css/style.css" rel="stylesheet">
 
-    
+
 </head>
 
 <body>
@@ -63,11 +64,12 @@
         <div class="row align-items-center py-3 px-xl-5">
             <div class="col-lg-3 d-none d-lg-block">
                 <a href="" class="text-decoration-none">
-                    <h1 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">E</span>Shop</h1>
+                    <h1 class="m-0 display-5 font-weight-semi-bold"><span
+                            class="text-primary font-weight-bold border px-3 mr-1">E</span>Shop</h1>
                 </a>
             </div>
-            
-           
+
+
         </div>
     </div>
     <!-- Topbar End -->
@@ -76,332 +78,354 @@
     <!-- Navbar Start -->
     <div class="container-fluid mb-5">
         <div class="row border-top px-xl-5">
-          
+
             <div class="col-lg-9">
                 <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
                     <a href="" class="text-decoration-none d-block d-lg-none">
-                        <h1 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">E</span>Shopper</h1>
+                        <h1 class="m-0 display-5 font-weight-semi-bold"><span
+                                class="text-primary font-weight-bold border px-3 mr-1">E</span>Shopper</h1>
                     </a>
                     <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                   
+
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto py-0">
                             <a href="/" class="nav-item nav-link active">Home</a>
-                           
-                        
-                    </div>
+
+
+                        </div>
                 </nav>
             </div>
         </div>
     </div>
     <!-- Navbar End -->
-    <%- include('../partials/flash') %> 
+    <%- include('../partials/flash') %>
 
-    <!-- Page Header Start -->
-    <div class="container-fluid bg-secondary mb-5">
-        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
-            <h1 class="font-weight-semi-bold text-uppercase mb-3">Shopping Cart</h1>
-            <div class="d-inline-flex">
-                <p class="m-0"><a href="/">Home</a></p>
-                <p class="m-0 px-2">-</p>
-                <p class="m-0">Shopping Cart</p>
+        <!-- Page Header Start -->
+        <div class="container-fluid bg-secondary mb-5">
+            <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
+                <h1 class="font-weight-semi-bold text-uppercase mb-3">Shopping Cart</h1>
+                <div class="d-inline-flex">
+                    <p class="m-0"><a href="/">Home</a></p>
+                    <p class="m-0 px-2">-</p>
+                    <p class="m-0">Shopping Cart</p>
+                </div>
             </div>
         </div>
-    </div>
-    <!-- Page Header End -->
+        <!-- Page Header End -->
 
 
-    <!-- Cart Start -->
-    <div class="container-fluid pt-5">
-       
-            <% if(cartList.length > 0) { %> 
+        <!-- Cart Start -->
+        <div class="container-fluid pt-5">
+
+            <% if(cartList.length> 0) { %>
                 <div class="row px-xl-5">
-            <div class="col-lg-8 table-responsive mb-5">
-                <table class="table table-bordered text-center mb-0">
-                    <thead class="bg-secondary text-dark">
-                        <tr>
-                            <th>Products</th>
-                            <th>Image</th>
-                            <th>Price</th>                            
-                            <th>Quantity</th>
-                            <th>Total</th>
-                            <th>Remove</th>
-                        </tr>
-                    </thead>
-                    <tbody class="align-middle">
-                        
-                        <% cartList.forEach((p) =>{ %> 
-                            <% p.product.forEach((p2) => { %> 
-                        <tr id="row<%= p.item %>">
-                            
-                            <td class="align-middle"> <%= p2.name %> </td>
-                            <td class="align-middle"><img src="<%= p2.images[0].url %> " alt="" style="width: 50px;"> </td>
-                            <td class="align-middle " > Rs.<span id="price<%= p.item %>"><%= p2.price %></span> </td>
-                            <td class="align-middle">
-                                <div class="input-group quantity mx-auto" style="width: 100px;">
-                                    <div class="input-group-btn">
-                                        
+                    <div class="col-lg-8 table-responsive mb-5">
+                        <table class="table table-bordered text-center mb-0">
+                            <thead class="bg-secondary text-dark">
+                                <tr>
+                                    <th>Products</th>
+                                    <th>Image</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Total</th>
+                                    <th>Remove</th>
+                                </tr>
+                            </thead>
+                            <tbody class="align-middle">
 
-                                                                            
-                                                    <button type="button" id="minus" onclick="dec('<%= p.item %>')" class="btn btn-sm btn-primary btn-minus" >
-                                                    <i class="fa fa-minus"></i>
-                                                    </button>
-                                                
-                                            
+                                <% cartList.forEach((p)=>{ %>
+                                    <% p.product.forEach((p2)=> { %>
+                                        <tr id="row<%= p.item %>">
 
-                                                                                   
-                                    </div>
-                                    <input type="text" readonly class="form-control form-control-sm bg-secondary text-center" value="<%= p.itemQuantity %> " id="<%= p.item %>">
-                                    <div class="input-group-btn">
-                                        
-                                        <button type="button" onclick="inc('<%= p.item %>')" class="btn btn-sm btn-primary btn-plus"id="plus">
-                                            <i class="fa fa-plus"></i>
-                                        </button>
-                                    
-                                    </div>
+                                            <td class="align-middle">
+                                                <%= p2.name %>
+                                            </td>
+                                            <td class="align-middle"><img src="<%= p2.images[0].url %> " alt=""
+                                                    style="width: 50px;"> </td>
+                                            <td class="align-middle "> Rs.<span id="price<%= p.item %>">
+                                                    <%= p2.price %>
+                                                </span> </td>
+                                            <td class="align-middle">
+                                                <div class="input-group quantity mx-auto" style="width: 100px;">
+                                                    <div class="input-group-btn">
+
+
+
+                                                        <button type="button" id="minus" onclick="dec('<%= p.item %>')"
+                                                            class="btn btn-sm btn-primary btn-minus">
+                                                            <i class="fa fa-minus"></i>
+                                                        </button>
+
+
+
+
+                                                    </div>
+                                                    <input type="text" readonly
+                                                        class="form-control form-control-sm bg-secondary text-center"
+                                                        value="<%= p.itemQuantity %> " id="<%= p.item %>">
+                                                    <div class="input-group-btn">
+
+                                                        <button type="button" onclick="inc('<%= p.item %>')"
+                                                            class="btn btn-sm btn-primary btn-plus" id="plus">
+                                                            <i class="fa fa-plus"></i>
+                                                        </button>
+
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <% const total=parseInt(p.itemQuantity)*parseInt(p2.price) %>
+                                                <td class="align-middle ">Rs.<span id="total<%= p.item %>">
+                                                        <%= total %>
+                                                    </span> </td>
+
+                                                <td class="align-middle">
+
+                                                    <button type="button" data-toggle="modal"
+                                                        data-target="#exampleModal<%= p.item %>"
+                                                        class="btn btn-sm btn-primary"><i
+                                                            class="fa fa-times"></i></button>
+
+                                                </td>
+                                        </tr>
+
+                                        <% }) %>
+                                            <% }) %>
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-lg-4">
+
+                        <div class="input-group mb-5">
+                            <input type="text" class="form-control p-4" id="usercode" name="usercode"
+                                placeholder="Coupon Code" required>
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" id="button" type="button" onclick="coupen()">Apply
+                                    Coupon</button>
+                            </div>
+                        </div>
+
+                        <div class="card border-secondary mb-5">
+                            <div class="card-header bg-secondary border-0">
+                                <h4 class="font-weight-semi-bold m-0">Cart Summary</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between mb-3 pt-1">
+                                    <h6 class="font-weight-medium">Subtotal</h6>
+                                    <h6 class="font-weight-medium">Rs. <span id="subtotal">
+                                            <%= subtotal %>
+                                        </span> </h6>
                                 </div>
-                            </td>
-                            <% const total = parseInt(p.itemQuantity)*parseInt(p2.price) %> 
-                            <td class="align-middle " >Rs.<span id="total<%= p.item %>"><%= total %></span> </td>
-                            
-                            <td class="align-middle">
-                               
-                                <button type="button" data-toggle="modal" data-target="#exampleModal<%= p.item %>"  class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button>
-                             
-                            </td>
-                        </tr>
+                                <div class="d-flex justify-content-between mb-3">
+                                    <h6 class="font-weight-medium">Shipping</h6>
+                                    <h6 class="font-weight-medium">Rs.<span id="shipping">
+                                            <%= shipping%>
+                                        </span> </h6>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <h6 class="font-weight-medium">Discount</h6>
+                                    <h6 class="font-weight-medium">Rs.<span id="discount">0</span> </h6>
+                                </div>
+                            </div>
+                            <div class="card-footer border-secondary bg-transparent">
+                                <div class="d-flex justify-content-between mt-2">
+                                    <h5 class="font-weight-bold">Total</h5>
+                                    <h5 class="font-weight-bold">Rs. <span id="grandtotal">
+                                            <%= grandtotal %>
+                                        </span> </h5>
 
-                        <% }) %> 
-                    <% }) %> 
-                       
-                    </tbody>
-                </table>
-            </div>
-            <div class="col-lg-4">
-                
-                    <div class="input-group mb-5">
-                        <input type="text" class="form-control p-4" id="usercode" name="usercode" placeholder="Coupon Code" required>
-                        <div class="input-group-append">
-                            <button class="btn btn-primary" id="button" type="button" onclick="coupen()">Apply Coupon</button>
-                        </div>
-                    </div>
-                
-                <div class="card border-secondary mb-5">
-                    <div class="card-header bg-secondary border-0">
-                        <h4 class="font-weight-semi-bold m-0">Cart Summary</h4>
-                    </div>
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between mb-3 pt-1">
-                            <h6 class="font-weight-medium">Subtotal</h6>
-                            <h6 class="font-weight-medium">Rs. <span id="subtotal"><%= subtotal %></span> </h6>
-                        </div>
-                        <div class="d-flex justify-content-between mb-3">
-                            <h6 class="font-weight-medium">Shipping</h6>
-                            <h6 class="font-weight-medium">Rs.<span id="shipping"><%= shipping%></span> </h6>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <h6 class="font-weight-medium">Discount</h6>
-                            <h6 class="font-weight-medium">Rs.<span id="discount">0</span> </h6>
-                        </div>
-                    </div>
-                    <div class="card-footer border-secondary bg-transparent">
-                        <div class="d-flex justify-content-between mt-2">
-                            <h5 class="font-weight-bold">Total</h5>
-                            <h5 class="font-weight-bold">Rs. <span id="grandtotal"><%= grandtotal %></span> </h5>
-                            
-                        </div>
+                                </div>
 
-                        
-                        
-                        <a href="/checkout/<%= cartList[0]._id %> " class="btn btn-block btn-primary my-3 py-3">Proceed To Checkout</a>
-                       
+
+
+                                <a href="/checkout/<%= cartList[0]._id %> "
+                                    class="btn btn-block btn-primary my-3 py-3">Proceed To Checkout</a>
+
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-            <% } else { %> 
-                <div class="row">
-                    <div class="col-md-12 text-center">
-                        <h3 class="text-danger">Nothing is in your Cart !!!</h3>
-                        <h5 class="pt-2">Add products to Cart</h5>
-                        <a class="btn btn-primary rounded font-weight-bold" href="/allProducts">Add</a>
+                <% } else { %>
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <h3 class="text-danger">Nothing is in your Cart !!!</h3>
+                            <h5 class="pt-2">Add products to Cart</h5>
+                            <a class="btn btn-primary rounded font-weight-bold" href="/allProducts">Add</a>
 
+                        </div>
+                    </div>
+                    <% } %>
+
+        </div>
+        <!-- Cart End -->
+        <% cartList.forEach((p)=>{ %>
+            <% p.product.forEach((p2)=> { %>
+                <div class="modal fade" id="exampleModal<%= p.item %>" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Remove Item</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Do you want remove this Item from Cart ..?
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                                <button type="button" onclick="itemDel('<%= p.item %>')" class="btn btn-danger"
+                                    data-dismiss="modal">
+
+                                    Delete</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <% } %> 
-        
-    </div>
-    <!-- Cart End -->
-    <% cartList.forEach((p) =>{ %> 
-        <% p.product.forEach((p2) => { %> 
-    <div class="modal fade" id="exampleModal<%= p.item %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Remove Item</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              Do you want remove this Item from Cart ..?
-              
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-             
-              <button type="button"
-             
-                    onclick="itemDel('<%= p.item %>')"
-                   
-              class="btn btn-danger" data-dismiss="modal">
-              
-              Delete</button>
-            </div>
-          </div>
-        </div>
-      </div>
 
-      <% }) }) %> 
-    <%- include('../partials/userFooter') %> 
-   
+                <% }) }) %>
+                    <%- include('../partials/userFooter') %>
 
 
 
-   <script>
-    function inc(id) {
-        
-        let count = document.getElementById(id).value
-        let price = document.getElementById('price'+id).innerHTML
-        
-        
-        
-        fetch('/itemInc/'+id, {
-            method:'post',
-            headers: {
-                'Content-type': 'application/json',
-                body: JSON.stringify({hai:"jhj"})
-            }
-        })
-        .then(res => res.json())
-        .then(data => {
-        
-            document.getElementById(id).value++
-            
-            document.getElementById('total'+id).innerHTML = parseInt(price)*parseInt(document.getElementById(id).value)
-            
-            document.getElementById('subtotal').innerHTML = parseInt(document.getElementById('subtotal').innerHTML) + parseInt(document.getElementById('price'+id).innerHTML)
 
-            document.getElementById('grandtotal').innerHTML = parseInt(document.getElementById('subtotal').innerHTML) + parseInt(document.getElementById('shipping').innerHTML)
-           
-           
-            
-        })
-            
-            
-    }
+                        <script>
+                            function inc(id) {
 
-    function dec(id) {
-        
-        let price = document.getElementById('price'+id).innerHTML
-        let count = document.getElementById(id).value
-        let row = document.getElementById('row'+id)
-        
-        if(count == 1){
-            fetch('/itemDelete/'+id, {
-            method:'put',
-            headers: {
-                'Content-type': 'application/json',
-                body: JSON.stringify({hai:"jhj"})
-            }
-        })
-        .then(res => res.json())
-        .then(data => {
-            document.getElementById('subtotal').innerHTML = parseInt(document.getElementById('subtotal').innerHTML) - parseInt(document.getElementById('total'+id).innerHTML)
-            document.getElementById('grandtotal').innerHTML = parseInt(document.getElementById('subtotal').innerHTML) + parseInt(document.getElementById('shipping').innerHTML)
-            row.remove()
-            success: location.reload()
-        })
-         
-        } else {
-        fetch('/itemDec/'+id, {
-            method:'post',
-            headers: {
-                'Content-type': 'application/json',
-                body: JSON.stringify({hai:"jhj"})
-            }
-        })
-        .then(res => res.json())
-        .then(data => {
-            
-            document.getElementById(id).value--
-            document.getElementById('total'+id).innerHTML = parseInt(price)*parseInt(document.getElementById(id).value)
-            document.getElementById('subtotal').innerHTML = parseInt(document.getElementById('subtotal').innerHTML) - parseInt(document.getElementById('price'+id).innerHTML)
-            document.getElementById('grandtotal').innerHTML = parseInt(document.getElementById('subtotal').innerHTML) + parseInt(document.getElementById('shipping').innerHTML)
+                                let count = document.getElementById(id).value
+                                let price = document.getElementById('price' + id).innerHTML
 
-        })
-            
-    }
-    }
 
-    function itemDel(id) {
-        console.log(id)
-        let price = document.getElementById('price'+id).innerHTML
-        let count = document.getElementById(id).value
-        let row = document.getElementById('row'+id)
-        console.log(row)
-        
-        fetch('/itemDelete/'+id, {
-            method:'put',
-            headers: {
-                'Content-type': 'application/json',
-                body: JSON.stringify({hai:"jhj"})
-            }
-        })
-        .then(res => res.json())
-        .then(data => {
-        
-            document.getElementById('subtotal').innerHTML = parseInt(document.getElementById('subtotal').innerHTML) - parseInt(document.getElementById('total'+id).innerHTML)
-            document.getElementById('grandtotal').innerHTML = parseInt(document.getElementById('subtotal').innerHTML) + parseInt(document.getElementById('shipping').innerHTML)
-            row.remove()
-            success: location.reload()
-           
 
-        })
-         
-    }
-  
-        function coupen() {
-            const usercode = document.getElementById('usercode').value
-            let disc = document.getElementById('discount').innerHTML
-            fetch('/applyCoupen/'+usercode, {
-                method:'post',
-                headers: {
-                    'Content-type': 'application/json',
-                    body: JSON.stringify({jfd:disc})
-                }
-                
-            })
-            .then(res => res.json())
-            .then(data => {
-                
-                discount=data.success
-                console.log(discount)
-                
-                if(parseInt(document.getElementById('grandtotal').innerHTML) > 15000){
-                    if(parseInt(document.getElementById('discount').innerHTML) > 0){
-                        document.getElementById('button').disabled = true
-                    }else {
-                    
-                        document.getElementById('discount').innerHTML = discount
-                        document.getElementById('grandtotal').innerHTML = parseInt(document.getElementById('grandtotal').innerHTML) - parseInt(discount)
-                        console.log(document.getElementById('grandtotal').innerHTML)
-                    }
-                }
-            })
-        }
-  
+                                fetch('/itemInc/' + id, {
+                                    method: 'post',
+                                    headers: {
+                                        'Content-type': 'application/json',
+                                        body: JSON.stringify({ hai: "jhj" })
+                                    }
+                                })
+                                    .then(res => res.json())
+                                    .then(data => {
 
-   </script>
+                                        document.getElementById(id).value++
+
+                                        document.getElementById('total' + id).innerHTML = parseInt(price) * parseInt(document.getElementById(id).value)
+
+                                        document.getElementById('subtotal').innerHTML = parseInt(document.getElementById('subtotal').innerHTML) + parseInt(document.getElementById('price' + id).innerHTML)
+
+                                        document.getElementById('grandtotal').innerHTML = parseInt(document.getElementById('subtotal').innerHTML) + parseInt(document.getElementById('shipping').innerHTML)
+
+
+
+                                    })
+
+
+                            }
+
+                            function dec(id) {
+
+                                let price = document.getElementById('price' + id).innerHTML
+                                let count = document.getElementById(id).value
+                                let row = document.getElementById('row' + id)
+
+                                if (count == 1) {
+                                    fetch('/itemDelete/' + id, {
+                                        method: 'put',
+                                        headers: {
+                                            'Content-type': 'application/json',
+                                            body: JSON.stringify({ hai: "jhj" })
+                                        }
+                                    })
+                                        .then(res => res.json())
+                                        .then(data => {
+                                            document.getElementById('subtotal').innerHTML = parseInt(document.getElementById('subtotal').innerHTML) - parseInt(document.getElementById('total' + id).innerHTML)
+                                            document.getElementById('grandtotal').innerHTML = parseInt(document.getElementById('subtotal').innerHTML) + parseInt(document.getElementById('shipping').innerHTML)
+                                            row.remove()
+                                            success: location.reload()
+                                        })
+
+                                } else {
+                                    fetch('/itemDec/' + id, {
+                                        method: 'post',
+                                        headers: {
+                                            'Content-type': 'application/json',
+                                            body: JSON.stringify({ hai: "jhj" })
+                                        }
+                                    })
+                                        .then(res => res.json())
+                                        .then(data => {
+
+                                            document.getElementById(id).value--
+                                            document.getElementById('total' + id).innerHTML = parseInt(price) * parseInt(document.getElementById(id).value)
+                                            document.getElementById('subtotal').innerHTML = parseInt(document.getElementById('subtotal').innerHTML) - parseInt(document.getElementById('price' + id).innerHTML)
+                                            document.getElementById('grandtotal').innerHTML = parseInt(document.getElementById('subtotal').innerHTML) + parseInt(document.getElementById('shipping').innerHTML)
+
+                                        })
+
+                                }
+                            }
+
+                            function itemDel(id) {
+                                
+                                let price = document.getElementById('price' + id).innerHTML
+                                let count = document.getElementById(id).value
+                                let row = document.getElementById('row' + id)
+                                
+
+                                fetch('/itemDelete/' + id, {
+                                    method: 'put',
+                                    headers: {
+                                        'Content-type': 'application/json',
+                                        body: JSON.stringify({ hai: "jhj" })
+                                    }
+                                })
+                                    .then(res => res.json())
+                                    .then(data => {
+
+                                        document.getElementById('subtotal').innerHTML = parseInt(document.getElementById('subtotal').innerHTML) - parseInt(document.getElementById('total' + id).innerHTML)
+                                        document.getElementById('grandtotal').innerHTML = parseInt(document.getElementById('subtotal').innerHTML) + parseInt(document.getElementById('shipping').innerHTML)
+                                        row.remove()
+                                        success: location.reload()
+
+
+                                    })
+
+                            }
+
+                            function coupen() {
+                                const usercode = document.getElementById('usercode').value
+                                let disc = document.getElementById('discount').innerHTML
+                                fetch('/applyCoupen/' + usercode, {
+                                    method: 'post',
+                                    headers: {
+                                        'Content-type': 'application/json',
+                                        body: JSON.stringify({ jfd: disc })
+                                    }
+
+                                })
+                                    .then(res => res.json())
+                                    .then(data => {
+
+                                        discount = data.success
+                                        
+
+                                        if (parseInt(document.getElementById('grandtotal').innerHTML) > 15000) {
+                                            if (parseInt(document.getElementById('discount').innerHTML) > 0) {
+                                                document.getElementById('button').disabled = true
+                                            } else {
+
+                                                document.getElementById('discount').innerHTML = discount
+                                                document.getElementById('grandtotal').innerHTML = parseInt(document.getElementById('grandtotal').innerHTML) - parseInt(discount)
+                                                
+                                            }
+                                        }
+                                    })
+                            }
+
+
+                        </script>

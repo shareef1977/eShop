@@ -2,82 +2,84 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <title>EShop - Add Address</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="Free HTML Templates" name="keywords">
-    <meta content="Free HTML Templates" name="description">
+  <meta charset="utf-8">
+  <title>EShop - Add Address</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="Free HTML Templates" name="keywords">
+  <meta content="Free HTML Templates" name="description">
 
-    <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
+  <!-- Favicon -->
+  <link href="img/favicon.ico" rel="icon">
 
-    <!-- Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"> 
+  <!-- Google Web Fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
 
-    <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
-    <!-- Libraries Stylesheet -->
-    <link href="/css/owl.carousel.min.css" rel="stylesheet">
+  <!-- Libraries Stylesheet -->
+  <link href="/css/owl.carousel.min.css" rel="stylesheet">
 
-    <!-- Customized Bootstrap Stylesheet -->
-    <link href="/css/userIndex.css" rel="stylesheet">
+  <!-- Customized Bootstrap Stylesheet -->
+  <link href="/css/userIndex.css" rel="stylesheet">
 </head>
 
 <body>
 
-<!-- Topbar Start -->
-<div class="container-fluid">
+  <!-- Topbar Start -->
+  <div class="container-fluid">
     <div class="row bg-secondary py-2 px-xl-5">
-        <div class="col-lg-6 d-none d-lg-block">
-            <div class="d-inline-flex align-items-center">
-                <a class="text-dark" href="">FAQs</a>
-                <span class="text-muted px-2">|</span>
-                <a class="text-dark" href="">Help</a>
-                <span class="text-muted px-2">|</span>
-                <a class="text-dark" href="">Support</a>
-            </div>
+      <div class="col-lg-6 d-none d-lg-block">
+        <div class="d-inline-flex align-items-center">
+          <a class="text-dark" href="">FAQs</a>
+          <span class="text-muted px-2">|</span>
+          <a class="text-dark" href="">Help</a>
+          <span class="text-muted px-2">|</span>
+          <a class="text-dark" href="">Support</a>
         </div>
-        
-        <div class="col-lg-6 text-center text-lg-right">
-            <div class="d-inline-flex align-items-center">
-                <a class="text-dark px-2" href="">
-                    <i class="fab fa-facebook-f"></i>
-                </a>
-                <a class="text-dark px-2" href="">
-                    <i class="fab fa-twitter"></i>
-                </a>
-                <a class="text-dark px-2" href="">
-                    <i class="fab fa-linkedin-in"></i>
-                </a>
-                <a class="text-dark px-2" href="">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                <a class="text-dark pl-2" href="">
-                    <i class="fab fa-youtube"></i>
-                </a>
-            </div>
+      </div>
+
+      <div class="col-lg-6 text-center text-lg-right">
+        <div class="d-inline-flex align-items-center">
+          <a class="text-dark px-2" href="">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a class="text-dark px-2" href="">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a class="text-dark px-2" href="">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+          <a class="text-dark px-2" href="">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a class="text-dark pl-2" href="">
+            <i class="fab fa-youtube"></i>
+          </a>
         </div>
+      </div>
     </div>
     <div class="row align-items-center py-3 px-xl-5">
-        <div class="col-lg-3 d-none d-lg-block">
-            <a href="" class="text-decoration-none">
-                <h1 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">E</span>Shop</h1>
-            </a>
-        </div>
-        <div class="col-lg-6 col-6 text-left">
-            
-        </div>
-       
-    </div>
-</div>
-<!-- Topbar End -->
-<a href="/checkout/<%= cartList[0]._id %> " class="nav-item nav-link active ps-5">Checkout</a>
-<%- include('../partials/flash') %> 
+      <div class="col-lg-3 d-none d-lg-block">
+        <a href="" class="text-decoration-none">
+          <h1 class="m-0 display-5 font-weight-semi-bold"><span
+              class="text-primary font-weight-bold border px-3 mr-1">E</span>Shop</h1>
+        </a>
+      </div>
+      <div class="col-lg-6 col-6 text-left">
 
-<div class="container">
-    <div class="row">
+      </div>
+
+    </div>
+  </div>
+  <!-- Topbar End -->
+  <a href="/checkout/<%= cartList[0]._id %> " class="nav-item nav-link active ps-5">Checkout</a>
+  <%- include('../partials/flash') %>
+
+    <div class="container">
+      <div class="row">
         <div class="col-md-12 mb-4">
           <div class="card mb-4">
             <div class="card-header py-3">
@@ -85,52 +87,52 @@
             </div>
             <div class="card-body">
               <form action="/saveAddress/<%= user._id %> " method="post">
-             
-      
+
+
                 <!-- Text input -->
                 <div class="form-outline mb-4">
-                    <label class="form-label" for="form7Example3">House No</label>
-                  <input type="text" id="form7Example3"name="houseNo" class="form-control" required/>
-                  
+                  <label class="form-label" for="form7Example3">House No</label>
+                  <input type="text" id="form7Example3" name="houseNo" class="form-control" required />
+
                 </div>
-      
+
                 <!-- Text input -->
                 <div class="form-outline mb-4">
-                    <label class="form-label" for="form7Example4">Street</label>
-                  <input type="text" id="form7Example4"name="street" class="form-control" />
-                 
+                  <label class="form-label" for="form7Example4">Street</label>
+                  <input type="text" id="form7Example4" name="street" class="form-control" />
+
                 </div>
-      
+
                 <!-- Email input -->
                 <div class="form-outline mb-4">
-                    <label class="form-label" for="form7Example5">District</label>
-                  <input type="text" id="form7Example5"name="district" class="form-control" />
-                  
+                  <label class="form-label" for="form7Example5">District</label>
+                  <input type="text" id="form7Example5" name="district" class="form-control" />
+
                 </div>
-      
+
                 <!-- Number input -->
                 <div class="form-outline mb-4">
-                    <label class="form-label" for="form7Example6">State</label>
+                  <label class="form-label" for="form7Example6">State</label>
                   <input type="text" id="form7Example6" name="state" class="form-control" />
-                  
+
                 </div>
-      
+
                 <!-- Message input -->
                 <div class="form-outline mb-4">
-                    <label class="form-label" for="form7Example6">Pincode</label>
+                  <label class="form-label" for="form7Example6">Pincode</label>
                   <input type="text" id="form7Example6" name="pincode" class="form-control" />
-                  
+
                 </div>
-      
+
                 <!-- Checkbox -->
 
                 <button class="btn btn-success" type="submit">Add</button>
               </form>
             </div>
           </div>
-          
-        </div>
-      
-</div>
 
-<%- include('../partials/userFooter')  %> 
+        </div>
+
+      </div>
+
+      <%- include('../partials/userFooter') %>

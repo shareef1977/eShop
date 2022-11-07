@@ -8,16 +8,10 @@ const singleProduct = async (req,res) => {
     try {
         const catId = req.params.id
         const category = await categoryData.findById({_id:catId})
-        // console.log(category)
         const cata = category.name
-        // console.log(cata)
-
-
-
         const products = await productData.find({$and:[{
             category:{$eq:cata}},{deleted:false}]
         })
-        // console.log(products) 
         const justArrived = await productData.find({
             $and:[{category:{$eq:cata}},{expiresAt:{$gte: Date.now()}}]
         })
@@ -29,15 +23,13 @@ const singleProduct = async (req,res) => {
         let wishlistItems 
         if(req.session.user){
             const userId = req.session.user._id
-           
-        
             cartItems = await cartData.findOne({userId})
             wishlistItems = await wishlistData.findOne({userId})
         }
         res.render('user/singleProduct',{products,justArrived,categories,courosels,cartItems,wishlistItems,cata})
     }
     catch(err) {
-        console.log(err)
+        res.render('error',{err})
     }
 }
 
@@ -49,25 +41,17 @@ const adminSingleProduct = async(req,res) => {
         
         const catId = req.params.id
         const category = await categoryData.findById({_id:catId})
-        // console.log(category)
         const cata = category.name
-        // console.log(cata)
-
-
-        const products = await productData.find({$and:[{
-            category: {$eq: cata}},{deleted:false}]
+        const products = await productData.find({
+            category: {$eq: cata}
         })
-
         res.render('admin/singleProduct',{products})
     } catch(err) {
-        console.log(err)
+        res.render('error',{err})
     }
 }
 
-
 module.exports = {
     singleProduct,
-   
     adminSingleProduct,
-   
 }
