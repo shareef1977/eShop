@@ -255,7 +255,7 @@ const userProfile = async (req, res) => {
     try {
         const userId = req.params.id
         const address = await addressData.find({ userId })
-        res.render('user/profile', { address })
+        res.render('user/Profile', { address })
     } catch (err) {
         res.render('error',{err})
     }
