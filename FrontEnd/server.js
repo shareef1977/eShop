@@ -38,7 +38,7 @@ const store = new MongoDBStore({
 store.on('error', function (error) {
     console.log(error)
 })
-
+console.log('hello')
 app.use(cookieParser())
 app.use(session({
     key: "user_sid",
@@ -89,4 +89,5 @@ mongoose.connect(process.env.MONG_URI)
     })
     .catch((err) => {
         console.log(err)
+
     })
