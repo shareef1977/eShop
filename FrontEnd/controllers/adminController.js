@@ -9,6 +9,7 @@ const checkoutData = require('../models/checkoutModel')
 const mongoose = require('mongoose')
 
 const {
+    hashPassword,
     comparePassword
 } = require('../utils/helpers')
 
@@ -68,6 +69,17 @@ const adminHomePage = async (req, res) => {
 
 const adminLogin = async (req, res) => {
     try {
+        const admin = await adminData.find({})
+        
+        if(admin.length == 0){
+            const password = '123456'
+            const newAdmin = new adminData({
+                name: 'Shareef',
+                email:'shareefmohammedmm@gmail.com',
+                password:hashPassword(password)
+            })
+            newAdmin.save()
+        }
         res.render('admin/adminLogin')
     } catch (err) {
         res.render('error', { err })
@@ -89,8 +101,7 @@ const adminHome = async (req, res) => {
 
 
             const isValid = comparePassword(password, admin.password)
-
-
+            
             if (isValid) {
                 req.session.admin = admin
                 req.flash('success', 'You are successfully logged in...')
