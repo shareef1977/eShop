@@ -17,7 +17,7 @@ const singleProduct = async (req,res) => {
         })
         const categories = await categoryData.find({})
         const courosels = await productData.find({ $and:[{
-            discount:{$gt:10}},{deleted:false}]
+            discount:{$gt:10}},{deleted:false}] 
         })
         let cartItems 
         let wishlistItems 

@@ -69,22 +69,7 @@
                 </a>
             </div>
 
-            <% if(user) { %>
-                <div class="col-lg-9 col-6 text-right">
-                    <% if(locals.wishlistItems){ %>
-                        <a href="/wishlist/<%= wishlistItems._id %> " class="btn border">
-                            <i class="fas fa-heart text-primary"></i>
-                            <span class="badge"></span>
-                        </a>
-                        <% } %>
-                            <% if(locals.cartItems) { %>
-                                <a href="/cart/<%= cartItems._id %> " class="btn border">
-                                    <i class="fas fa-shopping-cart text-primary"></i>
-                                    <span class="badge"></span>
-                                </a>
-                                <% } %>
-                </div>
-                <% } %>
+            
 
         </div>
     </div>

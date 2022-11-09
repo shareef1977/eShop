@@ -11,11 +11,7 @@ const {
     adminSessionCheckHomePage
 } = require('../middleware')
 
-const {
-    sessionCheckHomePage
-} = require('../middleware')
-
-router.get('/user/singleProduct/:id', sessionCheckHomePage, singleProduct)
+router.get('/user/singleProduct/:id', singleProduct)
 router.get('/admin/singleProduct/:id', adminSessionCheckHomePage, adminSingleProduct)
 
 module.exports = router
