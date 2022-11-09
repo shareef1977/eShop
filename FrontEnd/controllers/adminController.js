@@ -62,7 +62,7 @@ const adminHomePage = async (req, res) => {
 
         res.render('admin/adminHome', { todaySale, totalSale, todaySale, totalRevenue, completed, values, revenue, ordered, packed, shipped, delivered, cancelled })
     } catch (err) {
-        res.render('error', { err })
+        res.render('error')
     }
 }
 
@@ -82,7 +82,7 @@ const adminLogin = async (req, res) => {
         }
         res.render('admin/adminLogin')
     } catch (err) {
-        res.render('error', { err })
+        res.render('error')
     }
 }
 
