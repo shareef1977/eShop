@@ -296,7 +296,7 @@
 
                         <script>
                             function inc(id) {
-
+                                let discount = document.getElementById('discount').innerHTML
                                 let count = document.getElementById(id).value
                                 let price = document.getElementById('price' + id).innerHTML
 
@@ -318,14 +318,14 @@
 
                                         document.getElementById('subtotal').innerHTML = parseInt(document.getElementById('subtotal').innerHTML) + parseInt(document.getElementById('price' + id).innerHTML)
 
-                                        document.getElementById('grandtotal').innerHTML = parseInt(document.getElementById('subtotal').innerHTML) + parseInt(document.getElementById('shipping').innerHTML)
+                                        document.getElementById('grandtotal').innerHTML = parseInt(document.getElementById('subtotal').innerHTML) + parseInt(document.getElementById('shipping').innerHTML)-parseInt(document.getElementById('discount').innerHTML)
 
 
 
                                     })
 
 
-                            }
+                            } 
 
                             function dec(id) {
 
@@ -363,7 +363,7 @@
                                             document.getElementById(id).value--
                                             document.getElementById('total' + id).innerHTML = parseInt(price) * parseInt(document.getElementById(id).value)
                                             document.getElementById('subtotal').innerHTML = parseInt(document.getElementById('subtotal').innerHTML) - parseInt(document.getElementById('price' + id).innerHTML)
-                                            document.getElementById('grandtotal').innerHTML = parseInt(document.getElementById('subtotal').innerHTML) + parseInt(document.getElementById('shipping').innerHTML)
+                                            document.getElementById('grandtotal').innerHTML = parseInt(document.getElementById('subtotal').innerHTML) + parseInt(document.getElementById('shipping').innerHTML)-parseInt(document.getElementById('discount').innerHTML)
 
                                         })
 

@@ -7,7 +7,7 @@ function hashPassword(password) {
 }
 
 function comparePassword(raw, hash) {
-    return bcrypt.compareSync(raw, hash)
+    return bcrypt.compareSync(raw, hash) 
 }
 
 function hashOTP(OTP) {
